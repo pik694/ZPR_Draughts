@@ -13,7 +13,14 @@ set(CMAKE_CXX_STANDARD 14)
 if (APPLE)
     include_directories(/usr/local/include/)
 elseif (WIN32)
-    include_directories() # add paths to libraries on Win
+    link_directories("C:/local/boost_1_64_0/lib64-msvc-14.0")
+	include_directories("C:/local/boost_1_64_0/boost")
+
+	# needed for cmake to find boost libraries
+	SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} "C:/local/boost_1_64_0")
+	SET(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} "C:/local/boost_1_64_0/lib64-msvc-14.0")
+
+	SET(Boost_USE_STATIC_LIBS ON) # otherwise visual studio tries to link to dll libraries
 
 elseif (UNIX)
     include_directories() # add paths to libraries on Unix
