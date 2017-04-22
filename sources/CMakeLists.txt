@@ -1,6 +1,6 @@
 
 
-set(SOURCE_FILES main.cpp Adder.cpp Adder.h)
+set(SOURCE_FILES main.cpp Adder.h)
 add_executable(ZPR_Draughts ${SOURCE_FILES})
 
 if (_ENABLE_TESTS_AT_EACH_BUILD_)
