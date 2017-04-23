@@ -1,10 +1,10 @@
-Start testing: Apr 23 04:09 CEST
+Start testing: Apr 23 04:12 CEST
 ----------------------------------------------------------
 1/1 Testing: boostUnitTestsRun
 1/1 Test: boostUnitTestsRun
 Command: "/home/john/Desktop/checkers/tests/Tests"
 Directory: /home/john/Desktop/checkers/tests
-"boostUnitTestsRun" start time: Apr 23 04:09 CEST
+"boostUnitTestsRun" start time: Apr 23 04:12 CEST
 Output:
 ----------------------------------------------------------
 Running 1 test case...
@@ -14,8 +14,8 @@ Running 1 test case...
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"boostUnitTestsRun" end time: Apr 23 04:09 CEST
+"boostUnitTestsRun" end time: Apr 23 04:12 CEST
 "boostUnitTestsRun" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Apr 23 04:09 CEST
+End testing: Apr 23 04:12 CEST

@@ -1,2 +1,2 @@
-boostUnitTestsRun 18 0.000140561
+boostUnitTestsRun 19 0.000112897
 ---
