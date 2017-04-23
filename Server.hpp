@@ -4,7 +4,7 @@
 #include <websocketpp/server.hpp>
 //#include <websocketpp/connection.hpp>
 #include <list>
-#include "Client.hpp"
+#include "ConnectionProtocolHandler.hpp"
 #include "RoomManager.hpp"
 using websocketpp::connection_hdl;
 class Server
@@ -18,8 +18,7 @@ public:
 
 private:
 	websocketpp::server <websocketpp::config::asio> web_socket_server;
-	std::mutex m_mutex;
-	std::list<Client*> client_list;
+	std::list<ConnectionProtocolHandler*> client_list;
 	RoomManager manager;
 };
 #endif //SERVER_HPP

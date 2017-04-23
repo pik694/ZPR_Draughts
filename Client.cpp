@@ -1,13 +1,28 @@
 #include "Client.hpp"
 
-Client::Client(RoomManager *manager_a,connection_hdl &client_connection_a)
+int Client::client_ids = 0;
+Client::Client()
 {
-	client_connection =  client_connection_a;
-	manager = manager_a;
-	client_connection->set_message_handler(&Client::ClientTalker);
+	nickname = "";
+	client_id = client_ids;
+	++client_ids;
 }
 
-void Client::ClientTalker(connection_hdl hdl,websocketpp::server<websocketpp::config::asio>::message_ptr msg)
+void Client::SetNickName(std::string nick_a)
 {
+	nickname = nick_a;
+}
+void Client::SetRoom(int room_id_a)
+{
+	room_id = room_id_a;
+}
 
+bool Client::operator==(const Client &arg)
+{
+	return arg.client_id == client_id;
+}
+
+std::string Client::GetName()
+{
+	return nickname;
 }

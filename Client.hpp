@@ -4,19 +4,22 @@
 #include <websocketpp/server.hpp>
 //#include <websocketpp/connection.hpp>
 #include <thread>
+#include <string>
 #include "RoomManager.hpp"
 using websocketpp::connection_hdl;
 class RoomManager;
-enum ClientStatus {NICK_REQUEST, ROOM_REQUEST, WAITING_FOR_START, GAME_IN_PROGRESS, GAME_ENDED};
 class Client
 {
 public:
-	Client(RoomManager *manager_a,connection_hdl &client_connection_a);
-
+	Client();
+	void SetNickName(std::string nick_a);
+	void SetRoom(int room_id_a);
+	bool GetName();
+	bool operator==(const Client &arg);
 private:
-	void ClientTalker(connection_hdl hdl,websocketpp::server<websocketpp::config::asio>::message_ptr msg);
-	//ClientStatus 
-	connection_hdl client_connection;
-	RoomManager *manager;
+	static int client_ids;
+	std::string nickname;
+	int room_id;
+	int client_id;
 };
 #endif // CLIENT_HPP
