@@ -4,13 +4,15 @@
 #include "Room.hpp"
 class Room;
 class RoomManager
-{
+{ // TODO : SINGLETON
 public:
 	RoomManager();
 	/* creates new room and gives it an id */
-	Room* AddRoom();
-	void DeleteRoom(Room *);
+	Room* addRoom();
+	void deleteRoom(Room*);
+
+
 private:
-	std::list<Room*> room_list;
+	std::list<Room*> roomList_;
 };
 #endif // ROOM_MANAGER_HPP

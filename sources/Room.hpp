@@ -1,17 +1,29 @@
 #ifndef ROOM_HPP
 #define ROOM_HPP
-#include "Client.hpp"
+
+#include <memory>
+
+#include "Player.hpp"
 #include "Game.hpp"
-class Client;
-class Room
+
+
+
+
+class Player;
+class Room : public GameObserver
 {
 public:
+
 	Room();
-	bool JoinRoom(Client *player);
+	bool joinRoom(const Player&);
+
+    void leaveRoom(const Player&);
+
 private:
-	Client *player_1;
-	Client *player_2;
-	int nr_players;
-	Game room_game;
+
+	std::shared_ptr<Player> player1_;
+	std::shared_ptr<Player> player2_;
+	int nrPlayers_;
+	Game game_;
 };
 #endif // ROOM_HPP

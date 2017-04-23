@@ -2,21 +2,21 @@
 #include <jsoncpp/json/json.h>
 #include <string>
 #include "RoomManager.hpp"
-#include "Client.hpp"
+#include "Player.hpp"
 #include "ClientManager.hpp"
 // accepts data in JSON format, parses them and decides what to do
 
 /*
 Typical scenario:
 1.Connection opened, server creates ConnectionProtocolHandler
-2.Client sends nickname request in json
+2.Player sends nickname request in json
 JSON
 {
 	"action" : "nick_request",
 	"requested_name" : "[name send by client]"
 }
 3. Server accepts or if nick already taken declines
-4. Client request access to room
+4. Player request access to room
 JSON
 {
 	"action" : "room_request",
@@ -55,9 +55,8 @@ public:
 	void ParseJson(std::string data);
 private:
 	bool TryAssignName(std::string &name);
-	RoomManager manager;
 	connection_hdl current_connection;
 	ConnectionStates state;
-	Client game_client;
+	Player game_client;
 	ClientManager clients_manager;
 };

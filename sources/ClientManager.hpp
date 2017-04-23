@@ -1,12 +1,17 @@
 #ifndef CLIENT_MANAGER_HPP
 #define CLIENT_MANAGER_HPP
+
 #include <list>
 #include <string>
-#include "Client.hpp"
-class ClientManager
+#include "Player.hpp"
+
+class ClientManager // TODO: SINGLETON
 {
-	bool CheckIfNameAvailable(std::string nickname);
+	bool checkIfNameAvailable(std::string nickname);
+
+
+
 private:
-	std::list<Client> client_list;
+	std::list<Player*> clientList_;
 };
 #endif // CLIENT_MANAGER_HPP

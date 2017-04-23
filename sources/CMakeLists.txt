@@ -3,7 +3,7 @@
 
 
 
-set(SOURCE_FILES Client.cpp ClientManager.cpp ConnectionProtocolHandler.cpp Game.cpp Room.cpp RoomManager.cpp Server.cpp main.cpp)
+set(SOURCE_FILES Player.cpp ClientManager.cpp ConnectionProtocolHandler.cpp Game.cpp Room.cpp RoomManager.cpp Server.cpp main.cpp Point.hpp GameObserver.cpp GameObserver.hpp Gameboard.cpp Gameboard.hpp Pawn.hpp Message.cpp Message.hpp MessageDispatcher.cpp MessageDispatcher.hpp)
 add_executable(ZPR_Draughts ${SOURCE_FILES})
 
 find_package(Boost COMPONENTS system REQUIRED)

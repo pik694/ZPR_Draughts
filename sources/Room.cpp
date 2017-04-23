@@ -6,7 +6,7 @@ Room::Room()
 	player_2 = nullptr;
 	nr_players = 0;
 }
-bool Room::JoinRoom(Client *player)
+bool Room::JoinRoom(Player *player)
 {
 	if(nr_players >= 2)
 		return false;
