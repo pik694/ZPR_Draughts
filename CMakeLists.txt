@@ -13,6 +13,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 if (APPLE)
     include_directories(/usr/local/include/)
+
 elseif (WIN32)
     link_directories("C:/local/boost_1_64_0/lib64-msvc-14.0")
 	include_directories("C:/local/boost_1_64_0/boost")

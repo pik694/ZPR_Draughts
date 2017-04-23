@@ -7,7 +7,15 @@ set(SOURCE_FILES Client.cpp ClientManager.cpp ConnectionProtocolHandler.cpp Game
 add_executable(ZPR_Draughts ${SOURCE_FILES})
 
 find_package(Boost COMPONENTS system REQUIRED)
-target_link_libraries(ZPR_Draughts ${Boost_SYSTEM_LIBRARY} jsoncpp)
+
+if(APPLE)
+    set (JSONCPP_LIBRARY_DIR /usr/local/lib/libjsoncpp.dylib)
+    target_link_libraries(ZPR_Draughts ${Boost_SYSTEM_LIBRARY} ${JSONCPP_LIBRARY_DIR})
+
+else()
+    target_link_libraries(ZPR_Draughts ${Boost_SYSTEM_LIBRARY} jsoncpp)
+endif()
+
 
 if (_ENABLE_TESTS_AT_EACH_BUILD_)
     add_dependencies(ZPR_Draughts runTests)

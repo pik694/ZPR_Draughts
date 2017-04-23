@@ -28,5 +28,5 @@ void ConnectionProtocolHandler::ParseJson(std::string data)
 }
 bool ConnectionProtocolHandler::TryAssignName(std::string &name)
 {
-
+	throw std::runtime_error("Not implemented yet");
 }
