@@ -1,7 +1,13 @@
 
 
-set(SOURCE_FILES main.cpp Adder.h)
+
+
+
+set(SOURCE_FILES Client.cpp ClientManager.cpp ConnectionProtocolHandler.cpp Game.cpp Room.cpp RoomManager.cpp Server.cpp main.cpp)
 add_executable(ZPR_Draughts ${SOURCE_FILES})
+
+find_package(Boost COMPONENTS system REQUIRED)
+target_link_libraries(ZPR_Draughts ${Boost_SYSTEM_LIBRARY} jsoncpp)
 
 if (_ENABLE_TESTS_AT_EACH_BUILD_)
     add_dependencies(ZPR_Draughts runTests)

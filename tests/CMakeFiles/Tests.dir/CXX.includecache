@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/john/Desktop/checkers/tests/CustomTests.cpp
+boost/test/unit_test.hpp
+-
+
+/home/john/Desktop/checkers/tests/test_main.cpp
+boost/test/unit_test.hpp
+-
+

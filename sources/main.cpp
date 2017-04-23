@@ -1,9 +1,9 @@
-#include <iostream>
-#include "Adder.h"
+#include "Server.hpp"
+using namespace websocketpp;
+using namespace std;
 
-int main() {
 
-    Adder adder;
-    std::cout << adder.add(1,3) << std::endl;
-    return 0;
+int main()
+{
+	
 }
