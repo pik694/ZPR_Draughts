@@ -1,10 +1,10 @@
 #include "ClientManager.hpp"
 
-bool ClientManager::CheckIfNameAvailable(std::string nickname)
+bool ClientManager::checkIfNameAvailable(const std::string& nickname)
 {
     throw std::runtime_error("Not implemented yet");
 
-	for(auto i : client_list)
+	for(auto i : clients_)
 	{
 		return true;
 	}

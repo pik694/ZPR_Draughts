@@ -18,14 +18,16 @@ BOOST_AUTO_TEST_SUITE(GameEngineTests)
         Player whitePlayer, blackPlayer;
 
 
-        BOOST_CHECK_THROW(new Game (whitePlayer, whitePlayer), std::invalid_argument);
-        BOOST_CHECK_THROW(new Game (blackPlayer, blackPlayer), std::invalid_argument);
+        BOOST_CHECK_THROW(Game (&whitePlayer, &whitePlayer), std::invalid_argument);
+        BOOST_CHECK_THROW(Game (&blackPlayer, &blackPlayer), std::invalid_argument);
 
-        BOOST_CHECK_THROW(new Game (nullptr, nullptr), std::invalid_argument);
+        BOOST_CHECK_THROW(Game (nullptr, nullptr), std::invalid_argument);
 
-        BOOST_CHECK_THROW(new Game(nullptr, whitePlayer), std::invalid_argument);
-        BOOST_CHECK_THROW(new Game(blackPlayer, nullptr), std::invalid_argument);
+        BOOST_CHECK_THROW(Game(nullptr, &whitePlayer), std::invalid_argument);
+        BOOST_CHECK_THROW(Game(&blackPlayer, nullptr), std::invalid_argument);
 
+
+        BOOST_CHECK_NO_THROW(Game(&blackPlayer, &whitePlayer));
 
 
     }
@@ -34,10 +36,10 @@ BOOST_AUTO_TEST_SUITE(GameEngineTests)
 
         Player player1, player2;
 
-        Game game (player1, player2);
+        Game game (&player1, &player2);
 
-        const Player& whitePlayer = &game.whoseTurn() == &player1 ? player1 : player2;
-        const Player& blackPlayer = &game.whoseTurn() == &player1 ? player2 : player1;
+        const Player* whitePlayer = game.whoseTurn() == &player1 ? &player1 : &player2;
+        const Player* blackPlayer = game.whoseTurn() == &player1 ? &player2 : &player1;
 
         BOOST_CHECK(game.makeMove(whitePlayer, Point(3, 1), Point(4, 2)));
         BOOST_CHECK(game.makeMove(blackPlayer, Point(3, 1), Point(4, 2)));
@@ -63,17 +65,17 @@ BOOST_AUTO_TEST_SUITE(GameEngineTests)
 
         Player player1, player2;
 
-        Game game (player1, player2);
+        Game game (&player1, &player2);
 
-        const Player& whitePlayer = &game.whoseTurn() == &player1 ? player1 : player2;
-        const Player& blackPlayer = &game.whoseTurn() == &player1 ? player2 : player1;
+        const Player* whitePlayer = game.whoseTurn() == &player1 ? &player1 : &player2;
+        const Player* blackPlayer = game.whoseTurn() == &player1 ? &player2 : &player1;
 
 
         game.makeMove(whitePlayer, Point(3, 1), Point(4, 2));
-        BOOST_CHECK_EQUAL(&game.whoseTurn(), &blackPlayer);
+        BOOST_CHECK_EQUAL(game.whoseTurn(), blackPlayer);
 
         game.makeMove(blackPlayer, Point(4,2), Point(5,1));
-        BOOST_CHECK_EQUAL(&game.whoseTurn(), &whitePlayer);
+        BOOST_CHECK_EQUAL(game.whoseTurn(), whitePlayer);
 
 
 

@@ -1,16 +1,15 @@
 #include "ConnectionProtocolHandler.hpp"
 
-ConnectionProtocolHandler::ConnectionProtocolHandler(RoomManager &manager_a,ClientManager clients_manager_a, connection_hdl &hdl)
+ConnectionProtocolHandler::ConnectionProtocolHandler(connection_hdl &hdl)
 {
-	manager = manager_a;
-	current_connection = hdl;
-	state = ConnectionStates::JUST_STARTED;
+	currentConnection_ = hdl;
+	state_ = ConnectionStates::JUST_STARTED;
 }
 
-void ConnectionProtocolHandler::ParseJson(std::string data)
+void ConnectionProtocolHandler::parseJson(std::string data)
 {
 	Json::Value action;
-	/*switch(state)
+	/*switch(state_)
 	{
 		case ConnectionStates::JUST_STARTED:
 
@@ -26,7 +25,7 @@ void ConnectionProtocolHandler::ParseJson(std::string data)
 	}*/
 	
 }
-bool ConnectionProtocolHandler::TryAssignName(std::string &name)
+bool ConnectionProtocolHandler::tryToAssingName(const std::string &name)
 {
 	throw std::runtime_error("Not implemented yet");
 }

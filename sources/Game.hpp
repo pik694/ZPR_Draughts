@@ -12,23 +12,22 @@ class Game
 {
 public:
 
-    void Game(const Player& whitePlayer, const Player& blackPlayer);
+    Game(const Player* whitePlayer, const Player* blackPlayer);
 
     void addGameObserver(const GameObserver&);
 
     bool StartGame();
 
-    bool makeMove(const Player&, std::vector<Point>);
-    bool makeMove(const Player&, Point, Point);
+    bool makeMove(const Player*, std::vector<Point>);
+    bool makeMove(const Player*, Point, Point);
 
     const Gameboard&  getGameboard() const;
 
-    const Player& whoseTurn() const;
+    const Player* whoseTurn() const;
 
 private:
 
+    Gameboard gameboard_;
 
-
-	// collection storing game data
 };
 #endif // GAME_HPP

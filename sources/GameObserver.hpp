@@ -5,13 +5,12 @@
 #ifndef ZPR_DRAUGHTS_GAMEOBSERVER_HPP
 #define ZPR_DRAUGHTS_GAMEOBSERVER_HPP
 
-#include "Player.hpp"
+class Player;
 
 class GameObserver {
 public:
 
-    virtual void playerWon(const Player&) = 0;
-
+    virtual void playerWon(const Player*) = 0;
 
 };
 

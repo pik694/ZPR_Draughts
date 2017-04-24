@@ -8,7 +8,10 @@
 #include "MessageDispatcher.hpp"
 
 class Message {
+
     virtual void acceptDispatcher(const MessageDispatcher& dispatcher);
+
+    virtual ~Message();
 };
 
 

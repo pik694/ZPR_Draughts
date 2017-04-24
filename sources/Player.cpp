@@ -1,28 +1,23 @@
 #include "Player.hpp"
 
-int Player::client_ids = 0;
+int Player::clientIds_ = 0;
 Player::Player()
 {
-	nickname = "";
-	client_id = client_ids;
-	++client_ids;
+	nickname_ = "";
+	clientID_ = clientIds_;
+	++clientIds_;
 }
 
-void Player::SetNickName(std::string nick_a)
+void Player::setNickName(std::string nick_a)
 {
-	nickname = nick_a;
+	nickname_ = nick_a;
 }
-void Player::SetRoom(int room_id_a)
+void Player::setRoom(int room_id_a)
 {
-	room_id = room_id_a;
-}
-
-bool Player::operator==(const Player &arg)
-{
-	return arg.client_id == client_id;
+	roomID_ = room_id_a;
 }
 
-std::string Player::GetName()
+std::string Player::getName()
 {
-	return nickname;
+	return nickname_;
 }

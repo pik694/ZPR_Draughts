@@ -9,7 +9,7 @@
 /*
 Typical scenario:
 1.Connection opened, server creates ConnectionProtocolHandler
-2.Player sends nickname request in json
+2.Player sends nickname_ request in json
 JSON
 {
 	"action" : "nick_request",
@@ -46,17 +46,19 @@ JSON
 
 enum ConnectionStates {JUST_STARTED, NICK_SET, ROOM_ASSIGNED, PLAYER_READY, GAME_IN_PROGRESS };
 using websocketpp::connection_hdl;
+
 class ConnectionProtocolHandler
 {
 public:
 	// there is going to be an event handler on_message here
-	ConnectionProtocolHandler(RoomManager &manager_a,ClientManager clients_manager_a, connection_hdl &hdl);
+	ConnectionProtocolHandler(connection_hdl &hdl);
 
-	void ParseJson(std::string data);
+	void parseJson(std::string data);
+
+
 private:
-	bool TryAssignName(std::string &name);
-	connection_hdl current_connection;
-	ConnectionStates state;
-	Player game_client;
-	ClientManager clients_manager;
+	bool tryToAssingName(const std::string &name);
+	connection_hdl currentConnection_;
+	ConnectionStates state_;
+	Player player_;
 };

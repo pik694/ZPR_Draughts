@@ -2,14 +2,14 @@
 
 RoomManager::RoomManager() {}
 	/* creates new room and gives it an id */
-Room* RoomManager::AddRoom()
+Room* RoomManager::addRoom()
 {
-	Room *tmp = new Room;
-	room_list.push_back(tmp);
-	return tmp;
+	Room* newRoom = new Room();
+	rooms_.push_back(newRoom);
+	return newRoom;
 }
-void RoomManager::DeleteRoom(Room *tmp)
+void RoomManager::deleteRoom(Room* toBeDeleted)
 {
-	room_list.remove(tmp);
-	delete tmp;
+	rooms_.remove(toBeDeleted);
+	delete toBeDeleted;
 }

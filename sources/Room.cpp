@@ -1,22 +1,19 @@
 #include "Room.hpp"
 
-Room::Room()
+Room::Room(): player1_(nullptr), player2_(nullptr), numberOfPlayers_(0)
 {
-	player_1 = nullptr;
-	player_2 = nullptr;
-	nr_players = 0;
 }
-bool Room::JoinRoom(Player *player)
+bool Room::joinRoom(const Player *player)
 {
-	if(nr_players >= 2)
+	if(numberOfPlayers_ >= 2)
 		return false;
 
-	if(player_1 != nullptr)
+	if(player1_ != nullptr)
 	{
-		player_1 = player;
+		player1_ = player;
 		return true;
 	}
-	player_2 = player;
-	++nr_players;
+	player2_ = player;
+	++numberOfPlayers_;
 	return true;
 }

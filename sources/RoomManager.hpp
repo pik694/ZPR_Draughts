@@ -1,18 +1,22 @@
 #ifndef ROOM_MANAGER_HPP
 #define ROOM_MANAGER_HPP
+
 #include <list>
+
 #include "Room.hpp"
-class Room;
-class RoomManager
-{ // TODO : SINGLETON
+
+class RoomManager{
 public:
-	RoomManager();
+    static RoomManager* getInstance();
 	/* creates new room and gives it an id */
 	Room* addRoom();
 	void deleteRoom(Room*);
 
 
 private:
-	std::list<Room*> roomList_;
+    static RoomManager* instance_;
+
+    RoomManager();
+	std::list<Room*> rooms_;
 };
 #endif // ROOM_MANAGER_HPP
