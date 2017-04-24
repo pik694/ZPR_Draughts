@@ -7,16 +7,21 @@
 
 #include <jsoncpp/json/json.h>
 
-#include "Pawn.hpp"
+#include "PieceKind.hpp"
 #include "Point.hpp"
 
-class Gameboard {
+class Board {
 public:
 
-    Pawn getPawnAt(Point);
-    void setPawnAt(Pawn, Point);
+    using row = std::vector<PieceKind>;
 
-    void removePawnAt(Point);
+    Board();
+    Board(std::initializer_list<row>);
+
+    PieceKind getPieceAt(Point);
+    void setPieceAt(PieceKind, Point);
+
+    void remocePieceAt(Point);
 
     Json::Value toJSON();
 };

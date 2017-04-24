@@ -6,6 +6,7 @@
 #include "Game.hpp"
 
 
+
 class Room : public GameObserver
 {
 public:
@@ -19,12 +20,13 @@ public:
 
 	}
 
+
 private:
 
 	const Player* player1_;
     const Player* player2_;
 
-	int numberOfPlayers_;
+	int numberOfPlayers_; //
 	std::unique_ptr <Game> game_;
 
 };

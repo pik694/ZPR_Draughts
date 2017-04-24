@@ -5,91 +5,98 @@
 #include <boost/test/unit_test.hpp>
 
 #include <Game.hpp>
-#include <Gameboard.hpp>
-#include <Player.hpp>
+#include <Board.hpp>
 #include <Point.hpp>
+#include <PieceKind.hpp>
+#include <PlayerColour.hpp>
 
 #include <exception>
 
+
+using namespace{
+
+    using PlayerColour::black;
+    using PlayerColour::white;
+
+    using PieceKind::none;
+    using PieceKind::whiteMen;
+    using PieceKind::blackMen;
+    using PieceKind::whiteKing;
+    using PieceKind::blackKing;
+}
+
+
+
 BOOST_AUTO_TEST_SUITE(GameEngineTests)
+
+
 
     BOOST_AUTO_TEST_CASE(InvalidPlayersGivenToTheConstructor){
 
-        Player whitePlayer, blackPlayer;
-
-
-        BOOST_CHECK_THROW(Game (&whitePlayer, &whitePlayer), std::invalid_argument);
-        BOOST_CHECK_THROW(Game (&blackPlayer, &blackPlayer), std::invalid_argument);
-
-        BOOST_CHECK_THROW(Game (nullptr, nullptr), std::invalid_argument);
-
-        BOOST_CHECK_THROW(Game(nullptr, &whitePlayer), std::invalid_argument);
-        BOOST_CHECK_THROW(Game(&blackPlayer, nullptr), std::invalid_argument);
-
-
-        BOOST_CHECK_NO_THROW(Game(&blackPlayer, &whitePlayer));
 
 
     }
 
     BOOST_AUTO_TEST_CASE(ValidMensMovesWithoutCapture){
 
-        Player player1, player2;
+        Game game;
 
-        Game game (&player1, &player2);
+        BOOST_CHECK(game.makeMove(white, Point(3, 1), Point(4, 2)));
+        BOOST_CHECK(game.makeMove(black, Point(3, 1), Point(4, 2)));
 
-        const Player* whitePlayer = game.whoseTurn() == &player1 ? &player1 : &player2;
-        const Player* blackPlayer = game.whoseTurn() == &player1 ? &player2 : &player1;
+        BOOST_CHECK(game.makeMove(white, Point(4, 2), Point(5, 1)));
+        BOOST_CHECK(game.makeMove(black, Point(4, 2), Point(5, 1)));
 
-        BOOST_CHECK(game.makeMove(whitePlayer, Point(3, 1), Point(4, 2)));
-        BOOST_CHECK(game.makeMove(blackPlayer, Point(3, 1), Point(4, 2)));
+        BOOST_CHECK(game.makeMove(white, Point(2, 2), Point(3, 1)));
+        BOOST_CHECK(game.makeMove(black, Point(2, 2), Point(3, 1)));
 
-        BOOST_CHECK(game.makeMove(whitePlayer, Point(4, 2), Point(5, 1)));
-        BOOST_CHECK(game.makeMove(blackPlayer, Point(4, 2), Point(5, 1)));
+        BOOST_CHECK(game.makeMove(white, Point(2, 2), Point(3, 1)));
+        BOOST_CHECK(game.makeMove(black, Point(2, 2), Point(3, 1)));
 
-        BOOST_CHECK(game.makeMove(whitePlayer, Point(2, 2), Point(3, 1)));
-        BOOST_CHECK(game.makeMove(blackPlayer, Point(2, 2), Point(3, 1)));
-
-        BOOST_CHECK(game.makeMove(whitePlayer, Point(2, 2), Point(3, 1)));
-        BOOST_CHECK(game.makeMove(blackPlayer, Point(2, 2), Point(3, 1)));
-
-        BOOST_CHECK(game.makeMove(whitePlayer, Point(3, 1), Point(4, 2)));
-        BOOST_CHECK(game.makeMove(blackPlayer, Point(3, 1), Point(4, 2)));
-
+        BOOST_CHECK(game.makeMove(white, Point(3, 1), Point(4, 2)));
+        BOOST_CHECK(game.makeMove(black, Point(3, 1), Point(4, 2)));
 
 
     }
 
 
-    BOOST_AUTO_TEST_CASE(TurnsChanging){
+    BOOST_AUTO_TEST_CASE(ChangingTurns){
 
-        Player player1, player2;
+        Game game;
 
-        Game game (&player1, &player2);
+        game.makeMove(white, Point(3, 1), Point(4, 2));
+        BOOST_CHECK_EQUAL(game.whoseTurn(), black);
 
-        const Player* whitePlayer = game.whoseTurn() == &player1 ? &player1 : &player2;
-        const Player* blackPlayer = game.whoseTurn() == &player1 ? &player2 : &player1;
+        game.makeMove(black, Point(4,2), Point(5,1));
+        BOOST_CHECK_EQUAL(game.whoseTurn(), white);
 
-
-        game.makeMove(whitePlayer, Point(3, 1), Point(4, 2));
-        BOOST_CHECK_EQUAL(game.whoseTurn(), blackPlayer);
-
-        game.makeMove(blackPlayer, Point(4,2), Point(5,1));
-        BOOST_CHECK_EQUAL(game.whoseTurn(), whitePlayer);
-
-
-
-
-
-
-
+        game.makeMove(black, Point(2, 2), Point(3, 1));
+        BOOST_CHECK_EQUAL(game.whoseTurn(), white);
 
 
     }
 
     BOOST_AUTO_TEST_CASE(ValidMensMovesWithSingleCapture){
 
-        BOOST_REQUIRE( 1==1 );
+
+        Game game ( std::move( Board (
+            {
+                { none, blackMen, none, none, none, none, none, none },
+                { none, none, none, none, none, none, none, none },
+                { none, none, none, none, none, none, none, none },
+                { none, none, none, none, none, none, none, none },
+                { none, none, none, none, none, none, none, none },
+                { none, blackMen, none, none, none, none, none, none },
+                { whiteMen, none, none, none, none, none, none, none },
+            }
+        )));
+
+
+        BOOST_CHECK(game.makeMove(white, Point(1, 1), Point(3,3)));
+
+        BOOST_CHECK_EQUAL(game.getGameboard().getPieceAt(Point (2, 2)), none);
+        BOOST_CHECK_EQUAL(game.getGameboard().getPieceAt(Point(1,1)), none);
+        BOOST_CHECK_EQUAL(game.getGameboard().getPieceAt(Point(3,3)), whiteMen);
 
 
     }

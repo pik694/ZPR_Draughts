@@ -5,29 +5,33 @@
 
 #include "Player.hpp"
 #include "Point.hpp"
+#include <PieceKind.hpp>
 #include "GameObserver.hpp"
-#include "Gameboard.hpp"
+#include "Board.hpp"
+#include "PlayerColour.hpp"
 
 class Game
 {
 public:
 
-    Game(const Player* whitePlayer, const Player* blackPlayer);
+    Game();
+    Game(Board&& board):gameboard_(board){
+    }
 
     void addGameObserver(const GameObserver&);
 
     bool StartGame();
 
-    bool makeMove(const Player*, std::vector<Point>);
-    bool makeMove(const Player*, Point, Point);
+    bool makeMove(PlayerColour, std::vector<Point>);
+    bool makeMove(PlayerColour, Point, Point);
 
-    const Gameboard&  getGameboard() const;
+    Board  getGameboard() const;
 
-    const Player* whoseTurn() const;
+    const PieceKind whoseTurn() const;
 
 private:
 
-    Gameboard gameboard_;
+    Board gameboard_;
 
 };
 #endif // GAME_HPP
