@@ -12,7 +12,6 @@ public:
 
     virtual void playerWon(const Player&) = 0;
 
-    virtual void menChangedIntoKing(const Point&) = 0 ;
 
 };
 

@@ -4,7 +4,7 @@ find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
 include_directories(${Boost_INCLUDE_DIR})
 
-set(TEST_SOURCES test_main.cpp CustomTests.cpp)
+set(TEST_SOURCES test_main.cpp CustomTests.cpp GameEngineTests.cpp)
 
 add_executable(Tests  ${TEST_SOURCES})
 target_link_libraries(Tests ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})

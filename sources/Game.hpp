@@ -12,7 +12,7 @@ class Game
 {
 public:
 
-
+    void Game(const Player& whitePlayer, const Player& blackPlayer);
 
     void addGameObserver(const GameObserver&);
 
@@ -23,7 +23,7 @@ public:
 
     const Gameboard&  getGameboard() const;
 
-    bool isPlayersTurn(const Player&);
+    const Player& whoseTurn() const;
 
 private:
 

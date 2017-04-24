@@ -7,6 +7,12 @@
 
 
 struct Point {
+
+    Point(uint8_t x, uint8_t y): x_(x), y_(y) { }
+
+    uint8_t x_;
+    uint8_t y_;
+
 };
 
 
