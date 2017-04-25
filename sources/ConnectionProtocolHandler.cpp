@@ -2,12 +2,14 @@
 
 ConnectionProtocolHandler::ConnectionProtocolHandler(connection_hdl &hdl)
 {
+	throw std::runtime_error("Not implemented yet");
 	currentConnection_ = hdl;
 	state_ = ConnectionStates::JUST_STARTED;
 }
 
 void ConnectionProtocolHandler::parseJson(std::string data)
 {
+	throw std::runtime_error("Not implemented yet");
 	Json::Value action;
 	/*switch(state_)
 	{

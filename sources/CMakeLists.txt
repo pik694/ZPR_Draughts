@@ -5,7 +5,6 @@
 
 set(SOURCE_FILES Player.cpp ClientManager.cpp ConnectionProtocolHandler.cpp Game.cpp Room.cpp RoomManager.cpp Server.cpp main.cpp Point.hpp GameObserver.hpp Board.cpp Board.hpp PieceKind.hpp Message.cpp Message.hpp MessageDispatcher.cpp MessageDispatcher.hpp PlayerColour.hpp)
 add_executable(ZPR_Draughts ${SOURCE_FILES})
-
 find_package(Boost COMPONENTS system REQUIRED)
 
 if(APPLE)

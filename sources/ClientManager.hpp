@@ -10,8 +10,10 @@
 class ClientManager
 // TODO: SINGLETON
 {
+public:
+	bool addNewPlayer(const std::string &nickname);
 	bool checkIfNameAvailable(const std::string& nickname);
-
+	static ClientManager *getInstance();
 
 private:
 	std::list<Player*> clients_;

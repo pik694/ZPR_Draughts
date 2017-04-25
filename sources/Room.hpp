@@ -16,9 +16,7 @@ public:
 	bool joinRoom(const Player* );
     void leaveRoom(const Player*);
 
-	void playerWon(const Player*){
-
-	}
+	void playerWon(const Player*);
 
 
 private:

@@ -47,7 +47,7 @@ BOOST_AUTO_TEST_SUITE(GameEngineTests)
         BOOST_CHECK(game.makeMove(PlayerColour::black, Point(2, 2), Point(3, 1)));
 
         BOOST_CHECK(game.makeMove(PlayerColour::white, Point(3, 1), Point(4, 2)));
-        BOOST_CHECK(game.makeMove(PlayerColour::black, Point(3, 1), Point(4, 2)));
+        BOOST_CHECK(game.makeMove(PlayerColour::black, Point(3, 1), Point(4, 2)));  
 
 
     }

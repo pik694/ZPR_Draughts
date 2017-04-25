@@ -5,7 +5,7 @@ window.onload = function () {
 	var example = new WebSocket("ws://127.0.0.1:8080");
 	example.onerror = function(evt)
 	{
-		alert("shiet");
+		alert("123");
 	}
 	example.onopen = function(event)
 	{

@@ -9,7 +9,7 @@
 
 class Message {
 
-    virtual void acceptDispatcher(const MessageDispatcher& dispatcher);
+    virtual void acceptDispatcher(const MessageDispatcher& dispatcher)= 0;
 
     virtual ~Message();
 };

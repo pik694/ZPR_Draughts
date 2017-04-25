@@ -1,11 +1,13 @@
 #include "ClientManager.hpp"
 
-bool ClientManager::checkIfNameAvailable(const std::string& nickname)
-{
+bool ClientManager::checkIfNameAvailable(const std::string& nickname) {
     throw std::runtime_error("Not implemented yet");
+}
 
-	for(auto i : clients_)
-	{
-		return true;
-	}
+bool ClientManager::addNewPlayer(const std::string &nickname) {
+	throw std::runtime_error("Not implemented yet");
+}
+
+ClientManager* ClientManager::getInstance() {
+	throw std::runtime_error("Not implemented yet");
 }

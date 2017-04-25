@@ -10,7 +10,7 @@ public:
     static RoomManager* getInstance();
 	/* creates new room and gives it an id */
 	Room* addRoom();
-	void deleteRoom(Room*);
+	bool deleteRoom(Room*);
 
 
 private:
