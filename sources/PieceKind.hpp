@@ -42,7 +42,5 @@
 //
 //        return out;
 //    }
-//
-
 
 #endif //ZPR_DRAUGHTS_ENUMS_HPP
