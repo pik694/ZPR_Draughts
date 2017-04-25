@@ -9,6 +9,7 @@
 
 #include "PieceKind.hpp"
 #include "Point.hpp"
+#include "PlayerColour.hpp"
 
 class Board {
 public:
@@ -18,7 +19,7 @@ public:
     Board();
     Board(std::initializer_list<row>);
 
-    PieceKind getPieceAt(Point);
+    PieceKind getPieceAt(Point, PlayerColour side = PlayerColour::white) const;
     void setPieceAt(PieceKind, Point);
 
     void remocePieceAt(Point);

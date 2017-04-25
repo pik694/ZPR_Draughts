@@ -11,4 +11,10 @@
         black,
     };
 
+//TODO: resolve a problem with linking
+//     std::ostream& operator<<(std::ostream& out, PlayerColour colour){
+//        out << ((colour == PlayerColour::black) ? "back" : "white");
+//        return out;
+//    }
+
 #endif //ZPR_DRAUGHTS_PLAYERCOLOUR_HPP
