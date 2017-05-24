@@ -6,11 +6,11 @@
 
 #include <utility>
 
-#include <Game.hpp>
-#include <Board.hpp>
+#include <GameLogic/Game.hpp>
+#include <GameLogic/Board.hpp>
 #include <Point.hpp>
-#include <PieceKind.hpp>
-#include <PlayerColour.hpp>
+#include <GameLogic/PieceKind.hpp>
+#include <GameLogic/PlayerColour.hpp>
 
 
 

@@ -5,6 +5,8 @@
 #ifndef ZPR_DRAUGHTS_ENUMS_HPP
 #define ZPR_DRAUGHTS_ENUMS_HPP
 
+#include <ostream>
+
     enum class PieceKind : uint8_t {
         none,
         blackMen,
@@ -15,7 +17,7 @@
 
 //TODO: resolve a problem with linking
 //
-//    std::ostream& operator<<(std::ostream& out, PieceKind kind){
+//    std::ostream& operator<<(std::ostream& out, const PieceKind& kind){
 //
 //        std::string name;
 //

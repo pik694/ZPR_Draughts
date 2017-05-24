@@ -3,7 +3,7 @@
 
 
 #include "GameObserver.hpp"
-#include "Game.hpp"
+#include "GameLogic/Game.hpp"
 
 
 

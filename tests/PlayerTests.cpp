@@ -1,7 +1,7 @@
 
 
 #include <boost/test/unit_test.hpp>
-#include <Player.hpp>
+#include <GameLogic/Player.hpp>
 BOOST_AUTO_TEST_SUITE(PlayerTestSuite)
 
     BOOST_AUTO_TEST_CASE(setNick) {

@@ -4,7 +4,7 @@
 #include <list>
 #include <string>
 
-#include "Player.hpp"
+#include "GameLogic/Player.hpp"
 
 
 class ClientManager

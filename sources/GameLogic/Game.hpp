@@ -5,7 +5,7 @@
 
 #include "Player.hpp"
 #include "Point.hpp"
-#include <PieceKind.hpp>
+#include <GameLogic/PieceKind.hpp>
 #include "GameObserver.hpp"
 #include "Board.hpp"
 #include "PlayerColour.hpp"
@@ -14,7 +14,9 @@ class Game
 {
 public:
 
-    Game();
+    Game(): gameboard_(){
+
+    }
     Game(Board&& board):gameboard_(board){
     }
 
