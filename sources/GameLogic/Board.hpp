@@ -2,8 +2,8 @@
 // Created by Piotr Żelazko on 23.04.2017.
 //
 
-#ifndef ZPR_DRAUGHTS_GAMEBOARD_HPP
-#define ZPR_DRAUGHTS_GAMEBOARD_HPP
+#ifndef ZPR_DRAUGHTS_BOARD_HPP
+#define ZPR_DRAUGHTS_BOARD_HPP
 
 #include <jsoncpp/json/json.h>
 #include <algorithm>
@@ -25,12 +25,11 @@ public:
     Board(std::initializer_list<row_t>);
 
 
+    PieceKind getPieceAt(Point, PlayerColour) const;
 
-    PieceKind getPieceAt(Point,PlayerColour side = PlayerColour::white) const;
+    void setPieceAt(PieceKind ,Point, PlayerColour);
 
-    void setPieceAt(PieceKind ,Point, PlayerColour side = PlayerColour::white);
-
-    void removePieceAt(Point,PlayerColour side = PlayerColour::white);
+    void removePieceAt(Point,PlayerColour);
 
     Json::Value toJSON() const ;
 
@@ -49,4 +48,4 @@ private:
 };
 
 
-#endif //ZPR_DRAUGHTS_GAMEBOARD_HPP
+#endif //ZPR_DRAUGHTS_BOARD_HPP

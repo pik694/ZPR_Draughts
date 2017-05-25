@@ -32,14 +32,17 @@ Board::Board(std::initializer_list<row_t> list):board_(){
                                              "Got : " +  std::to_string(list.size()) +
                                              ", but expected : " + std::to_string(BOARD_SIZE));
 
-    std::for_each(list.begin(), list.end(),
-                  [&](row_t row){
-                      if (row.size() != BOARD_SIZE)
-                          throw std::invalid_argument ("Invalid row size in board_. "
-                                                               "Got : " +  std::to_string(row.size()) +
-                                                               ", but expected : " + std::to_string(BOARD_SIZE));
-                      this->board_.push_back(row);
-                  });
+
+	for (auto row = list.end(); row != list.begin(); ){
+
+		--row;
+
+		if (row->size() != BOARD_SIZE)
+			throw std::invalid_argument ("Invalid row size in board_. "
+												 "Got : " +  std::to_string(row->size()) +
+										 ", but expected : " + std::to_string(BOARD_SIZE));
+		this->board_.push_back(*row);
+	}
 
 }
 
@@ -49,6 +52,7 @@ PieceKind Board::getPieceAt(Point point, PlayerColour side) const {
            board_.at(point.y_).at(point.x_) : board_.at(BOARD_SIZE - point.y_ - 1).at(BOARD_SIZE - point.x_ - 1);
 
 }
+
 void Board::setPieceAt(PieceKind piece, Point point, PlayerColour side) {
 
     if (point.x_%2 != point.y_ %2)

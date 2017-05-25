@@ -24,7 +24,7 @@ bool Game::makeMove(PlayerColour player, const std::vector<Point>& points) {
 
     movePiece(player, points);
 
-    currentTurn_ = currentTurn_ == PlayerColour::white ? PlayerColour::black : PlayerColour ::black;
+    currentTurn_ = currentTurn_ == PlayerColour::white ? PlayerColour::black : PlayerColour ::white;
     return true;
 
 }
@@ -51,13 +51,14 @@ PlayerColour Game::whoseTurn() const {
 
 bool Game::validatePoints(PieceKind piece, Point begin, Point end) {
 
+
 	return !((begin.y_ >= Board::BOARD_SIZE || begin.y_ < 0)
 		|| (begin.x_ >= Board::BOARD_SIZE || begin.x_ < 0)
 		|| (end.y_ >= Board::BOARD_SIZE || end.y_ < 0)
 		|| (end.x_ >= Board::BOARD_SIZE || end.x_ < 0)
 		|| ((begin.x_ % 2 != begin.y_ % 2) || (end.x_ % 2 != end.y_ % 2))
 		|| (piece == PieceKind::none)
-		|| ((piece == PieceKind::whiteMen || piece == PieceKind::blackMen) && (begin.y_ < end.y_))
+		|| ((piece == PieceKind::whiteMen || piece == PieceKind::blackMen) && (begin.y_ >= end.y_))
         || (abs(begin.x_ - end.x_) != abs(begin.y_ - end.y_))
         || ((piece == PieceKind::whiteMen || piece == PieceKind::blackMen) && abs(begin.x_ - end.x_) > 2));
 }
@@ -85,8 +86,8 @@ bool Game::validateMove(PlayerColour player, const std::vector<Point>& points) {
         Point direction (findDirection(begin->x_, end->x_), findDirection(begin->y_, end->y_));
 
 
-        if (*end - direction != *begin && tempBoard.getPieceAt(*end - direction) != PieceKind::none){
-            PieceKind foundPiece = tempBoard.getPieceAt(*end - direction);
+        if (*end - direction != *begin && tempBoard.getPieceAt(*end - direction, player) != PieceKind::none){
+            PieceKind foundPiece = tempBoard.getPieceAt(*end - direction, player);
             switch (piece){
                 case PieceKind::whiteMen:
                 case PieceKind::whiteKing:
@@ -107,7 +108,7 @@ bool Game::validateMove(PlayerColour player, const std::vector<Point>& points) {
                     break;
 
                 default:
-                    throw  std::runtime_error("Invalid pice" + std::to_string((uint8_t)piece));
+                    throw  std::runtime_error("Invalid piece" + std::to_string((uint8_t)piece));
             }
 
         }
