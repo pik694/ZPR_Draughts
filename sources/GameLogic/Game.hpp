@@ -2,6 +2,7 @@
 #define GAME_HPP
 
 #include <vector>
+#include <string>
 
 #include "Player.hpp"
 #include "Point.hpp"

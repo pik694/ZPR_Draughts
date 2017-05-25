@@ -8,7 +8,7 @@
 
 #include <GameLogic/Game.hpp>
 #include <GameLogic/Board.hpp>
-#include <Point.hpp>
+#include <GameLogic/Point.hpp>
 #include <GameLogic/PieceKind.hpp>
 #include <GameLogic/PlayerColour.hpp>
 

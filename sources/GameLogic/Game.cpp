@@ -58,7 +58,8 @@ bool Game::validatePoints(PieceKind piece, Point begin, Point end) {
 		|| ((begin.x_ % 2 != begin.y_ % 2) || (end.x_ % 2 != end.y_ % 2))
 		|| (piece == PieceKind::none)
 		|| ((piece == PieceKind::whiteMen || piece == PieceKind::blackMen) && (begin.y_ < end.y_))
-		|| (abs(begin.x_ - end.x_) != 1 || abs(begin.y_ - end.y_) != 1));
+        || (abs(begin.x_ - end.x_) != abs(begin.y_ - end.y_))
+        || ((piece == PieceKind::whiteMen || piece == PieceKind::blackMen) && abs(begin.x_ - end.x_) > 2));
 }
 
 
@@ -66,16 +67,64 @@ bool Game::validateMove(PlayerColour player, const std::vector<Point>& points) {
 
     Board tempBoard = board_;
 
+    bool captured = true;
+
     for (auto begin = points.begin(), end = begin + 1; end != points.end(); ++begin, ++end){
 
+        if (!captured) return false;
+        captured = false;
 
-//tODO
+
+        PieceKind piece = board_.getPieceAt(*begin, player);
+        tempBoard.removePieceAt(*begin, player);
+
+        if (!validatePoints(piece, *begin, *end)
+            || tempBoard.getPieceAt(*end, player) != PieceKind::none) return false;
 
 
+        Point direction (findDirection(begin->x_, end->x_), findDirection(begin->y_, end->y_));
+
+
+        if (*end - direction != *begin && tempBoard.getPieceAt(*end - direction) != PieceKind::none){
+            PieceKind foundPiece = tempBoard.getPieceAt(*end - direction);
+            switch (piece){
+                case PieceKind::whiteMen:
+                case PieceKind::whiteKing:
+                    if (foundPiece != PieceKind::blackMen && foundPiece != PieceKind::blackKing)
+                        return false;
+
+                    tempBoard.removePieceAt(*end - direction, player);
+                    captured = true;
+                    break;
+
+                case PieceKind::blackMen:
+                case PieceKind::blackKing:
+                    if (foundPiece != PieceKind::whiteMen && foundPiece != PieceKind::whiteKing)
+                        return false;
+
+                    tempBoard.removePieceAt(*end - direction, player);
+                    captured = true;
+                    break;
+
+                default:
+                    throw  std::runtime_error("Invalid pice" + std::to_string((uint8_t)piece));
+            }
+
+        }
+
+        for (Point curr = *begin; curr != *end; curr += direction) {
+            if (tempBoard.getPieceAt(curr, player) != PieceKind::none) return false;
+        }
+
+        if (!captured && (piece == PieceKind::whiteMen || piece == PieceKind::blackMen) && abs(begin->x_ - end->x_) > 1) return false;
+
+        if (end->y_ == Board::BOARD_SIZE - 1) changeIntoAKing(piece);
+
+        tempBoard.setPieceAt(piece, *end, player);
 
     }
 
-
+    return (!captured && points.size() > 2) ? false : true;
 }
 
 void Game::movePiece(PlayerColour player, const std::vector<Point>& points) {
@@ -110,5 +159,9 @@ void Game::changeIntoAKing(PieceKind& piece){
         case PieceKind::blackMen:
             piece = PieceKind::blackKing;
             break;
+        default:
+            if (piece != PieceKind::blackKing && piece != PieceKind::whiteKing)
+                    throw  std::runtime_error("Invalid pice" + std::to_string((uint8_t)piece));
+            else break;
     }
 }
