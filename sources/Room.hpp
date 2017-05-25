@@ -13,20 +13,20 @@ public:
 
 	Room ();
 
-	bool joinRoom(const Player* );
+	bool joinRoom(const Player*);
     void leaveRoom(const Player*);
 
 	void playerWon(const Player*);
 
 
 private:
+    using player_ptr = std::shared_ptr<const Player>;
 
-	const Player* player1_;
-    const Player* player2_;
 
-	int numberOfPlayers_; //
-	std::unique_ptr <Game> game_;
+    player_ptr whitePlayer_;
+    player_ptr blackPlayer_;
 
+	int numberOfPlayers_;
 };
 
 #endif // ROOM_HPP

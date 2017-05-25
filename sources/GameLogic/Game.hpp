@@ -14,26 +14,43 @@ class Game
 {
 public:
 
-    Game(): gameboard_(){
-
-    }
-    Game(Board&& board):gameboard_(board){
+    Game(): gameObservers_(){
+        startGame();
     }
 
-    void addGameObserver(const GameObserver&);
+    Game(Board&& board):board_(board), gameObservers_() {
 
-    bool StartGame();
+        currentTurn_ = PlayerColour::white;
+        blackPieces_ = whitePieces_ = Board::BOARD_SIZE * Board::ROWS_OF_PIECES / 2;
 
-    bool makeMove(PlayerColour, std::vector<Point>);
+    }
+
+    void addGameObserver(GameObserver*);
+
+    void startGame();
+
+    bool makeMove(PlayerColour, const std::vector<Point>&);
     bool makeMove(PlayerColour, Point, Point);
 
-    Board  getGameboard() const;
+    const Board&  getGameboard() const;
 
-    const PieceKind whoseTurn() const;
+    PlayerColour whoseTurn() const;
 
 private:
 
-    Board gameboard_;
+    bool validatePoints(PieceKind , Point begin, Point end);
+    bool validateMove(PlayerColour , const std::vector<Point>&);
+    void movePiece(PlayerColour , const std::vector<Point>&);
+    int findDirection(int begin, int end);
+    void changeIntoAKing(PieceKind&);
+
+    Board board_;
+    PlayerColour currentTurn_;
+
+    int whitePieces_;
+    int blackPieces_;
+
+    std::vector<GameObserver*> gameObservers_;
 
 };
 #endif // GAME_HPP

@@ -2,7 +2,7 @@
 #include <jsoncpp/json/json.h>
 #include <string>
 #include "RoomManager.hpp"
-#include "GameLogic/Player.hpp"
+#include "Player.hpp"
 #include "ClientManager.hpp"
 // accepts data in JSON format, parses them and decides what to do
 

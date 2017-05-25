@@ -1,4 +1,4 @@
-set(SOURCE_FILES GameLogic/Player.cpp ClientManager.cpp ConnectionProtocolHandler.cpp GameLogic/Game.cpp Room.cpp RoomManager.cpp Server.cpp main.cpp Point.hpp GameObserver.hpp GameLogic/Board.cpp GameLogic/Board.hpp GameLogic/PieceKind.hpp Message.cpp Message.hpp MessageDispatcher.cpp MessageDispatcher.hpp GameLogic/PlayerColour.hpp)
+set(SOURCE_FILES Player.cpp ClientManager.cpp ConnectionProtocolHandler.cpp GameLogic/Game.cpp Room.cpp RoomManager.cpp Server.cpp main.cpp Point.hpp GameObserver.hpp GameLogic/Board.cpp GameLogic/Board.hpp GameLogic/PieceKind.hpp Message.cpp Message.hpp MessageDispatcher.cpp MessageDispatcher.hpp GameLogic/PlayerColour.hpp)
 add_executable(ZPR_Draughts ${SOURCE_FILES})
 find_package(Boost COMPONENTS system REQUIRED)
 

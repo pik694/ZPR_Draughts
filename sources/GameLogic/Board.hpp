@@ -26,15 +26,19 @@ public:
 
 
 
-    const PieceKind& getPieceAt(const Point&, const PlayerColour& side = PlayerColour::white) const;
+    PieceKind getPieceAt(Point,PlayerColour side = PlayerColour::white) const;
 
-    void setPieceAt(const PieceKind& ,const Point&, const PlayerColour& side = PlayerColour::white);
+    void setPieceAt(PieceKind ,Point, PlayerColour side = PlayerColour::white);
 
-    void removePieceAt(const Point&, const PlayerColour& side = PlayerColour::white);
+    void removePieceAt(Point,PlayerColour side = PlayerColour::white);
 
-    Json::Value toJSON();
+    Json::Value toJSON() const ;
+
+    static size_t  BOARD_SIZE;
+    static size_t  ROWS_OF_PIECES;
 
 private:
+
     PieceKind& pieceAt (const Point& point, const PlayerColour& side){
         return side == PlayerColour::white ?
                 board_.at(point.y_).at(point.x_) : board_.at(BOARD_SIZE - point.y_ - 1).at(BOARD_SIZE - point.x_ - 1);
@@ -42,7 +46,6 @@ private:
 
 
     std::vector<row_t> board_;
-    static size_t  BOARD_SIZE;
 };
 
 
