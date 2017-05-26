@@ -34,7 +34,7 @@ bool Game::makeMove(PlayerColour player, Point begin, Point end) {
 
 }
 
-const Board& Game::getGameboard() const {
+const Board& Game::getBoard() const {
 
 	return board_;
 
@@ -66,6 +66,8 @@ bool Game::validatePoints(PieceKind piece, Point begin, Point end) {
 
 bool Game::validateMove(PlayerColour player, const std::vector<Point>& points) {
 
+    //TODO: refactor
+
     Board tempBoard = board_;
 
     bool captured = true;
@@ -76,7 +78,12 @@ bool Game::validateMove(PlayerColour player, const std::vector<Point>& points) {
         captured = false;
 
 
-        PieceKind piece = board_.getPieceAt(*begin, player);
+        PieceKind piece = tempBoard.getPieceAt(*begin, player);
+
+        if ((player == PlayerColour::white && piece != PieceKind::whiteKing && piece != PieceKind::whiteMen)
+                || (player == PlayerColour::black && piece != PieceKind::blackKing && piece != PieceKind::blackMen))
+            return false;
+
         tempBoard.removePieceAt(*begin, player);
 
         if (!validatePoints(piece, *begin, *end)
@@ -162,7 +169,7 @@ void Game::changeIntoAKing(PieceKind& piece){
             break;
         default:
             if (piece != PieceKind::blackKing && piece != PieceKind::whiteKing)
-                    throw  std::runtime_error("Invalid pice" + std::to_string((uint8_t)piece));
+                    throw  std::runtime_error("Invalid piece" + std::to_string((uint8_t)piece));
             else break;
     }
 }

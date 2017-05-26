@@ -33,7 +33,7 @@ public:
     bool makeMove(PlayerColour, const std::vector<Point>&);
     bool makeMove(PlayerColour, Point, Point);
 
-    const Board&  getGameboard() const;
+    const Board&  getBoard() const;
 
     PlayerColour whoseTurn() const;
 
