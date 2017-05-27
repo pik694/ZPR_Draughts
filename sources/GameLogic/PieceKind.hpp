@@ -7,7 +7,7 @@
 
 
 enum class PieceKind : uint8_t {
-    none,
+    none = 0,
     blackMen,
     whiteMen,
     blackKing,
