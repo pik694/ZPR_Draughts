@@ -1,4 +1,7 @@
-set(SOURCE_FILES Player.cpp ClientManager.cpp ConnectionProtocolHandler.cpp GameLogic/Game.cpp Room.cpp RoomManager.cpp Server.cpp main.cpp GameLogic/Point.hpp GameObserver.hpp GameLogic/Board.cpp GameLogic/Board.hpp GameLogic/PieceKind.hpp Signals/Signal.hpp MessageDispatcher.cpp MessageDispatcher.hpp GameLogic/PlayerColour.hpp Signals/BoardSignal.hpp Signals/NickRequestSignal.hpp Signals/TextMessage.hpp Signals/GameEndSignal.hpp Signals/NewPlayerInRoomSignal.hpp Signals/OpponentLeftRoomSignal.hpp Signals/LeaveRoomSignal.hpp Signals/NewGameSignal.hpp Signals/PermissionSignal.hpp Signals/NewRoomRequestSignal.hpp  Signals/EnterRoomSignal.hpp Signals/StaticInit.cpp Signals/SignalFactory.hpp)
+
+
+set(SOURCE_FILES Player.cpp ClientManager.cpp ConnectionProtocolHandler.cpp GameLogic/Game.cpp Room.cpp RoomManager.cpp Server.cpp main.cpp GameLogic/Point.hpp GameObserver.hpp GameLogic/Board.cpp GameLogic/Board.hpp GameLogic/PieceKind.hpp MessageDispatcher.cpp MessageDispatcher.hpp GameLogic/PlayerColour.hpp Signals/Signal.hpp TextMessage.hpp BoardSignal.hpp EnterRoomSignal.hpp GameEndSignal.hpp LeaveRoomSignal.hpp NewGameSignal.hpp OpponentEnteredTheRoomSignal.hpp NewRoomRequestSignal.hpp OpponentLeftRoomSignal.hpp PermissionSignal.hpp NickRequestSignal.hpp)
+
 
 add_executable(ZPR_Draughts ${SOURCE_FILES})
 find_package(Boost COMPONENTS system REQUIRED)

@@ -23,6 +23,7 @@ private:
     using player_ptr = std::shared_ptr<const Player>;
 
 
+
     player_ptr whitePlayer_;
     player_ptr blackPlayer_;
 
