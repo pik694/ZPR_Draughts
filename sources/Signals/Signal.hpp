@@ -6,8 +6,6 @@
 #define ZPR_DRAUGHTS_SIGNAL_HPP
 
 
-#include "MessageDispatcher.hpp"
-
 class MessageDispatcher;
 
 class Signal {
@@ -16,6 +14,8 @@ public:
     virtual void acceptDispatcher (MessageDispatcher) = 0;
     virtual ~Signal();
 };
+
+#include "MessageDispatcher.hpp"
 
 
 #endif //ZPR_DRAUGHTS_SIGNAL_HPP

@@ -1,14 +1,23 @@
 //
-// Created by Piotr Żelazko on 27.05.2017.
+// Created by Piotr Żelazko on 28.05.2017.
 //
 
 #ifndef ZPR_DRAUGHTS_ENTERROOMSIGNAL_HPP
 #define ZPR_DRAUGHTS_ENTERROOMSIGNAL_HPP
 
+
 #include "Signal.hpp"
 
-class EnterRoomSignal : public Signal {
+class EnterRoomSignal : public Signal{
+public:
+    EnterRoomSignal(std::string roomID): roomID_(roomID){}
 
+    virtual void acceptDispatcher(MessageDispatcher);
+
+    const std::string& getRoomID() const;
+
+private:
+    const std::string roomID_;
 };
 
 

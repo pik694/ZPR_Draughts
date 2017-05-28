@@ -7,20 +7,17 @@
 
 
 #include <GameLogic/Board.hpp>
-#include "Signals/Signal.hpp"
+#include "Signal.hpp"
 
 class BoardSignal : public  Signal {
 public:
 
     BoardSignal(Board board): board_(board){}
 
-    const Board& getBoard() const {
-        return board_;
-    }
+    const Board& getBoard() const;
 
-    void acceptDispatcher(MessageDispatcher dispatcher){
-        throw std::runtime_error("Dispatcher should not dispatch this kind of signal");
-    }
+    virtual void acceptDispatcher(MessageDispatcher dispatcher);
+
 
 private:
     const Board board_;

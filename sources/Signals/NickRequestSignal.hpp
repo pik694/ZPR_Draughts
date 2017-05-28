@@ -1,21 +1,26 @@
 //
-// Created by Piotr Żelazko on 27.05.2017.
+// Created by Piotr Żelazko on 28.05.2017.
 //
 
 #ifndef ZPR_DRAUGHTS_NICKREQUESTSIGNAL_HPP
 #define ZPR_DRAUGHTS_NICKREQUESTSIGNAL_HPP
 
-#include "Signal.hpp"
-#include "SignalFactory.hpp"
-class NickRequestSignal : public Signal {
-public:
-	NickRequestSignal() {}
-	//NickRequestSignal(std::string nick) : nick_(nick) {}
-	std::string nick_;
-	void acceptDispatcher(MessageDispatcher& dispatcher);
-private:
-	static Register<NickRequestSignal> reg;
 
+#include <string>
+#include "Signals/Signal.hpp"
+
+class NickRequestSignal : public Signal{
+public:
+
+    NickRequestSignal(std::string nick):nick_(nick){}
+
+    const std::string& getNick() const;
+
+    void acceptDispatcher(MessageDispatcher dispatcher);
+
+
+private:
+    const std::string nick_;
 };
 
 

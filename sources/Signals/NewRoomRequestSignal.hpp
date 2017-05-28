@@ -1,15 +1,25 @@
 //
-// Created by Piotr Żelazko on 27.05.2017.
+// Created by Piotr Żelazko on 28.05.2017.
 //
 
 #ifndef ZPR_DRAUGHTS_NEWROOMREQUESTSIGNAL_HPP
 #define ZPR_DRAUGHTS_NEWROOMREQUESTSIGNAL_HPP
 
 
-#include "Signal.hpp"
+#include "Signals/Signal.hpp"
 
-class NewRoomRequestSignal : public Signal {
+class NewRoomRequestSignal : public Signal{
+public:
 
+    NewRoomRequestSignal(std::string roomID): roomID_(roomID){}
+
+
+    void acceptDispatcher(MessageDispatcher dispatcher);
+
+    const std::string& getRoomID() const;
+
+private:
+    const std::string roomID_;
 };
 
 

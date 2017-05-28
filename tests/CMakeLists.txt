@@ -13,7 +13,7 @@ if(_ENABLE_TESTS_AT_EACH_BUILD_)
 			../sources/MessageDispatcher.cpp
 			../sources/MessageDispatcher.hpp ../sources/GameLogic/PlayerColour.hpp )
 
-	set(TEST_SOURCES test_main.cpp CustomTests.cpp GameEngineTests.cpp ../sources/Signals/NickRequestSignal.hpp)
+	set(TEST_SOURCES test_main.cpp CustomTests.cpp GameEngineTests.cpp)
 
 	add_executable(Tests  ${TEST_SOURCES} ${SOURCE_FILES})
 	target_link_libraries(Tests ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} ${Boost_SYSTEM_LIBRARY})

@@ -1,6 +1,6 @@
 
 
-set(SOURCE_FILES Player.cpp ClientManager.cpp ConnectionProtocolHandler.cpp GameLogic/Game.cpp Room.cpp RoomManager.cpp Server.cpp main.cpp GameLogic/Point.hpp GameObserver.hpp GameLogic/Board.cpp GameLogic/Board.hpp GameLogic/PieceKind.hpp MessageDispatcher.cpp MessageDispatcher.hpp GameLogic/PlayerColour.hpp Signals/Signal.hpp TextMessage.hpp BoardSignal.hpp EnterRoomSignal.hpp GameEndSignal.hpp LeaveRoomSignal.hpp NewGameSignal.hpp OpponentEnteredTheRoomSignal.hpp NewRoomRequestSignal.hpp OpponentLeftRoomSignal.hpp PermissionSignal.hpp NickRequestSignal.hpp)
+set(SOURCE_FILES Player.cpp ClientManager.cpp ConnectionProtocolHandler.cpp GameLogic/Game.cpp Room.cpp RoomManager.cpp Server.cpp main.cpp GameLogic/Point.hpp GameObserver.hpp GameLogic/Board.cpp GameLogic/Board.hpp GameLogic/PieceKind.hpp MessageDispatcher.cpp MessageDispatcher.hpp GameLogic/PlayerColour.hpp Signals/Signal.hpp Signals/TextMessage.hpp Signals/BoardSignal.hpp Signals/EnterRoomSignal.hpp GameEndSignal.hpp Signals/LeaveRoomSignal.hpp Signals/NewGameSignal.hpp Signals/OpponentEnteredTheRoomSignal.hpp Signals/NewRoomRequestSignal.hpp Signals/OpponentLeftRoomSignal.hpp Signals/PermissionSignal.hpp Signals/NickRequestSignal.hpp Signals/EnterRoomSignal.cpp Signals/BoardSignal.cpp Signals/LeaveRoomSignal.cpp Signals/NewGameSignal.cpp Signals/NewRoomRequestSignal.cpp Signals/NickRequestSignal.cpp Signals/TextMessage.cpp)
 
 
 add_executable(ZPR_Draughts ${SOURCE_FILES})
