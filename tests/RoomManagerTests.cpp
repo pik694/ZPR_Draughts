@@ -13,6 +13,6 @@ Room* addRoom();
 		Room* tmp = rooms->addRoom();
 		BOOST_REQUIRE(rooms->deleteRoom(tmp));
 
-		BOOST_REQUIRE(rooms->deleteRoom(nullptr) == false)
+		BOOST_REQUIRE(rooms->deleteRoom(nullptr) == false);
 	}
 BOOST_AUTO_TEST_SUITE_END()

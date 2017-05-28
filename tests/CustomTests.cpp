@@ -9,7 +9,7 @@ BOOST_AUTO_TEST_SUITE(customTestSuite)
 
     BOOST_AUTO_TEST_CASE(custom_test_case){
 
-        BOOST_REQUIRE( 1==1 );
+        BOOST_CHECK( 1==1 );
 
 
     }
