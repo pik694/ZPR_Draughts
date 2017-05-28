@@ -8,7 +8,9 @@
 #include "Signal.hpp"
 
 class NickRequestSignal : public Signal {
-
+public:
+	NickRequestSignal(std::string nick) : nick_(nick) {}
+	std::string nick_;
 };
 
 

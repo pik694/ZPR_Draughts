@@ -41,7 +41,7 @@ Server::Server() {
 }
 Server::~Server() {
 	webSocketServer_.stop_listening();
-	webSocketServer_.close();
+	
 }
 
 void Server::onOpen(connection_hdl hdl) {
