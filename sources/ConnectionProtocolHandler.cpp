@@ -1,9 +1,11 @@
 #include "ConnectionProtocolHandler.hpp"
+using websocketpp::connection_hdl;
 
-ConnectionProtocolHandler::ConnectionProtocolHandler(connection_hdl &hdl)
-{
-	throw std::runtime_error("Not implemented yet");
-	currentConnection_ = hdl;
+
+ConnectionProtocolHandler::ConnectionProtocolHandler(connection_hdl &con,std::queue<Action> m_actions) {
+	//throw std::runtime_error("Not implemented yet"); 
+	currentConnection_ = con;
+	actions_ = m_actions;
 	state_ = ConnectionStates::JUST_STARTED;
 }
 
@@ -27,6 +29,11 @@ void ConnectionProtocolHandler::parseJson(std::string data)
 	}*/
 	
 }
+void ConnectionProtocolHandler::onMessage(websocketpp::connection_hdl hdl, message_ptr msg) {
+	std::cout<<"Message: ";
+	std::cout<<msg->get_payload()<<std::endl;
+}
+
 bool ConnectionProtocolHandler::tryToAssingName(const std::string &name)
 {
 	throw std::runtime_error("Not implemented yet");

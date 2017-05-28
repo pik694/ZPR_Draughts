@@ -2,7 +2,7 @@
 
 window.onload = function () {
 	//alert("fuck");
-	var example = new WebSocket("ws://127.0.0.1:8080");
+	var example = new WebSocket("ws://127.0.0.1:9002");
 	example.onerror = function(evt)
 	{
 		alert("123");

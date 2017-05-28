@@ -8,5 +8,12 @@ using namespace std;
 
 int main()
 {
-	std::cout << "Hello world\n";
+	std::cout << "Server starting ... \n"<<std::endl;
+	try {
+		Server myServer;
+		myServer.run(9002);
+	}
+	catch(websocketpp::exception const & e) {
+		std::cout<<e.what()<<std::endl;
+	}
 }

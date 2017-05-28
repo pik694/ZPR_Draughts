@@ -12,7 +12,7 @@ if(APPLE)
     target_link_libraries(ZPR_Draughts ${Boost_SYSTEM_LIBRARY} ${JSONCPP_LIBRARY_DIR})
 
 else()
-    target_link_libraries(ZPR_Draughts ${Boost_SYSTEM_LIBRARY} jsoncpp)
+    target_link_libraries(ZPR_Draughts ${Boost_SYSTEM_LIBRARY} jsoncpp pthread)
 endif()
 
 

@@ -71,7 +71,8 @@ function paintFocus(context,x,y,size,direction) {
 
 
 
-window.onload = function() {
+function InitGame() {
+    console.log("inting game");
     InitBoard();
 
     // add event listener
@@ -85,9 +86,17 @@ window.onload = function() {
         FocusOnPawn(Math.floor(mousePos.x/100.0),Math.floor(mousePos.y/100.0));
     }, false);
     DrawEverything();
+}
+/*window.onload = function() {
+    $("button").on("click",function(event) {
+        alert("hey");
+        console.log("button clicked");
+    });
+    communication();
+    InitGame();
 
 }
-
+*/
 function DrawEverything()
 {
     var myGame = document.getElementById("game");

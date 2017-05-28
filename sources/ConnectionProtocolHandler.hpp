@@ -4,6 +4,7 @@
 #include "RoomManager.hpp"
 #include "Player.hpp"
 #include "ClientManager.hpp"
+#include "Action.hpp"
 // accepts data in JSON format, parses them and decides what to do
 
 /*
@@ -43,22 +44,26 @@ JSON
 }
 8. After game ended players go back to [5]
 */
-
+using websocketpp::connection_hdl;
+using websocketpp::lib::mutex;
+using websocketpp::lib::condition_variable;
+typedef websocketpp::server<websocketpp::config::asio> server;
+typedef server::message_ptr message_ptr;
 enum ConnectionStates {JUST_STARTED, NICK_SET, ROOM_ASSIGNED, PLAYER_READY, GAME_IN_PROGRESS };
 using websocketpp::connection_hdl;
-
+typedef websocketpp::server<websocketpp::config::asio> server;
 class ConnectionProtocolHandler
 {
 public:
 	// there is going to be an event handler on_message here
-	ConnectionProtocolHandler(connection_hdl &hdl);
+	ConnectionProtocolHandler(connection_hdl &con,std::queue<Action> m_actions);
 
+	void onMessage(websocketpp::connection_hdl hdl, message_ptr msg);
 	void parseJson(std::string data);
-
-
 private:
 	bool tryToAssingName(const std::string &name);
 	connection_hdl currentConnection_;
+	std::queue<Action> actions_;
 	ConnectionStates state_;
-	Player player_;
+	//Player player_;
 };
