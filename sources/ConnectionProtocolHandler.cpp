@@ -1,4 +1,5 @@
 #include "ConnectionProtocolHandler.hpp"
+#include <stdio.h>
 using websocketpp::connection_hdl;
 using websocketpp::lib::thread;
 using websocketpp::lib::lock_guard;
@@ -15,23 +16,17 @@ void ConnectionProtocolHandler::parseJson(std::string data)
 	//throw std::runtime_error("Not implemented yet");
 	Json::Value root;
 	std::stringstream myData(data);
+	std::stringstream typeStream;
 	myData >> root;
-	std::cout<<"getting type of it: "<<root["type"]<<std::endl;
-	//std::string mytype << root["type"];
-	switch(state_)
-	{
-		case ConnectionStates::JUST_STARTED:
-
-		break;
-		case ConnectionStates::NICK_SET:
-		break;
-		case ConnectionStates::ROOM_ASSIGNED:
-		break;
-		case ConnectionStates::PLAYER_READY:
-		break;
-		case ConnectionStates::GAME_IN_PROGRESS:
-		break;
+	std::string myType = root.get("type","nothing").asString();
+	
+	Signal *currentSignal = SignalFactory::createInstance(myType);
+	if(currentSignal == nullptr) {
+		//invalidRequest();
+		std::cout<<"not found sorry"<<std::endl;
+		return;
 	}
+	currentSignal->acceptDispatcher(dispatcher_);
 
 	
 }
@@ -42,7 +37,7 @@ void ConnectionProtocolHandler::invalidRequest() {
 	std::stringstream myStream;
 	myStream << jsonMessage;
 	message_ptr msg;
-	msg->set_payload(myStream.str());
+	msg->set_payload(jsonMessage.asString());
 	{
 		lock_guard<mutex> guard(Server::m_action_lock);
 		Server::m_actions.push(Action(MESSAGE,currentConnection_,msg));

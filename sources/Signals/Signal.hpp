@@ -5,14 +5,13 @@
 #ifndef ZPR_DRAUGHTS_SIGNAL_HPP
 #define ZPR_DRAUGHTS_SIGNAL_HPP
 
-#include "../MessageDispatcher.hpp"
+//#include "../MessageDispatcher.hpp"
 #include <string>
+class MessageDispatcher;
 class Signal {
 
 public:
-	std::string type;
-    virtual void acceptDispatcher(const MessageDispatcher& dispatcher) = 0;
-    virtual ~Signal();
+    virtual void acceptDispatcher(MessageDispatcher& dispatcher) = 0;
 };
 
 

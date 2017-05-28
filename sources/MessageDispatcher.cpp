@@ -3,3 +3,8 @@
 //
 
 #include "MessageDispatcher.hpp"
+
+
+void MessageDispatcher::visit(NickRequestSignal *message) {
+	std::cout<<"message dispatcher working"<<std::endl;
+}

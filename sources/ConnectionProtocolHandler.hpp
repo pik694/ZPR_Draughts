@@ -8,6 +8,11 @@
 #include "Player.hpp"
 #include "ClientManager.hpp"
 #include "Action.hpp"
+#include "MessageDispatcher.hpp"
+#include "Signals/Signal.hpp"
+#include "Signals/NickRequestSignal.hpp"
+#include "Signals/BoardSignal.hpp"
+#include "Signals/SignalFactory.hpp"
 // accepts data in JSON format, parses them and decides what to do
 
 /*
@@ -69,6 +74,7 @@ private:
 	connection_hdl currentConnection_;
 	std::queue<Action> actions_;
 	ConnectionStates state_;
+	MessageDispatcher dispatcher_;
 	//Player player_;
 };
 

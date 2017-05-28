@@ -98,6 +98,8 @@ void Server::run(int port) {
 	webSocketServer_.start_accept();
 
 	thread t(bind(&Server::processMessages,this));
+
+	
 	webSocketServer_.run();
 
 	t.join();
