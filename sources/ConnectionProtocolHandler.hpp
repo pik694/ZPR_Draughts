@@ -1,6 +1,9 @@
-
+#ifndef ZPR_DRAUGHTS_CONNECTION_HPP
+#define ZPR_DRAUGHTS_CONNECTION_HPP
 #include <jsoncpp/json/json.h>
 #include <string>
+#include <sstream>
+#include "Server.hpp"
 #include "RoomManager.hpp"
 #include "Player.hpp"
 #include "ClientManager.hpp"
@@ -56,14 +59,17 @@ class ConnectionProtocolHandler
 {
 public:
 	// there is going to be an event handler on_message here
-	ConnectionProtocolHandler(connection_hdl &con,std::queue<Action> m_actions);
+	ConnectionProtocolHandler(connection_hdl &con);
 
 	void onMessage(websocketpp::connection_hdl hdl, message_ptr msg);
 	void parseJson(std::string data);
 private:
+	void invalidRequest();
 	bool tryToAssingName(const std::string &name);
 	connection_hdl currentConnection_;
 	std::queue<Action> actions_;
 	ConnectionStates state_;
 	//Player player_;
 };
+
+#endif

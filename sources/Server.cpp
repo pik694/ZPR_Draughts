@@ -34,14 +34,26 @@ using websocketpp::lib::unique_lock;
 //	//web_socket_server.start_accept();
 //}
 mutex Server::m_action_lock;
+condition_variable Server::m_action_cond;
+std::queue<Action> Server::m_actions;
 typedef websocketpp::server<websocketpp::config::asio> server;
 typedef server::message_ptr message_ptr;
-Server::Server() {
+Server::Server()  {
 	//throw std::runtime_error("Not implemented yet");
+	//boost::asio::io_service io_service;
+	//boost::asio::signal_set _signals(io_service,SIGINT);
+	//signals_.add(SIGINT);
+	//io_service.run();
+	//std::cout<<"wtf just happened"<<std::endl;
 }
 Server::~Server() {
+	stopServer();
+}
+
+void Server::stopServer() {
+	std::cout<<"what is going on ?"<<std::endl;
 	webSocketServer_.stop_listening();
-	
+	exit(0);
 }
 
 void Server::onOpen(connection_hdl hdl) {
@@ -54,7 +66,7 @@ void Server::onOpen(connection_hdl hdl) {
     m_action_cond.notify_one();
 
 	server::connection_ptr con = webSocketServer_.get_con_from_hdl(hdl);
-	ConnectionProtocolHandler *myHandler = new ConnectionProtocolHandler(hdl,m_actions);
+	ConnectionProtocolHandler *myHandler = new ConnectionProtocolHandler(hdl);
 	con->set_message_handler(bind(&ConnectionProtocolHandler::onMessage,myHandler,::_1,::_2));
 	
 	//con->set_message_handler(bind(&ConnectionProtocolHandler::))
@@ -111,6 +123,13 @@ void Server::processMessages() {
 		} else if (a.type == UNSUBSCRIBE) {
 			lock_guard<mutex> guard(m_connection_lock);
 			m_connections.erase(a.hdl);
+		} else if (a.type == MESSAGE) {
+			lock_guard<mutex> guard(m_connection_lock);
+			std::cout<<"sending a message"<<std::endl;
+			con_list::iterator it;
+			for (it = m_connections.begin(); it != m_connections.end(); ++it) {
+				webSocketServer_.send(*it,a.msg);
+			}
 		}
 		std::cout<<"total connections: "<<m_connections.size()<<std::endl;
 	}

@@ -3,9 +3,11 @@
 #include <websocketpp/config/asio_no_tls.hpp>
 #include <websocketpp/server.hpp>
 #include <websocketpp/connection.hpp>
+#include <boost/asio/signal_set.hpp>
 #include <iostream>
 #include <list>
 #include <set>
+#include <cstdlib>
 #include "Action.hpp"
 #include "ConnectionProtocolHandler.hpp"
 #include "RoomManager.hpp"
@@ -16,6 +18,7 @@ using websocketpp::lib::mutex;
 using websocketpp::lib::condition_variable;
 typedef websocketpp::server<websocketpp::config::asio> server;
 typedef server::message_ptr message_ptr;
+class ConnectionProtocolHandler;
 //typedef websocketpp::server<websocketpp::config::asio> server_t;
 class Server // TODO : SINGLETON
 {
@@ -29,16 +32,21 @@ public:
 	void run(int port);
 	void processMessages();
 	static mutex m_action_lock;
+	static condition_variable m_action_cond;
+	static std::queue<Action> m_actions;
 private:
+
+	void stopServer();
+
 	websocketpp::server <websocketpp::config::asio> webSocketServer_;
 	std::list<ConnectionProtocolHandler*> connections_;
 	typedef std::set<connection_hdl,std::owner_less<connection_hdl> > con_list;
 
     con_list m_connections;
-    std::queue<Action> m_actions;
+    //std::queue<Action> m_actions;
 
     mutex m_connection_lock;
-    condition_variable m_action_cond;
+    
 
 };
 #endif //SERVER_HPP
