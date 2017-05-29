@@ -5,7 +5,6 @@
 #ifndef ZPR_DRAUGHTS_NICKREQUESTSIGNAL_HPP
 #define ZPR_DRAUGHTS_NICKREQUESTSIGNAL_HPP
 
-
 #include <string>
 #include "Signals/Signal.hpp"
 
@@ -16,7 +15,7 @@ public:
 
     const std::string& getNick() const;
 
-    void acceptDispatcher(MessageDispatcher dispatcher);
+    void acceptDispatcher(MessageDispatcher&);
 
 
 private:

@@ -10,7 +10,7 @@
 
 class NewGameSignal : public Signal{
 public:
-    virtual void acceptDispatcher(MessageDispatcher dispatcher);
+    virtual void acceptDispatcher(MessageDispatcher&);
 };
 
 

@@ -3,7 +3,8 @@
 //
 
 #include "NewGameSignal.hpp"
+#include "MessageDispatcher.hpp"
 
-void NewGameSignal::acceptDispatcher(MessageDispatcher dispatcher) {
-    dispatcher.visit(*this);
+void NewGameSignal::acceptDispatcher(MessageDispatcher& dispatcher) {
+    dispatcher.dispatch(*this);
 }

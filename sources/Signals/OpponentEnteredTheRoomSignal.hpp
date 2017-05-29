@@ -5,17 +5,19 @@
 #ifndef ZPR_DRAUGHTS_OPPONENTENTEREDTHEROOMSIGNAL_HPP
 #define ZPR_DRAUGHTS_OPPONENTENTEREDTHEROOMSIGNAL_HPP
 
-
+#include <string>
 #include "Signals/Signal.hpp"
+
 
 class OpponentEnteredTheRoomSignal : public Signal {
 public:
 
     OpponentEnteredTheRoomSignal (std::string opponentNick):opponentNick_(opponentNick){}
 
-    void acceptDispatcher(MessageDispatcher dispatcher){
-        throw std::runtime_error("Dispatcher should not dispatch this kind of signal");
-    }
+    virtual void acceptDispatcher(MessageDispatcher&);
+
+    const std::string& getOpponentNick() const;
+
 
 private:
     std::string opponentNick_;

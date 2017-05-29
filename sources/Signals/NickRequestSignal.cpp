@@ -3,11 +3,12 @@
 //
 
 #include "NickRequestSignal.hpp"
+#include "MessageDispatcher.hpp"
 
 const std::string& NickRequestSignal::getNick() const {
     return nick_;
 }
 
-void NickRequestSignal::acceptDispatcher(MessageDispatcher dispatcher){
-    dispatcher.visit(*this);
+void NickRequestSignal::acceptDispatcher(MessageDispatcher& dispatcher){
+    dispatcher.dispatch(*this);
 }

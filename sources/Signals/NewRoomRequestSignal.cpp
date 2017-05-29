@@ -3,12 +3,13 @@
 //
 
 #include "NewRoomRequestSignal.hpp"
+#include "MessageDispatcher.hpp"
 
 const std::string& NewRoomRequestSignal::getRoomID() const {
     return roomID_;
 }
 
 
-void NewRoomRequestSignal::acceptDispatcher(MessageDispatcher dispatcher) {
-    dispatcher.visit(*this);
+void NewRoomRequestSignal::acceptDispatcher(MessageDispatcher& dispatcher) {
+    dispatcher.dispatch(*this);
 }

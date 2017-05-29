@@ -3,10 +3,10 @@
 //
 
 #include "EnterRoomSignal.hpp"
+#include "MessageDispatcher.hpp"
 
-
-void EnterRoomSignal::acceptDispatcher(MessageDispatcher dispatcher){
-    dispatcher.visit(*this);
+void EnterRoomSignal::acceptDispatcher(MessageDispatcher& dispatcher){
+    dispatcher.dispatch(*this);
 }
 
 const std::string& EnterRoomSignal::getRoomID() const {

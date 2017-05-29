@@ -7,14 +7,11 @@
 
 
 #include "Signals/Signal.hpp"
+#include <string>
 
 class OpponentLeftRoomSignal : public Signal {
-
 public:
-    void acceptDispatcher(MessageDispatcher dispatcher){
-        throw std::runtime_error("Dispatcher should not dispatch this kind of signal");
-    }
-
+    virtual void acceptDispatcher(MessageDispatcher&);
 };
 
 

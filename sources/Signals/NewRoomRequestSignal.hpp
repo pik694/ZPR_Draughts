@@ -7,6 +7,7 @@
 
 
 #include "Signals/Signal.hpp"
+#include <string>
 
 class NewRoomRequestSignal : public Signal{
 public:
@@ -14,7 +15,7 @@ public:
     NewRoomRequestSignal(std::string roomID): roomID_(roomID){}
 
 
-    void acceptDispatcher(MessageDispatcher dispatcher);
+    virtual void acceptDispatcher(MessageDispatcher&);
 
     const std::string& getRoomID() const;
 

@@ -6,7 +6,7 @@
 #define ZPR_DRAUGHTS_TEXTMESSAGE_HPP
 
 #include <string>
-#include <MessageDispatcher.hpp>
+
 #include "Signal.hpp"
 
 class Signal;
@@ -16,7 +16,7 @@ public:
 
     TextMessage(std::string message):message_(message){}
 
-    void acceptDispatcher(MessageDispatcher dispatcher);
+    void acceptDispatcher(MessageDispatcher&);
 
     const std::string& getMessage() const;
 

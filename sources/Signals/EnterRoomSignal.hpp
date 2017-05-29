@@ -7,12 +7,13 @@
 
 
 #include "Signal.hpp"
+#include <string>
 
 class EnterRoomSignal : public Signal{
 public:
     EnterRoomSignal(std::string roomID): roomID_(roomID){}
 
-    virtual void acceptDispatcher(MessageDispatcher);
+    virtual void acceptDispatcher(MessageDispatcher&);
 
     const std::string& getRoomID() const;
 

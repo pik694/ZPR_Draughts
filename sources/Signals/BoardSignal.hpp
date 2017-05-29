@@ -16,7 +16,7 @@ public:
 
     const Board& getBoard() const;
 
-    virtual void acceptDispatcher(MessageDispatcher dispatcher);
+    virtual void acceptDispatcher(MessageDispatcher&);
 
 
 private:

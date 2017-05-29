@@ -3,7 +3,8 @@
 //
 
 #include "LeaveRoomSignal.hpp"
+#include "MessageDispatcher.hpp"
 
-void LeaveRoomSignal::acceptDispatcher(MessageDispatcher dispatcher) {
-    dispatcher.visit(*this);
+void LeaveRoomSignal::acceptDispatcher(MessageDispatcher& dispatcher) {
+    dispatcher.dispatch(*this);
 }
