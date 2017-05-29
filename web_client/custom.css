@@ -2,6 +2,9 @@
 
 .container {
     max-width: 800px;
+    background-image:url("hip-square.png");
+    background-repeat: repeat;
+
 }
 .header {
     margin-top: 6rem;

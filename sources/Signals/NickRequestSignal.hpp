@@ -7,11 +7,13 @@
 
 #include <string>
 #include "Signals/Signal.hpp"
-
+#include "SignalFactory.hpp"
 class NickRequestSignal : public Signal{
 public:
 
-    NickRequestSignal(std::string nick):nick_(nick){}
+    NickRequestSignal() {}
+
+    void fillData(Json::Value data);
 
     const std::string& getNick() const;
 
@@ -19,7 +21,8 @@ public:
 
 
 private:
-    const std::string nick_;
+    std::string nick_;
+    static Register<NickRequestSignal> reg;
 };
 
 

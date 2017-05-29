@@ -46,10 +46,19 @@
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <div class="container">
     <section class="header">
-        <h2 class="title">Checkers</h2>
-        <input value="nick" id="nickname" type="text">
-        <button id="submit_nick" type="button">Connect</button>
-        <canvas hidden id="game" width="500" height="500"></canvas>
+        <h1 class="title">Checkers</h2>
+        <div id="nick_form">
+            <input value="nick" id="nickname" type="text">
+            <button id="submit_nick" type="button">Connect</button>
+        </div>
+        <div hidden id="game_form">
+            <canvas id="game" width="500" height="500"></canvas>
+        </div>
+        <div hidden id="room_form">
+            <ul><a>Room 1</a></ul>
+            <ul>Room 2</ul>
+            <ul>Room 3</ul>
+        </div>
     </section>
 </div>
 

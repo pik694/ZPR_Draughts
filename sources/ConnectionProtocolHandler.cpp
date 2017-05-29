@@ -11,25 +11,28 @@ ConnectionProtocolHandler::ConnectionProtocolHandler(connection_hdl &con) {
 	state_ = ConnectionStates::JUST_STARTED;
 }
 
-void ConnectionProtocolHandler::parseJson(std::string data)
-{
+void ConnectionProtocolHandler::parseJson(std::string data) {
 	//throw std::runtime_error("Not implemented yet");
 	Json::Value root;
 	std::stringstream myData(data);
 	std::stringstream typeStream;
 	myData >> root;
-	std::string myType = root.get("type","nothing").asString();
+	//std::string myType = root.get("type","nothing").asString();
 	
-	Signal *currentSignal = SignalFactory::createInstance(myType);
+	Signal *currentSignal = SignalFactory::createInstance(root);
 	if(currentSignal == nullptr) {
 		//invalidRequest();
 		std::cout<<"not found sorry"<<std::endl;
 		return;
 	}
-	currentSignal->acceptDispatcher(dispatcher_);
-
-	
+	currentSignal->acceptDispatcher(dispatcher_);	
 }
+
+
+void testSession(std::string data) {
+
+}
+
 
 void ConnectionProtocolHandler::invalidRequest() {
 	Json::Value jsonMessage;

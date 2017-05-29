@@ -8,6 +8,8 @@ window.onload = function() {
 		console.log(event.data);
 	}
 	$("button").on("click",function(event) {
+		hideAll();
+		$("#room_form").show("slow");
 		console.log("button clicked");
 		var msg = {
         	type: "nickRequest",
@@ -20,7 +22,17 @@ window.onload = function() {
 }
 
 
+function hideAll() {
+	$("#room_form").hide();
+	$("#game_form").hide();
+	$("#nick_form").hide();
+}
 
+
+function generateRooms() {
+	// code 
+
+}
 
 
 function communication() {

@@ -5,13 +5,14 @@
 #ifndef ZPR_DRAUGHTS_SIGNAL_HPP
 #define ZPR_DRAUGHTS_SIGNAL_HPP
 
-
+#include <jsoncpp/json/json.h>
 class MessageDispatcher;
 
 class Signal {
 public:
 
     virtual void acceptDispatcher (MessageDispatcher&) = 0;
+    virtual void fillData(Json::Value data) = 0;
     virtual ~Signal(){}
 
 };
