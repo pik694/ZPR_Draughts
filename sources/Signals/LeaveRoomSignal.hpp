@@ -11,8 +11,10 @@
 class LeaveRoomSignal : public Signal{
 
 public:
+    LeaveRoomSignal(ConnectionProtocolHandler* hdl): Signal(hdl){}
 
     virtual void acceptDispatcher(MessageDispatcher&);
+    virtual void serialize();
 
 };
 

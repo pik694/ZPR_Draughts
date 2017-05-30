@@ -12,3 +12,7 @@ const bool PermissionSignal::getGivenPermission() const {
 void PermissionSignal::acceptDispatcher(MessageDispatcher &) {
     throw std::runtime_error("Dispatcher should not dispatch this kind of a signal");
 }
+
+void PermissionSignal::serialize() {
+    throw std::runtime_error("Not implemented yet");
+}

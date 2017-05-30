@@ -12,12 +12,13 @@
 class BoardSignal : public  Signal {
 public:
 
-    BoardSignal(Board board): board_(board){}
+    BoardSignal(ConnectionProtocolHandler* hdl, Board board):Signal(hdl),  board_(board){}
 
     const Board& getBoard() const;
 
     virtual void acceptDispatcher(MessageDispatcher&);
 
+    virtual void serialize();
 
 private:
     const Board board_;

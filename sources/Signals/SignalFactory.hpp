@@ -22,6 +22,8 @@ public:
 		it->second()->fillData(data);
 		return it->second();
 	}
+
+
 protected:
 	static map_type *getMap() {
 		if(!map) {

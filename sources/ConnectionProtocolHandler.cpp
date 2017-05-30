@@ -49,10 +49,13 @@ void ConnectionProtocolHandler::invalidRequest() {
 }
 
 void ConnectionProtocolHandler::onMessage(websocketpp::connection_hdl hdl, message_ptr msg) {
+
 	std::cout<<"Message: ";
 	std::cout<<msg->get_payload()<<std::endl;
 	parseJson(msg->get_payload());
-	Server::getInstance()->putMessageInQueue(hdl, msg);
+
+	// TODO : should I call this method there ?
+    // Server::getInstance()->putMessageInQueue(hdl, msg);
 
 }
 

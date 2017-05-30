@@ -8,3 +8,7 @@
 void LeaveRoomSignal::acceptDispatcher(MessageDispatcher& dispatcher) {
     dispatcher.dispatch(*this);
 }
+
+void LeaveRoomSignal::serialize() {
+    throw std::runtime_error("Not implemented yet");
+}

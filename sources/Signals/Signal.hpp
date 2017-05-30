@@ -8,14 +8,24 @@
 #include <jsoncpp/json/json.h>
 
 
+class ConnectionProtocolHandler;
 class MessageDispatcher;
 
 class Signal {
 public:
 
+    Signal (ConnectionProtocolHandler* hdl = nullptr);
+
     virtual void acceptDispatcher (MessageDispatcher&) = 0;
     virtual void fillData(Json::Value data) = 0;
+    virtual void serialize() = 0;
+
     virtual ~Signal(){}
+
+    ConnectionProtocolHandler* getConnectionProtocolHandler();
+
+private:
+    ConnectionProtocolHandler* connectionProtocolHandler_;
 
 };
 

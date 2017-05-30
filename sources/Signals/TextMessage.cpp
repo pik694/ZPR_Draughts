@@ -12,3 +12,7 @@ void TextMessage::acceptDispatcher(MessageDispatcher& dispatcher){
 const std::string& TextMessage::getMessage() const {
     return message_;
 }
+
+void TextMessage::serialize() {
+    throw std::runtime_error("Not implemented yet");
+}

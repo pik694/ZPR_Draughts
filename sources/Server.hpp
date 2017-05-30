@@ -4,15 +4,14 @@
 #include <websocketpp/server.hpp>
 #include <websocketpp/connection.hpp>
 #include <boost/asio/signal_set.hpp>
-#include <iostream>
-#include <list>
-#include <set>
-#include <cstdlib>
+#include "Signals/Signal.hpp"
 #include "Action.hpp"
-#include "ConnectionProtocolHandler.hpp"
-#include "RoomManager.hpp"
-#include "ClientManager.hpp"
-#include "Player.hpp"
+#include <list>
+#include <map>
+#include <set>
+
+class ConnectionProtocolHandler;
+class Player;
 
 using websocketpp::connection_hdl;
 using websocketpp::lib::mutex;
@@ -46,11 +45,13 @@ public:
 
 	void addPlayer(std::string nick, ConnectionProtocolHandler* hdl);
 
-	void putMessageInQueue(connection_hdl,message_ptr);
+	void putMessageInQueue(std::shared_ptr<Signal>);
+
+	Server(const Server&) = delete;
 
 private:
 
-	static Server* instance_;
+	static Server* instance_; //TODO: unique_ptrale
 
 	Server();
 	void stopServer();
@@ -66,7 +67,9 @@ private:
     mutex m_action_lock;
 	condition_variable m_action_cond;
 	std::queue<Action> m_actions;
-	std::vector<Player> players_;
+
+
+	std::map<ConnectionProtocolHandler*, Player> players_;
 
 };
 #endif //SERVER_HPP

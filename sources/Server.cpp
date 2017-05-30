@@ -4,6 +4,10 @@
 #include <websocketpp/logger/levels.hpp>
 #include <websocketpp/version.hpp>
 #include <websocketpp/endpoint.hpp>
+
+#include "Action.hpp"
+#include "ConnectionProtocolHandler.hpp"
+
 typedef websocketpp::server<websocketpp::config::asio> server;
 using websocketpp::lib::bind;
 using websocketpp::lib::placeholders::_1;
@@ -147,7 +151,7 @@ void Server::processMessages() {
 bool Server::validateNick(std::string nick) {
 
 	for (auto player : players_){
-		if (player.getName() == nick) return false;
+		if (player.second.getName() == nick) return false;
 	}
 
 	return true;
@@ -156,19 +160,18 @@ bool Server::validateNick(std::string nick) {
 
 void Server::addPlayer(std::string nick, ConnectionProtocolHandler* hdl) {
 
-	for (auto player : players_){
-		if (player.getName() == nick || player.getConnectionProtocolHandler() == hdl){
-			return;
-		}
-	}
+	if (!validateNick(nick)) return;
 
-	players_.push_back(Player(nick, hdl));
+	players_.at(hdl) = Player(nick, hdl);
 }
 
-void Server::putMessageInQueue(connection_hdl hdl,message_ptr msg) {
-	{
-		lock_guard<mutex> guard(m_action_lock);
-		m_actions.push(Action(MESSAGE,hdl,msg));
-	}
-	m_action_cond.notify_one();
+void Server::putMessageInQueue(std::shared_ptr<Signal> signal) {
+
+	throw std::runtime_error("Not implemented yet");
+
+//	{
+//		lock_guard<mutex> guard(m_action_lock);
+//		m_actions.push(Action(MESSAGE,hdl,msg));
+//	}
+//	m_action_cond.notify_one();
 }

@@ -14,9 +14,10 @@ class Signal;
 class TextMessage : public Signal {
 public:
 
-    TextMessage(std::string message):message_(message){}
+    TextMessage(ConnectionProtocolHandler* hdl, std::string message):Signal(hdl), message_(message){}
 
-    void acceptDispatcher(MessageDispatcher&);
+    virtual void acceptDispatcher(MessageDispatcher&);
+    virtual void serialize();
 
     const std::string& getMessage() const;
 

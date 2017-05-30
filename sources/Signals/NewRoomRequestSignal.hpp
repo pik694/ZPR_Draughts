@@ -12,10 +12,11 @@
 class NewRoomRequestSignal : public Signal{
 public:
 
-    NewRoomRequestSignal(std::string roomID): roomID_(roomID){}
+    NewRoomRequestSignal(ConnectionProtocolHandler* hdl, std::string roomID):Signal(hdl), roomID_(roomID){}
 
 
     virtual void acceptDispatcher(MessageDispatcher&);
+    virtual void serlialize();
 
     const std::string& getRoomID() const;
 

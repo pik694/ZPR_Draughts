@@ -2,8 +2,13 @@
 // Created by Piotr Żelazko on 23.04.2017.
 //
 
+#include <memory>
+
+#include <Signals/PermissionSignal.hpp>
 #include "MessageDispatcher.hpp"
 #include "Server.hpp"
+
+
 
 
 void MessageDispatcher::dispatch(EnterRoomSignal &) {
@@ -32,8 +37,10 @@ void MessageDispatcher::dispatch(NickRequestSignal& nickRequest) {
         Server::getInstance()->addPlayer(nickRequest.getNick(), nullptr); //TODO
     }
 
-    //TODO: send answer
 
+    std::shared_ptr<Signal> signal = std::make_shared<PermissionSignal>(nickRequest.getConnectionProtocolHandler(), answer);
+
+    Server::getInstance()->putMessageInQueue(signal);
 
 }
 

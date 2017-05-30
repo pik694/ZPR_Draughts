@@ -13,3 +13,7 @@ void OpponentEnteredTheRoomSignal::acceptDispatcher(MessageDispatcher &) {
 const std::string& OpponentEnteredTheRoomSignal::getOpponentNick() const {
     return opponentNick_;
 }
+
+void OpponentEnteredTheRoomSignal::serialize() {
+    throw std::runtime_error("Not implemented yet");
+}

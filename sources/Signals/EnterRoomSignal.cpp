@@ -12,3 +12,7 @@ void EnterRoomSignal::acceptDispatcher(MessageDispatcher& dispatcher){
 const std::string& EnterRoomSignal::getRoomID() const {
     return roomID_;
 }
+
+void EnterRoomSignal::serialize() {
+    throw std::runtime_error("Not implemented yet");
+}

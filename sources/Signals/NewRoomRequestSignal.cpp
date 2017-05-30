@@ -13,3 +13,7 @@ const std::string& NewRoomRequestSignal::getRoomID() const {
 void NewRoomRequestSignal::acceptDispatcher(MessageDispatcher& dispatcher) {
     dispatcher.dispatch(*this);
 }
+
+void NewRoomRequestSignal::serlialize() {
+    throw std::runtime_error("Not implemented yet");
+}

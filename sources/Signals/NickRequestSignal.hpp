@@ -11,14 +11,13 @@
 class NickRequestSignal : public Signal{
 public:
 
-    NickRequestSignal() {}
+    NickRequestSignal(ConnectionProtocolHandler* hdl): Signal(hdl) {}
 
-    void fillData(Json::Value data);
+    virtual void fillData(Json::Value data);
+    virtual void acceptDispatcher(MessageDispatcher&);
+    virtual void serialize();
 
     const std::string& getNick() const;
-
-    void acceptDispatcher(MessageDispatcher&);
-
 
 private:
     std::string nick_;

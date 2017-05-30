@@ -13,11 +13,13 @@ class PermissionSignal : public Signal{
 
 
 public:
-    PermissionSignal(bool givenPermission): givenPermission_(givenPermission){}
+    PermissionSignal(ConnectionProtocolHandler* hdl, bool givenPermission):Signal(hdl), givenPermission_(givenPermission){}
 
     const bool getGivenPermission() const;
 
-    void acceptDispatcher(MessageDispatcher&);
+    virtual void acceptDispatcher(MessageDispatcher&);
+    virtual void fillData(Json::Value){};
+    virtual void serialize();
 
 private:
     const bool givenPermission_;

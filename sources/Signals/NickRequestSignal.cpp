@@ -15,6 +15,10 @@ void NickRequestSignal::acceptDispatcher(MessageDispatcher& dispatcher){
     dispatcher.dispatch(*this);
 }
 
+void NickRequestSignal::serialize() {
+    throw std::runtime_error("Not implemented yet");
+}
+
 void NickRequestSignal::fillData(Json::Value data) {
 	nick_ = data.get("value","").asString();
 }

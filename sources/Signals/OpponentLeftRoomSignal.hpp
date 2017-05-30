@@ -11,7 +11,10 @@
 
 class OpponentLeftRoomSignal : public Signal {
 public:
+    OpponentLeftRoomSignal(ConnectionProtocolHandler* hdl):Signal(hdl){}
+
     virtual void acceptDispatcher(MessageDispatcher&);
+    virtual void serialize();
 };
 
 
