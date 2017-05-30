@@ -27,11 +27,11 @@ class Server
 public:
 
 	static Server* getInstance () {
-		if (instance_ = nullptr){
-			instance_ = std::make_unique(Server);
+		if (instance_ == nullptr){
+			instance_ = new Server();
 		}
 
-		return instance_.get();
+		return instance_;
 	}
 
 
@@ -52,7 +52,7 @@ public:
 
 private:
 
-	static std::unique_ptr<Server> instance_;
+	static Server* instance_;
 
 	Server();
 	void stopServer();

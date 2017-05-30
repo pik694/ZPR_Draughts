@@ -9,9 +9,9 @@
 #include <thread>
 #include <string>
 
-#include "ConnectionProtocolHandler.hpp"
-
 using websocketpp::connection_hdl;
+
+class ConnectionProtocolHandler;
 
 class Player
 {

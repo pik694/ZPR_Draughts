@@ -1,4 +1,5 @@
 #include "Player.hpp"
+#include "ConnectionProtocolHandler.hpp"
 
 int Player::clientIds_ = 0;
 Player::Player()

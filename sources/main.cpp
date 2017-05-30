@@ -12,8 +12,7 @@ int main()
 
 	std::cout << "Server starting ... \n"<<std::endl;
 	try {
-		Server myServer;
-		myServer.run(9002);
+		Server::getInstance()->run(9002);
 	}
 	catch(websocketpp::exception const & e) {
 		std::cout<<e.what()<<std::endl;

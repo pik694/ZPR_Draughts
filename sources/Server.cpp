@@ -35,7 +35,7 @@ using websocketpp::lib::unique_lock;
 //}
 
 
-std::unique_ptr<Server> Server::instance_ = nullptr;
+Server* Server::instance_ = nullptr;
 
 mutex Server::m_action_lock;
 condition_variable Server::m_action_cond;

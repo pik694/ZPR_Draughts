@@ -5,7 +5,6 @@
 #include <sstream>
 #include "Server.hpp"
 #include "RoomManager.hpp"
-#include "Player.hpp"
 #include "ClientManager.hpp"
 #include "Action.hpp"
 #include "MessageDispatcher.hpp"
@@ -60,6 +59,8 @@ typedef server::message_ptr message_ptr;
 enum ConnectionStates {JUST_STARTED, NICK_SET, ROOM_ASSIGNED, PLAYER_READY, GAME_IN_PROGRESS };
 using websocketpp::connection_hdl;
 typedef websocketpp::server<websocketpp::config::asio> server;
+
+
 class ConnectionProtocolHandler
 {
 public:

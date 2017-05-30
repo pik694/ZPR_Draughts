@@ -11,6 +11,7 @@
 
 class EnterRoomSignal : public Signal{
 public:
+
     EnterRoomSignal(std::string roomID): roomID_(roomID){}
 
     virtual void acceptDispatcher(MessageDispatcher&);
