@@ -20,22 +20,32 @@ typedef websocketpp::server<websocketpp::config::asio> server;
 typedef server::message_ptr message_ptr;
 class ConnectionProtocolHandler;
 //typedef websocketpp::server<websocketpp::config::asio> server_t;
-class Server // TODO : SINGLETON
+
+class Server
 {
 public:
 
-	Server();
+	Server* getInstance () {
+		if (instance_ = nullptr){
+			instance_ = std::make_unique(Server);
+		}
+
+		return instance_.get();
+	}
+
+
 	~Server();
 	void onOpen(connection_hdl hdl);
 	void onClose(connection_hdl hdl);
 	void onMessage(connection_hdl hdl, message_ptr msg);
 	void run(int port);
 	void processMessages();
-	static mutex m_action_lock;
-	static condition_variable m_action_cond;
-	static std::queue<Action> m_actions;
-private:
+	mutex m_action_lock;
+	condition_variable m_action_cond;
+	std::queue<Action> m_actions;
 
+private:
+	Server();
 	void stopServer();
 
 	websocketpp::server <websocketpp::config::asio> webSocketServer_;
@@ -46,7 +56,8 @@ private:
     //std::queue<Action> m_actions;
 
     mutex m_connection_lock;
-    
+
+	static std::unique_ptr<Server> instance_;
 
 };
 #endif //SERVER_HPP

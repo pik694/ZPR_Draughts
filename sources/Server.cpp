@@ -33,6 +33,10 @@ using websocketpp::lib::unique_lock;
 //	//.listen(8080);
 //	//web_socket_server.start_accept();
 //}
+
+
+std::unique_ptr<Server> Server::instance_ = nullptr;
+
 mutex Server::m_action_lock;
 condition_variable Server::m_action_cond;
 std::queue<Action> Server::m_actions;
@@ -45,6 +49,7 @@ Server::Server()  {
 	//signals_.add(SIGINT);
 	//io_service.run();
 	//std::cout<<"wtf just happened"<<std::endl;
+
 }
 Server::~Server() {
 	stopServer();

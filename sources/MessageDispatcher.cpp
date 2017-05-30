@@ -23,7 +23,9 @@ void MessageDispatcher::dispatch(NewRoomRequestSignal &) {
 }
 
 void MessageDispatcher::dispatch(NickRequestSignal &) {
-    throw std::runtime_error("Not implemented yet");
+
+
+
 }
 
 void MessageDispatcher::dispatch(TextMessage &) {
