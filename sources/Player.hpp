@@ -22,6 +22,7 @@ public:
 
 	void setNickName(std::string nick_a);
 	void setRoom(int roomID);
+    int getRoom();
 	std::string getName();
 
 	ConnectionProtocolHandler* getConnectionProtocolHandler();

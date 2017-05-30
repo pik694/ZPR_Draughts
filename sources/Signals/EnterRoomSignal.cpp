@@ -9,7 +9,7 @@ void EnterRoomSignal::acceptDispatcher(MessageDispatcher& dispatcher){
     dispatcher.dispatch(*this);
 }
 
-const std::string& EnterRoomSignal::getRoomID() const {
+int EnterRoomSignal::getRoomID() const {
     return roomID_;
 }
 

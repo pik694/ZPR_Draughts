@@ -11,23 +11,31 @@ class Room : public GameObserver
 {
 public:
 
-	Room ();
+	Room (int);
 
-	bool joinRoom(const Player*);
-    void leaveRoom(const Player*);
+	bool joinRoom(Player*);
+	void leaveRoom(Player*);
 
-	void playerWon(const Player*);
+	int getRoomID();
 
+	void playerWon(PlayerColour);
+
+
+	void sendTextMessage(Player*, std::string);
 
 private:
-    using player_ptr = std::shared_ptr<const Player>;
 
 
+	const int roomID_;
 
-    player_ptr whitePlayer_;
-    player_ptr blackPlayer_;
+	Player* whitePlayer_;
+	Player* blackPlayer_;
 
 	int numberOfPlayers_;
+
+	Game game_;
+	bool end_;
+
 };
 
 #endif // ROOM_HPP

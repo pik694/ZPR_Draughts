@@ -12,15 +12,15 @@
 class EnterRoomSignal : public Signal{
 public:
 
-    EnterRoomSignal(ConnectionProtocolHandler* hdl, std::string roomID):Signal(hdl), roomID_(roomID){}
+    EnterRoomSignal(ConnectionProtocolHandler* hdl, int roomID):Signal(hdl), roomID_(roomID){}
 
     virtual void acceptDispatcher(MessageDispatcher&);
     virtual void serialize();
 
-    const std::string& getRoomID() const;
+    int getRoomID() const;
 
 private:
-    const std::string roomID_;
+   int roomID_;
 };
 
 

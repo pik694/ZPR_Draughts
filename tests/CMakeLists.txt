@@ -6,7 +6,7 @@ if(_ENABLE_TESTS_AT_EACH_BUILD_)
 	include_directories(${Boost_INCLUDE_DIR})
 
 	set(SOURCE_FILES
-			../sources/Player.cpp ../sources/ClientManager.cpp ../sources/ConnectionProtocolHandler.cpp
+			../sources/Player.cpp ../sources/ConnectionProtocolHandler.cpp
 			../sources/GameLogic/Game.cpp ../sources/Room.cpp ../sources/RoomManager.cpp ../sources/Server.cpp
 			../sources/GameLogic/Point.hpp ../sources/GameObserver.hpp ../sources/GameLogic/Board.cpp
 			../sources/GameLogic/Board.hpp ../sources/GameLogic/PieceKind.hpp

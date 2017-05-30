@@ -16,7 +16,7 @@ public:
         return won_;
     }
 
-    virtual void acceptDispatcher(MessageDispatcher dispatcher) {
+    virtual void acceptDispatcher(MessageDispatcher) {
         throw std::runtime_error("Dispatcher should not dispatch this kind of signal");
     }
 

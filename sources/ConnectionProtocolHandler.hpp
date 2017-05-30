@@ -5,7 +5,7 @@
 #include <sstream>
 #include "Server.hpp"
 #include "RoomManager.hpp"
-#include "ClientManager.hpp"
+#include "PlayerManager.hpp"
 #include "Action.hpp"
 #include "MessageDispatcher.hpp"
 #include "Signals/Signal.hpp"
