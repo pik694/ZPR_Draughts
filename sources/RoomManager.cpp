@@ -11,7 +11,7 @@ RoomManager* RoomManager::getInstance() {
     return instance_;
 }
 
-room_ptr RoomManager::getRoom(int id) {
+RoomManager::room_ptr RoomManager::getRoom(int id) {
 
     for(auto room : rooms_){
         if (room->getRoomID() == id) return room;
@@ -21,7 +21,7 @@ room_ptr RoomManager::getRoom(int id) {
 
 }
 
-room_ptr RoomManager::newRoom() {
+RoomManager::room_ptr RoomManager::newRoom() {
 
     if (rooms_.size() == MAX_NUMBER_OF_ROOMS) throw std::runtime_error("Maximum number of rooms has already been achieved");
 
@@ -33,7 +33,7 @@ room_ptr RoomManager::newRoom() {
 void RoomManager::deleteRoom(Room* room) {
 
     rooms_.remove_if(
-            [room](room_ptr currRoom) -> bool {
+            [room](RoomManager::room_ptr currRoom) -> bool {
                 return currRoom.get() == room;
             });
 }

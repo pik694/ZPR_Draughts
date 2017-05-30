@@ -8,7 +8,8 @@
 
 #include <thread>
 #include <string>
-#include "Room.hpp"
+
+class Room;
 
 using websocketpp::connection_hdl;
 
@@ -16,6 +17,8 @@ class ConnectionProtocolHandler;
 
 class Player
 {
+	using room_ptr = std::shared_ptr<Room>;
+
 public:
 
 	Player();
@@ -25,7 +28,7 @@ public:
 	void setRoom(int roomID);
 	void setRoom(Room* room);
     int getRoomID();
-	Room* getRoom();
+	room_ptr getRoom();
 	std::string getName();
 
 	ConnectionProtocolHandler* getConnectionProtocolHandler();

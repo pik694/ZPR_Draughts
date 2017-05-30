@@ -14,7 +14,7 @@
 void MessageDispatcher::dispatch(EnterRoomSignal& enterRoomSignal) {
 
     room_ptr room = RoomManager::getInstance()->getRoom(enterRoomSignal.getRoomID());
-    Player* player = getPlayerFromSignal(&enterRoomSignal);
+    player_ptr player = getPlayerFromSignal(&enterRoomSignal);
     bool answer = false;
 
     if (room != nullptr && room->joinRoom(player)) {
@@ -29,7 +29,7 @@ void MessageDispatcher::dispatch(EnterRoomSignal& enterRoomSignal) {
 
 void MessageDispatcher::dispatch(LeaveRoomSignal& leaveRoomSignal) {
 
-    Player* player = getPlayerFromSignal(&leaveRoomSignal);
+    player_ptr player = getPlayerFromSignal(&leaveRoomSignal);
 
     if (player->getRoom() == nullptr || !player->getRoom()->leaveRoom(player))
         throw std::runtime_error("Unknown error appeared: could not exit form room");
@@ -38,7 +38,7 @@ void MessageDispatcher::dispatch(LeaveRoomSignal& leaveRoomSignal) {
 
 void MessageDispatcher::dispatch(NewGameSignal& newGameSignal) {
 
-    Player* player = getPlayerFromSignal(&newGameSignal);
+    player_ptr player = getPlayerFromSignal(&newGameSignal);
 
     player->getRoom()->startNewGame();
 
@@ -48,7 +48,7 @@ void MessageDispatcher::dispatch(NewGameSignal& newGameSignal) {
 void MessageDispatcher::dispatch(NewRoomRequestSignal& newRoomRequestSignal) {
 
     room_ptr newRoom;
-    Player* player = getPlayerFromSignal(&newRoomRequestSignal);
+    player_ptr player = getPlayerFromSignal(&newRoomRequestSignal);
 
     bool answer = true;
     try {
@@ -87,7 +87,7 @@ void MessageDispatcher::dispatch(NickRequestSignal& nickRequest) {
 
 void MessageDispatcher::dispatch(TextMessage& textMessage) {
 
-    Player* player = getPlayerFromSignal(&textMessage);
+    player_ptr player = getPlayerFromSignal(&textMessage);
 
     room_ptr room = player->getRoom();
 
@@ -97,9 +97,9 @@ void MessageDispatcher::dispatch(TextMessage& textMessage) {
 
 }
 
-Player* MessageDispatcher::getPlayerFromSignal(Signal* signal) {
+MessageDispatcher::player_ptr MessageDispatcher::getPlayerFromSignal(Signal* signal) {
 
-    Player* player = PlayerManager::getInstance()->getPlayer(signal->getConnectionProtocolHandler());
+    player_ptr player = PlayerManager::getInstance()->getPlayer(signal->getConnectionProtocolHandler());
 
     if (player == nullptr) throw std::invalid_argument("Could not find such a player");
 

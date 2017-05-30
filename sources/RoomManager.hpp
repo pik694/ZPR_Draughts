@@ -6,6 +6,10 @@
 #include "Room.hpp"
 
 class RoomManager{
+
+	using room_ptr = std::shared_ptr<Room>;
+
+
 public:
 	static RoomManager* getInstance();
 
@@ -19,7 +23,7 @@ public:
 	~RoomManager();
 
 private:
-	using room_ptr = std::shared_ptr<Room>;
+
 
 	static RoomManager* instance_;
 	static const size_t  MAX_NUMBER_OF_ROOMS;

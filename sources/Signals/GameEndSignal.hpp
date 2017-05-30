@@ -8,6 +8,8 @@
 
 #include "Signals/Signal.hpp"
 
+#include "MessageDispatcher.hpp"
+
 class GameEndSignal : public Signal {
 public:
     GameEndSignal(ConnectionProtocolHandler* hdl, bool won):Signal(hdl), won_(won){}

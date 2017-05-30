@@ -4,17 +4,20 @@
 
 #include "GameObserver.hpp"
 #include "GameLogic/Game.hpp"
+#include "GameLogic/PlayerColour.hpp"
 
 
 
 class Room : public GameObserver
 {
+
+	using player_ptr = std::shared_ptr<Player>;
 public:
 
 	Room (int);
 
 	bool joinRoom(player_ptr);
-	void leaveRoom(player_ptr);
+	bool leaveRoom(player_ptr);
 
 	int getRoomID();
 
@@ -26,7 +29,6 @@ public:
 	void sendTextMessage(player_ptr ,const std::string&);
 
 private:
-	using player_ptr = std::shared_ptr<Player>;
 
 	const int roomID_;
 

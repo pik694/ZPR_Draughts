@@ -6,14 +6,16 @@
 #define ZPR_DRAUGHTS_PLAYERMANAGER_HPP
 
 
-#include "../../../Desktop/sources/RoomManager.hpp"
+#include "RoomManager.hpp"
 
 class PlayerManager {
+    using player_ptr = std::shared_ptr<Player>;
+
 public:
 
     static PlayerManager* getInstance();
 
-    Player* getPlayer(ConnectionProtocolHandler*);
+    player_ptr getPlayer(ConnectionProtocolHandler*);
 
 
     PlayerManager(const PlayerManager&) = delete;

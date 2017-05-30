@@ -30,7 +30,7 @@ bool Room::joinRoom(player_ptr player) {
 		player_ptr opponent = player == whitePlayer_? blackPlayer_ : whitePlayer_;
 
 		Server::getInstance()->putMessageInQueue(
-				make_shared<OpponentEnteredTheRoomSignal>(opponent->getConnectionProtocolHandler(), player->getName())
+				std::make_shared<OpponentEnteredTheRoomSignal>(opponent->getConnectionProtocolHandler(), player->getName())
 		);
 	}
 
@@ -42,7 +42,7 @@ bool Room::joinRoom(player_ptr player) {
 
 }
 
-void Room::leaveRoom(player_ptr player) {
+bool Room::leaveRoom(player_ptr player) {
 
 	bool removed = false;
 	if (whitePlayer_ == player){
@@ -70,6 +70,7 @@ void Room::leaveRoom(player_ptr player) {
 		RoomManager::getInstance()->deleteRoom(this);
 	}
 
+	return removed;
 
 }
 

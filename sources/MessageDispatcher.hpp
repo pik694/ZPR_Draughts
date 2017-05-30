@@ -27,8 +27,9 @@ public:
 
 private:
     using room_ptr = std::shared_ptr<Room>;
+    using player_ptr = std::shared_ptr<Player>;
 
-    Player* getPlayerFromSignal(Signal*);
+    player_ptr getPlayerFromSignal(Signal*);
 
 };
 
