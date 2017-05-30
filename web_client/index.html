@@ -35,7 +35,6 @@
 
     <!-- Favicon
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
     <script src="jquery-3.2.1.min.js"></script>
     <script src="game.js"></script>
     <script src="gui.js"></script>
@@ -46,10 +45,31 @@
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <div class="container">
     <section class="header">
-        <h2 class="title">Checkers</h2>
-        <input value="nick" id="nickname" type="text">
-        <button id="submit_nick" type="button">Connect</button>
-        <canvas hidden id="game" width="500" height="500"></canvas>
+        <h1 class="title">Checkers</h2>
+        <div id="nick_form">
+            <input value="nick" id="nickname" type="text">
+            <button id="submit_nick" type="button">Connect</button>
+        </div>
+        <div hidden id="game_form">
+            <div class="row">
+                <div class="eight columns">
+                     <canvas id="game" width="500" height="500"></canvas>
+                </div>
+                <div class="four columns">
+                    <div id="nick_output"></div>
+                    <div id="room_name_output"></div>
+                    <button id="start_game">StartGame</button>
+                    <button id="leave_room">Leave room</button>
+                    <div id="chat"></div>
+                    <input id="chat_input" type="text">
+                </div>
+            </div>
+        </div>
+        <div hidden id="room_form">
+            <ul><a class="room">Room 1</a></ul>
+            <ul><a class="room">Room 2</a></ul>
+            <ul><a class="room">Room 3</a></ul>
+        </div>
     </section>
 </div>
 

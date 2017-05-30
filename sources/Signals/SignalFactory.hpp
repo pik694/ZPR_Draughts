@@ -7,17 +7,19 @@
 class Signal;
 
 template<typename T> Signal* createT() {
-	return new T;	
+	return new T;
 }
 
 class SignalFactory {
 public:
 	typedef std::map<std::string,Signal*(*)()> map_type;
 
-	static Signal* createInstance(std::string const&s) {
+	static Signal* createInstance(Json::Value data) {
+		std::string s = data.get("type","").asString();
 		auto it = getMap()->find(s);
 		if(it == getMap()->end())
 			return nullptr;
+		it->second()->fillData(data);
 		return it->second();
 	}
 protected:
