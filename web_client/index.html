@@ -35,7 +35,6 @@
 
     <!-- Favicon
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
     <script src="jquery-3.2.1.min.js"></script>
     <script src="game.js"></script>
     <script src="gui.js"></script>
@@ -52,12 +51,24 @@
             <button id="submit_nick" type="button">Connect</button>
         </div>
         <div hidden id="game_form">
-            <canvas id="game" width="500" height="500"></canvas>
+            <div class="row">
+                <div class="eight columns">
+                     <canvas id="game" width="500" height="500"></canvas>
+                </div>
+                <div class="four columns">
+                    <div id="nick_output"></div>
+                    <div id="room_name_output"></div>
+                    <button id="start_game">StartGame</button>
+                    <button id="leave_room">Leave room</button>
+                    <div id="chat"></div>
+                    <input id="chat_input" type="text">
+                </div>
+            </div>
         </div>
         <div hidden id="room_form">
-            <ul><a>Room 1</a></ul>
-            <ul>Room 2</ul>
-            <ul>Room 3</ul>
+            <ul><a class="room">Room 1</a></ul>
+            <ul><a class="room">Room 2</a></ul>
+            <ul><a class="room">Room 3</a></ul>
         </div>
     </section>
 </div>

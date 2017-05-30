@@ -1,10 +1,14 @@
 
-
-.container {
-    max-width: 800px;
-    background-image:url("hip-square.png");
+body {
+	background-image:url("hip-square.png");
     background-repeat: repeat;
 
+}
+
+
+
+.container {
+    max-width: 1000px;
 }
 .header {
     margin-top: 6rem;
@@ -17,4 +21,14 @@
 }
 #game_container {
 
+}
+
+#chat {
+	overflow-y: scroll;
+	height: 400px;
+	background-color: #ffffff;
+}
+
+#chat_input {
+	width: 100%;
 }
