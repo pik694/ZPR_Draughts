@@ -16,5 +16,5 @@ void NickRequestSignal::acceptDispatcher(MessageDispatcher& dispatcher){
 }
 
 void NickRequestSignal::fillData(Json::Value data) {
-	nick_ = data.get("type","").asString();
+	nick_ = data.get("value","").asString();
 }
