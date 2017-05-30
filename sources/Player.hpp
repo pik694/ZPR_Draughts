@@ -8,6 +8,7 @@
 
 #include <thread>
 #include <string>
+#include "Room.hpp"
 
 using websocketpp::connection_hdl;
 
@@ -22,15 +23,19 @@ public:
 
 	void setNickName(std::string nick_a);
 	void setRoom(int roomID);
-    int getRoom();
+	void setRoom(Room* room);
+    int getRoomID();
+	Room* getRoom();
 	std::string getName();
 
 	ConnectionProtocolHandler* getConnectionProtocolHandler();
 
+	~Player();
+
 private:
 	static int clientIds_;
 	std::string nickname_;
-	int roomID_;
+	Room* room_;
 	int clientID_;
 	ConnectionProtocolHandler* connectionProtocolHandler_;
 };

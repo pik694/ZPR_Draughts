@@ -10,6 +10,7 @@ Player::Player()
 
 	connectionProtocolHandler_ = nullptr;
 
+
 	//TODO: throw std::runtime_error("This constructor should not be invoked");
 }
 
@@ -20,15 +21,17 @@ Player::Player(std::string nick, ConnectionProtocolHandler *hdl) {
 	++clientIds_;
 
 	connectionProtocolHandler_ = hdl;
+
+	room_ = nullptr;
+
 }
 
 void Player::setNickName(std::string nick_a)
 {
 	nickname_ = nick_a;
 }
-void Player::setRoom(int room_id_a)
-{
-	roomID_ = room_id_a;
+void Player::setRoom(Room* room){
+	 room_ = room;
 }
 
 std::string Player::getName()

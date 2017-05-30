@@ -13,46 +13,64 @@
 
 void MessageDispatcher::dispatch(EnterRoomSignal& enterRoomSignal) {
 
-    Room* room = RoomManager::getInstance()->getRoom(enterRoomSignal.getRoomID());
-    Player* player = PlayerManager::getInstance()->getPlayer(enterRoomSignal.getConnectionProtocolHandler());
-
-    if (player == nullptr) throw std::invalid_argument("Could not find such a player");
-
+    room_ptr room = RoomManager::getInstance()->getRoom(enterRoomSignal.getRoomID());
+    Player* player = getPlayerFromSignal(&enterRoomSignal);
     bool answer = false;
 
     if (room != nullptr && room->joinRoom(player)) {
         answer = true;
     }
 
-    std::shared_ptr<Signal> signal = std::make_shared<PermissionSignal>(enterRoomSignal.getConnectionProtocolHandler(), answer);
-
-    Server::getInstance()->putMessageInQueue(signal);
+    Server::getInstance()->putMessageInQueue(
+            std::make_shared<PermissionSignal>(enterRoomSignal.getConnectionProtocolHandler(), answer)
+    );
 
 }
-
 
 void MessageDispatcher::dispatch(LeaveRoomSignal& leaveRoomSignal) {
 
-    Player* player = PlayerManager::getInstance()->getPlayer(leaveRoomSignal.getConnectionProtocolHandler());
+    Player* player = getPlayerFromSignal(&leaveRoomSignal);
 
-    if (player != nullptr){
+    if (player->getRoom() == nullptr || !player->getRoom()->leaveRoom(player))
+        throw std::runtime_error("Unknown error appeared: could not exit form room");
 
+}
+
+void MessageDispatcher::dispatch(NewGameSignal& newGameSignal) {
+
+    Player* player = getPlayerFromSignal(&newGameSignal);
+
+    player->getRoom()->startNewGame();
+
+
+}
+
+void MessageDispatcher::dispatch(NewRoomRequestSignal& newRoomRequestSignal) {
+
+    room_ptr newRoom;
+    Player* player = getPlayerFromSignal(&newRoomRequestSignal);
+
+    bool answer = true;
+    try {
+        newRoom = RoomManager::getInstance()->newRoom();
+        newRoom->joinRoom(player);
+    }
+    catch(std::runtime_error e){
+        std::cerr << e.what() << std::endl;
+        answer = false;
     }
 
-}
-
-void MessageDispatcher::dispatch(NewGameSignal &) {
-    throw std::runtime_error("Not implemented yet");
-}
-
-void MessageDispatcher::dispatch(NewRoomRequestSignal& ) {
-
+    Server::getInstance()->putMessageInQueue(
+            std::make_shared<PermissionSignal>(newRoomRequestSignal.getConnectionProtocolHandler(), answer)
+    );
 
 
 }
 
 void MessageDispatcher::dispatch(NickRequestSignal& nickRequest) {
 
+
+    //TODO: PlayerManager should take care of this
     bool answer = false;
 
     if (Server::getInstance()->validateNick(nickRequest.getNick())){
@@ -61,20 +79,17 @@ void MessageDispatcher::dispatch(NickRequestSignal& nickRequest) {
         Server::getInstance()->addPlayer(nickRequest.getNick(), nickRequest.getConnectionProtocolHandler());
     }
 
-
-    std::shared_ptr<Signal> signal = std::make_shared<PermissionSignal>(nickRequest.getConnectionProtocolHandler(), answer);
-
-    Server::getInstance()->putMessageInQueue(signal);
+    Server::getInstance()->putMessageInQueue(
+            std::make_shared<PermissionSignal>(nickRequest.getConnectionProtocolHandler(), answer)
+    );
 
 }
 
 void MessageDispatcher::dispatch(TextMessage& textMessage) {
 
-    Player* player = PlayerManager::getInstance()->getPlayer(textMessage.getConnectionProtocolHandler());
+    Player* player = getPlayerFromSignal(&textMessage);
 
-    if (player == nullptr) throw std::invalid_argument("Could not find such a player");
-
-    Room* room = RoomManager::getInstance()->getRoom(player->getRoom());
+    room_ptr room = player->getRoom();
 
     if (room != nullptr){
         room->sendTextMessage(player, textMessage.getMessage());
@@ -82,4 +97,12 @@ void MessageDispatcher::dispatch(TextMessage& textMessage) {
 
 }
 
+Player* MessageDispatcher::getPlayerFromSignal(Signal* signal) {
 
+    Player* player = PlayerManager::getInstance()->getPlayer(signal->getConnectionProtocolHandler());
+
+    if (player == nullptr) throw std::invalid_argument("Could not find such a player");
+
+    return player;
+
+}

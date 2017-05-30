@@ -9,23 +9,24 @@ class RoomManager{
 public:
 	static RoomManager* getInstance();
 
-	Room* getRoom(int id);
+	room_ptr getRoom(int id);
 
-	Room* newRoom();
+	room_ptr newRoom();
 
-	bool deleteRoom(Room*);
-	bool deleteRoom(int id);
-
-
+	void deleteRoom(Room*);
 
 	RoomManager(const RoomManager&) = delete;
 	~RoomManager();
+
 private:
+	using room_ptr = std::shared_ptr<Room>;
+
 	static RoomManager* instance_;
+	static const size_t  MAX_NUMBER_OF_ROOMS;
 
 	RoomManager();
 
 	int currentRoomID_;
-	std::list<Room*> rooms_;
+	std::list<room_ptr> rooms_;
 };
 #endif // ROOM_MANAGER_HPP

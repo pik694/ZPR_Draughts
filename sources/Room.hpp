@@ -13,28 +13,29 @@ public:
 
 	Room (int);
 
-	bool joinRoom(Player*);
-	void leaveRoom(Player*);
+	bool joinRoom(player_ptr);
+	void leaveRoom(player_ptr);
 
 	int getRoomID();
 
 	void playerWon(PlayerColour);
+	void startNewGame();
 
 
-	void sendTextMessage(Player*, std::string);
+
+	void sendTextMessage(player_ptr ,const std::string&);
 
 private:
-
+	using player_ptr = std::shared_ptr<Player>;
 
 	const int roomID_;
 
-	Player* whitePlayer_;
-	Player* blackPlayer_;
+	player_ptr whitePlayer_;
+	player_ptr blackPlayer_;
 
 	int numberOfPlayers_;
 
 	Game game_;
-	bool end_;
 
 };
 

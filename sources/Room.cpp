@@ -1,15 +1,20 @@
+#include <Signals/OpponentEnteredTheRoomSignal.hpp>
+#include <Signals/GameEndSignal.hpp>
+#include <Signals/BoardSignal.hpp>
+#include <Signals/TextMessage.hpp>
 #include "Room.hpp"
+#include "Server.hpp"
+#include "RoomManager.hpp"
 
 Room::Room(int ID):
 		whitePlayer_(nullptr),
 		blackPlayer_(nullptr),
 		numberOfPlayers_(0),
-		roomID_(ID),
-		end_(false) {}
+		roomID_(ID) {}
 
 
 
-bool Room::joinRoom(Player* player) {
+bool Room::joinRoom(player_ptr player) {
 
 	if (numberOfPlayers_ == 2) return false;
 
@@ -21,25 +26,23 @@ bool Room::joinRoom(Player* player) {
 	}
 
 	if (numberOfPlayers_ == 1){
-		Player* opponent;
-		if (whitePlayer_ != player){
-			opponent = whitePlayer_;
-		}
-		else {
-			opponent = blackPlayer_;
-		}
 
-		//TODO: send singal : opponent entered room
+		player_ptr opponent = player == whitePlayer_? blackPlayer_ : whitePlayer_;
+
+		Server::getInstance()->putMessageInQueue(
+				make_shared<OpponentEnteredTheRoomSignal>(opponent->getConnectionProtocolHandler(), player->getName())
+		);
 	}
 
 	player->setRoom(roomID_);
 
 	++numberOfPlayers_;
 
+	return true;
 
 }
 
-void Room::leaveRoom(Player* player) {
+void Room::leaveRoom(player_ptr player) {
 
 	bool removed = false;
 	if (whitePlayer_ == player){
@@ -52,21 +55,28 @@ void Room::leaveRoom(Player* player) {
 	}
 
 	if (removed){
-		if (whitePlayer_ != nullptr) ; //TODO: send signal
-		else if (blackPlayer_ != nullptr) ; //TODO: send signal
+		if (whitePlayer_ != nullptr){
+
+		}//TODO: send signal
+		else if (blackPlayer_ != nullptr){
+
+		} //TODO: send signal
+
 		player->setRoom(-1);
 		--numberOfPlayers_;
 	}
 
-	end_ = true;
+	if (numberOfPlayers_<= 0){
+		RoomManager::getInstance()->deleteRoom(this);
+	}
 
 
 }
 
 void Room::playerWon(PlayerColour colour) {
 
-	Player* won;
-	Player* lost;
+	player_ptr won;
+	player_ptr lost;
 
 	if (colour == PlayerColour::white){
 		won = whitePlayer_;
@@ -77,8 +87,45 @@ void Room::playerWon(PlayerColour colour) {
 		lost = whitePlayer_;
 	}
 
-	end_ = true;
+	Server::getInstance()->putMessageInQueue(
+			std::make_shared<GameEndSignal>(won->getConnectionProtocolHandler(), true)
+	);
 
-	//TODO: send messages
+	Server::getInstance()->putMessageInQueue(
+			std::make_shared<GameEndSignal>(lost->getConnectionProtocolHandler(), false)
+	);
 
 }
+
+int Room::getRoomID() {
+	return roomID_;
+}
+
+void Room::startNewGame() {
+
+	if (numberOfPlayers_ != 2) return;
+
+	game_.startGame();
+	game_.setGameObserver(this);
+
+	Server::getInstance()->putMessageInQueue(
+		std::make_shared<BoardSignal>(whitePlayer_->getConnectionProtocolHandler(), game_.getBoard())
+	);
+
+	Server::getInstance()->putMessageInQueue(
+			std::make_shared<BoardSignal>(blackPlayer_->getConnectionProtocolHandler(), game_.getBoard())
+	);
+
+}
+
+void Room::sendTextMessage(Room::player_ptr sender, const std::string& message) {
+
+	player_ptr receiver =  sender == whitePlayer_ ? blackPlayer_ : whitePlayer_;
+
+	Server::getInstance()->putMessageInQueue(
+		std::make_shared<TextMessage>(receiver->getConnectionProtocolHandler(), message)
+	);
+
+}
+
+

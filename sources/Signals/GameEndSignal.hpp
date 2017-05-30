@@ -10,7 +10,7 @@
 
 class GameEndSignal : public Signal {
 public:
-    GameEndSignal(bool won): won_(won){}
+    GameEndSignal(ConnectionProtocolHandler* hdl, bool won):Signal(hdl), won_(won){}
 
     const bool getWon() const {
         return won_;

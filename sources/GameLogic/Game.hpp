@@ -26,7 +26,7 @@ public:
 
     }
 
-    void addGameObserver(GameObserver*);
+    void setGameObserver(GameObserver *);
 
     void startGame();
 

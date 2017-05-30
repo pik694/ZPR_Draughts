@@ -68,7 +68,7 @@ private:
 	condition_variable m_action_cond;
 	std::queue<Action> m_actions;
 
-
+//TODO: move to PlayerManager
 	std::map<ConnectionProtocolHandler*, Player> players_;
 
 };
