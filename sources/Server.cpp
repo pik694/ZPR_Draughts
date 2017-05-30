@@ -37,9 +37,6 @@ using websocketpp::lib::unique_lock;
 
 Server* Server::instance_ = nullptr;
 
-mutex Server::m_action_lock;
-condition_variable Server::m_action_cond;
-std::queue<Action> Server::m_actions;
 typedef websocketpp::server<websocketpp::config::asio> server;
 typedef server::message_ptr message_ptr;
 Server::Server()  {
@@ -52,6 +49,8 @@ Server::Server()  {
 
 }
 Server::~Server() {
+	if(instance_ != nullptr)
+		delete instance_;
 	stopServer();
 }
 
@@ -164,4 +163,12 @@ void Server::addPlayer(std::string nick, ConnectionProtocolHandler* hdl) {
 	}
 
 	players_.push_back(Player(nick, hdl));
+}
+
+void Server::putMessageInQueue(connection_hdl hdl,message_ptr msg) {
+	{
+		lock_guard<mutex> guard(m_action_lock);
+		m_actions.push(Action(MESSAGE,hdl,msg));
+	}
+	m_action_cond.notify_one();
 }

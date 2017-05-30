@@ -46,9 +46,7 @@ public:
 
 	void addPlayer(std::string nick, ConnectionProtocolHandler* hdl);
 
-	mutex m_action_lock;
-	condition_variable m_action_cond;
-	std::queue<Action> m_actions;
+	void putMessageInQueue(connection_hdl,message_ptr);
 
 private:
 
@@ -65,7 +63,9 @@ private:
     //std::queue<Action> m_actions;
 
     mutex m_connection_lock;
-
+    mutex m_action_lock;
+	condition_variable m_action_cond;
+	std::queue<Action> m_actions;
 	std::vector<Player> players_;
 
 };

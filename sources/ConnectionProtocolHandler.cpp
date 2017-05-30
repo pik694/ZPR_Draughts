@@ -40,23 +40,19 @@ void ConnectionProtocolHandler::invalidRequest() {
 	std::stringstream myStream;
 	myStream << jsonMessage;
 	message_ptr msg;
-	msg->set_payload(jsonMessage.asString());
+	/*msg->set_payload(jsonMessage.asString());
 	{
 		lock_guard<mutex> guard(Server::m_action_lock);
 		Server::m_actions.push(Action(MESSAGE,currentConnection_,msg));
 	}
-	Server::m_action_cond.notify_one();
+	Server::m_action_cond.notify_one();*/
 }
 
 void ConnectionProtocolHandler::onMessage(websocketpp::connection_hdl hdl, message_ptr msg) {
 	std::cout<<"Message: ";
 	std::cout<<msg->get_payload()<<std::endl;
 	parseJson(msg->get_payload());
-	{
-		lock_guard<mutex> guard(Server::m_action_lock);
-		Server::m_actions.push(Action(MESSAGE,hdl,msg));
-	}
-	Server::m_action_cond.notify_one();
+	Server::getInstance()->putMessageInQueue(hdl, msg);
 
 }
 
