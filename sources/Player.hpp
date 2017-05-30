@@ -9,22 +9,28 @@
 #include <thread>
 #include <string>
 
-using websocketpp::connection_hdl;
+#include "ConnectionProtocolHandler.hpp"
 
+using websocketpp::connection_hdl;
 
 class Player
 {
 public:
+
 	Player();
+	Player(std::string nick, ConnectionProtocolHandler* hdl);
+
 	void setNickName(std::string nick_a);
 	void setRoom(int roomID);
 	std::string getName();
 
+	ConnectionProtocolHandler* getConnectionProtocolHandler();
 
 private:
 	static int clientIds_;
 	std::string nickname_;
 	int roomID_;
 	int clientID_;
+	ConnectionProtocolHandler* connectionProtocolHandler_;
 };
 #endif // CLIENT_HPP

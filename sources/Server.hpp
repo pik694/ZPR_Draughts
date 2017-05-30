@@ -12,6 +12,7 @@
 #include "ConnectionProtocolHandler.hpp"
 #include "RoomManager.hpp"
 #include "ClientManager.hpp"
+#include "Player.hpp"
 
 using websocketpp::connection_hdl;
 using websocketpp::lib::mutex;
@@ -25,7 +26,7 @@ class Server
 {
 public:
 
-	Server* getInstance () {
+	static Server* getInstance () {
 		if (instance_ = nullptr){
 			instance_ = std::make_unique(Server);
 		}
@@ -40,11 +41,19 @@ public:
 	void onMessage(connection_hdl hdl, message_ptr msg);
 	void run(int port);
 	void processMessages();
+
+	bool validateNick(std::string);
+
+	void addPlayer(std::string nick, ConnectionProtocolHandler* hdl);
+
 	mutex m_action_lock;
 	condition_variable m_action_cond;
 	std::queue<Action> m_actions;
 
 private:
+
+	static std::unique_ptr<Server> instance_;
+
 	Server();
 	void stopServer();
 
@@ -57,7 +66,7 @@ private:
 
     mutex m_connection_lock;
 
-	static std::unique_ptr<Server> instance_;
+	std::vector<Player> players_;
 
 };
 #endif //SERVER_HPP

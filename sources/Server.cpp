@@ -111,6 +111,7 @@ void Server::run(int port) {
 }
 
 void Server::processMessages() {
+
 	while(1) {
 		unique_lock<mutex> lock(m_action_lock);
 
@@ -140,4 +141,27 @@ void Server::processMessages() {
 		}
 		std::cout<<"total connections: "<<m_connections.size()<<std::endl;
 	}
+
+}
+
+
+bool Server::validateNick(std::string nick) {
+
+	for (auto player : players_){
+		if (player.getName() == nick) return false;
+	}
+
+	return true;
+
+}
+
+void Server::addPlayer(std::string nick, ConnectionProtocolHandler* hdl) {
+
+	for (auto player : players_){
+		if (player.getName() == nick || player.getConnectionProtocolHandler() == hdl){
+			return;
+		}
+	}
+
+	players_.push_back(Player(nick, hdl));
 }
