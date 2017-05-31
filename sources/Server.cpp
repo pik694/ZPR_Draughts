@@ -151,7 +151,7 @@ void Server::processMessages() {
 bool Server::validateNick(std::string nick) {
 
 	for (auto player : players_){
-		if (player.second.getName() == nick) return false;
+		if (player.second->getName() == nick) return false;
 	}
 
 	return true;
@@ -162,7 +162,7 @@ void Server::addPlayer(std::string nick, ConnectionProtocolHandler* hdl) {
 
 	if (!validateNick(nick)) return;
 
-	players_.at(hdl) = Player(nick, hdl);
+	players_.at(hdl) = std::make_shared<Player>(nick, hdl);
 }
 
 void Server::putMessageInQueue(std::shared_ptr<Signal> signal) {

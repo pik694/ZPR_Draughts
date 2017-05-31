@@ -21,14 +21,14 @@ public:
 		return instance_;
 	}
 
-    player_ptr getPlayer(ConnectionProtocolHandler*) {}
+    player_ptr getPlayer(ConnectionProtocolHandler*){throw std::runtime_error("Not implemented yet");}
 
 
     PlayerManager(const PlayerManager&) = delete;
 private:
     static PlayerManager* instance_;
 
-    PlayerManager() {}
+    PlayerManager(){throw std::runtime_error("Not implemented yet");}
 
 
 };

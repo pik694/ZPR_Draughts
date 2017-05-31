@@ -26,7 +26,7 @@ public:
 
 	void setNickName(std::string nick_a);
 	void setRoom(int roomID);
-	void setRoom(Room* room);
+	void setRoom(room_ptr room);
     int getRoomID();
 	room_ptr getRoom();
 	std::string getName();
@@ -38,8 +38,8 @@ public:
 private:
 	static int clientIds_;
 	std::string nickname_;
-	Room* room_;
-	int clientID_;
+	room_ptr room_;
+	const int clientID_;
 	ConnectionProtocolHandler* connectionProtocolHandler_;
 };
 #endif // CLIENT_HPP

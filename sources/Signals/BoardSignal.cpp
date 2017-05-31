@@ -18,4 +18,8 @@ void BoardSignal::serialize() {
 
 }
 
+const bool BoardSignal::isPlayersMove() const {
+    return isPlayersMove_;
+}
+
 

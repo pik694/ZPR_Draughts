@@ -69,7 +69,7 @@ private:
 	std::queue<Action> m_actions;
 
 //TODO: move to PlayerManager
-	std::map<ConnectionProtocolHandler*, Player> players_;
+	std::map<ConnectionProtocolHandler*, std::shared_ptr<Player>> players_;
 
 };
 #endif //SERVER_HPP

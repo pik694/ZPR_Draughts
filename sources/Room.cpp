@@ -110,11 +110,11 @@ void Room::startNewGame() {
 	game_.setGameObserver(this);
 
 	Server::getInstance()->putMessageInQueue(
-		std::make_shared<BoardSignal>(whitePlayer_->getConnectionProtocolHandler(), game_.getBoard())
+		std::make_shared<BoardSignal>(whitePlayer_->getConnectionProtocolHandler(), game_.getBoard(), true)
 	);
 
 	Server::getInstance()->putMessageInQueue(
-			std::make_shared<BoardSignal>(blackPlayer_->getConnectionProtocolHandler(), game_.getBoard())
+			std::make_shared<BoardSignal>(blackPlayer_->getConnectionProtocolHandler(), game_.getBoard(), false)
 	);
 
 }

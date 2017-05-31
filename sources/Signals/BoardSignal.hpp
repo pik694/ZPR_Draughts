@@ -12,16 +12,19 @@
 
 class BoardSignal : public  Signal {
 public:
-	BoardSignal() {}
-    BoardSignal(ConnectionProtocolHandler* hdl, Board board):Signal(hdl),  board_(board){}
+	BoardSignal(): isPlayersMove_(false) {} //TODO: remove this constructor
+    BoardSignal(ConnectionProtocolHandler* hdl, Board board, bool isPlayersMove):Signal(hdl),  board_(board), isPlayersMove_(isPlayersMove){}
 
     const Board& getBoard() const;
 
-    virtual void acceptDispatcher(MessageDispatcher&);
+	const bool isPlayersMove() const;
+
+	virtual void acceptDispatcher(MessageDispatcher&);
     virtual void serialize();
 
 private:
     const Board board_;
+	const bool isPlayersMove_;
     static Register<BoardSignal> reg;
 };
 
