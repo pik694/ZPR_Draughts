@@ -9,23 +9,26 @@
 
 
 class ConnectionProtocolHandler;
+
 class MessageDispatcher;
 
 class Signal {
 public:
 
-    Signal (ConnectionProtocolHandler* hdl = nullptr);
+    Signal(ConnectionProtocolHandler *hdl = nullptr);
 
-    virtual void acceptDispatcher (MessageDispatcher&) = 0;
+    virtual void acceptDispatcher(MessageDispatcher &) = 0;
+
     virtual void fillData(Json::Value data) {}
+
     virtual void serialize() {}
 
-    virtual ~Signal(){}
+    virtual ~Signal() {}
 
-    ConnectionProtocolHandler* getConnectionProtocolHandler();
+    ConnectionProtocolHandler *getConnectionProtocolHandler();
 
 private:
-    ConnectionProtocolHandler* connectionProtocolHandler_;
+    ConnectionProtocolHandler *connectionProtocolHandler_;
 
 };
 

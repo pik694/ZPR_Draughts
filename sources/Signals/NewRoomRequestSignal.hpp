@@ -9,16 +9,21 @@
 #include "Signals/Signal.hpp"
 #include <string>
 #include "SignalFactory.hpp"
-class NewRoomRequestSignal : public Signal{
+
+class NewRoomRequestSignal : public Signal {
 public:
-	NewRoomRequestSignal() {}
-    NewRoomRequestSignal(ConnectionProtocolHandler* hdl, std::string roomID):Signal(hdl), roomID_(roomID){}
+    NewRoomRequestSignal() {}
+
+    NewRoomRequestSignal(ConnectionProtocolHandler *hdl, std::string roomID) : Signal(hdl), roomID_(roomID) {}
 
 
-    virtual void acceptDispatcher(MessageDispatcher&);
+    virtual void acceptDispatcher(MessageDispatcher &);
+
     virtual void serlialize();
+
     virtual void fillData(Json::Value data);
-    const std::string& getRoomID() const;
+
+    const std::string &getRoomID() const;
 
 private:
     std::string roomID_;

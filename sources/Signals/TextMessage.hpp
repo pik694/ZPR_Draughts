@@ -9,17 +9,20 @@
 
 #include "Signal.hpp"
 #include "SignalFactory.hpp"
+
 class Signal;
 
 class TextMessage : public Signal {
 public:
-	TextMessage() {}
-    TextMessage(ConnectionProtocolHandler* hdl, std::string message):Signal(hdl), message_(message){}
+    TextMessage() {}
 
-    virtual void acceptDispatcher(MessageDispatcher&);
+    TextMessage(ConnectionProtocolHandler *hdl, std::string message) : Signal(hdl), message_(message) {}
+
+    virtual void acceptDispatcher(MessageDispatcher &);
+
     virtual void serialize();
 
-    const std::string& getMessage() const;
+    const std::string &getMessage() const;
 
 private:
     std::string message_;

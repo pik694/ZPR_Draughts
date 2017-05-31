@@ -18,6 +18,6 @@ void MoveSignal::serialize() {
 }
 
 
-void MoveSignal::acceptDispatcher(MessageDispatcher& dispatcher) {
+void MoveSignal::acceptDispatcher(MessageDispatcher &dispatcher) {
     dispatcher.dispatch(*this);
 }

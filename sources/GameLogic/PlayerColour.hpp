@@ -6,11 +6,10 @@
 #define ZPR_DRAUGHTS_PLAYER_COLOUR_HPP
 
 
-    enum class PlayerColour : uint8_t {
-        white,
-        black,
-    };
-
+enum class PlayerColour : uint8_t {
+    white,
+    black,
+};
 
 
 #endif //ZPR_DRAUGHTS_PLAYER_COLOUR_HPP

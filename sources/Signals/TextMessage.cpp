@@ -3,13 +3,14 @@
 //
 
 #include <MessageDispatcher.hpp>
-#include "TextMessage.hpp"
+
 Register<TextMessage> TextMessage::reg("TextMessage");
-void TextMessage::acceptDispatcher(MessageDispatcher& dispatcher){
+
+void TextMessage::acceptDispatcher(MessageDispatcher &dispatcher) {
     dispatcher.dispatch(*this);
 }
 
-const std::string& TextMessage::getMessage() const {
+const std::string &TextMessage::getMessage() const {
     return message_;
 }
 

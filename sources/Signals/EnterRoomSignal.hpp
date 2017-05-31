@@ -9,20 +9,24 @@
 #include "Signal.hpp"
 #include <string>
 #include "SignalFactory.hpp"
-class EnterRoomSignal : public Signal{
-public:
-	EnterRoomSignal() {}
-    EnterRoomSignal(ConnectionProtocolHandler* hdl, int roomID):Signal(hdl), roomID_(roomID){}
 
-    virtual void acceptDispatcher(MessageDispatcher&);
+class EnterRoomSignal : public Signal {
+public:
+    EnterRoomSignal() {}
+
+    EnterRoomSignal(ConnectionProtocolHandler *hdl, int roomID) : Signal(hdl), roomID_(roomID) {}
+
+    virtual void acceptDispatcher(MessageDispatcher &);
+
     virtual void fillData(Json::Value data);
+
     virtual void serialize();
 
     int getRoomID() const;
 
 private:
-   int roomID_;
-   static Register<EnterRoomSignal> reg;
+    int roomID_;
+    static Register<EnterRoomSignal> reg;
 };
 
 

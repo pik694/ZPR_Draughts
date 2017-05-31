@@ -8,16 +8,20 @@
 #include <string>
 #include "Signals/Signal.hpp"
 #include "SignalFactory.hpp"
-class NickRequestSignal : public Signal{
+
+class NickRequestSignal : public Signal {
 public:
-	NickRequestSignal() {}
-    NickRequestSignal(ConnectionProtocolHandler* hdl): Signal(hdl) {}
+    NickRequestSignal() {}
+
+    NickRequestSignal(ConnectionProtocolHandler *hdl) : Signal(hdl) {}
 
     virtual void fillData(Json::Value data);
-    virtual void acceptDispatcher(MessageDispatcher&);
+
+    virtual void acceptDispatcher(MessageDispatcher &);
+
     virtual void serialize();
 
-    const std::string& getNick() const;
+    const std::string &getNick() const;
 
 private:
     std::string nick_;

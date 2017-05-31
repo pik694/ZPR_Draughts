@@ -7,39 +7,38 @@
 #include "GameLogic/PlayerColour.hpp"
 
 
+class Room : public GameObserver {
 
-class Room : public GameObserver
-{
-
-	using player_ptr = std::shared_ptr<Player>;
+    using player_ptr = std::shared_ptr<Player>;
 public:
 
-	Room (int);
+    Room(int);
 
-	bool joinRoom(player_ptr);
-	bool leaveRoom(player_ptr);
+    bool joinRoom(player_ptr);
 
-	int getRoomID();
+    bool leaveRoom(player_ptr);
 
-	void playerWon(PlayerColour);
-	void startNewGame();
+    int getRoomID();
 
-    void makeMove(const std::vector<Point>&, player_ptr);
+    void playerWon(PlayerColour);
+
+    void startNewGame();
+
+    void makeMove(const std::vector<Point> &, player_ptr);
 
 
-
-	void sendTextMessage(player_ptr ,const std::string&);
+    void sendTextMessage(player_ptr, const std::string &);
 
 private:
 
-	const int roomID_;
+    const int roomID_;
 
-	player_ptr whitePlayer_;
-	player_ptr blackPlayer_;
+    player_ptr whitePlayer_;
+    player_ptr blackPlayer_;
 
-	int numberOfPlayers_;
+    int numberOfPlayers_;
 
-	Game game_;
+    Game game_;
 
 };
 

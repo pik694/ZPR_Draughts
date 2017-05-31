@@ -4,16 +4,18 @@
 
 #include "NewRoomRequestSignal.hpp"
 #include "MessageDispatcher.hpp"
+
 Register<NewRoomRequestSignal> NewRoomRequestSignal::reg("NewRoomRequestSignal");
-const std::string& NewRoomRequestSignal::getRoomID() const {
+
+const std::string &NewRoomRequestSignal::getRoomID() const {
     return roomID_;
 }
 
 void NewRoomRequestSignal::fillData(Json::Value data) {
-	roomID_ = data.get("value",-1).asInt();
+    roomID_ = data.get("value", -1).asInt();
 }
 
-void NewRoomRequestSignal::acceptDispatcher(MessageDispatcher& dispatcher) {
+void NewRoomRequestSignal::acceptDispatcher(MessageDispatcher &dispatcher) {
     dispatcher.dispatch(*this);
 }
 

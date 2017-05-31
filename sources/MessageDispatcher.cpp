@@ -11,7 +11,7 @@
 #include "PlayerManager.hpp"
 
 
-void MessageDispatcher::dispatch(EnterRoomSignal& enterRoomSignal){
+void MessageDispatcher::dispatch(EnterRoomSignal &enterRoomSignal) {
 
     room_ptr room = RoomManager::getInstance()->getRoom(enterRoomSignal.getRoomID());
     player_ptr player = getPlayerFromSignal(&enterRoomSignal);
@@ -27,7 +27,7 @@ void MessageDispatcher::dispatch(EnterRoomSignal& enterRoomSignal){
 
 }
 
-void MessageDispatcher::dispatch(LeaveRoomSignal& leaveRoomSignal) {
+void MessageDispatcher::dispatch(LeaveRoomSignal &leaveRoomSignal) {
 
     player_ptr player = getPlayerFromSignal(&leaveRoomSignal);
 
@@ -36,7 +36,7 @@ void MessageDispatcher::dispatch(LeaveRoomSignal& leaveRoomSignal) {
 
 }
 
-void MessageDispatcher::dispatch(NewGameSignal& newGameSignal) {
+void MessageDispatcher::dispatch(NewGameSignal &newGameSignal) {
 
     player_ptr player = getPlayerFromSignal(&newGameSignal);
 
@@ -45,7 +45,7 @@ void MessageDispatcher::dispatch(NewGameSignal& newGameSignal) {
 
 }
 
-void MessageDispatcher::dispatch(NewRoomRequestSignal& newRoomRequestSignal) {
+void MessageDispatcher::dispatch(NewRoomRequestSignal &newRoomRequestSignal) {
 
     room_ptr newRoom;
     player_ptr player = getPlayerFromSignal(&newRoomRequestSignal);
@@ -55,7 +55,7 @@ void MessageDispatcher::dispatch(NewRoomRequestSignal& newRoomRequestSignal) {
         newRoom = RoomManager::getInstance()->newRoom();
         newRoom->joinRoom(player);
     }
-    catch(std::runtime_error e){
+    catch (std::runtime_error e) {
         std::cerr << e.what() << std::endl;
         answer = false;
     }
@@ -67,13 +67,13 @@ void MessageDispatcher::dispatch(NewRoomRequestSignal& newRoomRequestSignal) {
 
 }
 
-void MessageDispatcher::dispatch(NickRequestSignal& nickRequest) {
+void MessageDispatcher::dispatch(NickRequestSignal &nickRequest) {
 
 
     //TODO: PlayerManager should take care of this
     bool answer = false;
 
-    if (PlayerManager::getInstance()->validateNick(nickRequest.getNick())){
+    if (PlayerManager::getInstance()->validateNick(nickRequest.getNick())) {
         answer = true;
 
         PlayerManager::getInstance()->addPlayer(nickRequest.getNick(), nickRequest.getConnectionProtocolHandler());
@@ -85,32 +85,32 @@ void MessageDispatcher::dispatch(NickRequestSignal& nickRequest) {
 
 }
 
-void MessageDispatcher::dispatch(TextMessage& textMessage) {
+void MessageDispatcher::dispatch(TextMessage &textMessage) {
 
     player_ptr player = getPlayerFromSignal(&textMessage);
 
     room_ptr room = player->getRoom();
 
-    if (room != nullptr){
+    if (room != nullptr) {
         room->sendTextMessage(player, textMessage.getMessage());
     }
 
 }
 
-void MessageDispatcher::dispatch(MoveSignal& moveSignal) {
+void MessageDispatcher::dispatch(MoveSignal &moveSignal) {
 
-    player_ptr player =  getPlayerFromSignal(&moveSignal);
+    player_ptr player = getPlayerFromSignal(&moveSignal);
 
     room_ptr room = player->getRoom();
 
-    if (room != nullptr){
+    if (room != nullptr) {
         room->makeMove(moveSignal.getMove(), player);
     }
 
 
 }
 
-MessageDispatcher::player_ptr MessageDispatcher::getPlayerFromSignal(Signal* signal) {
+MessageDispatcher::player_ptr MessageDispatcher::getPlayerFromSignal(Signal *signal) {
 
     player_ptr player = PlayerManager::getInstance()->getPlayer(signal->getConnectionProtocolHandler());
 

@@ -9,16 +9,18 @@
 #include "Signals/Signal.hpp"
 
 #include "SignalFactory.hpp"
+
 class GameEndSignal : public Signal {
 public:
-	GameEndSignal() : won_(false) {}
-    GameEndSignal(ConnectionProtocolHandler* hdl, bool won):Signal(hdl), won_(won){}
+    GameEndSignal() : won_(false) {}
+
+    GameEndSignal(ConnectionProtocolHandler *hdl, bool won) : Signal(hdl), won_(won) {}
 
     const bool getWon() const {
         return won_;
     }
 
-    virtual void acceptDispatcher(MessageDispatcher&);
+    virtual void acceptDispatcher(MessageDispatcher &);
 
 
 private:

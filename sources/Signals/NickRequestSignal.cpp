@@ -7,11 +7,11 @@
 
 Register<NickRequestSignal> NickRequestSignal::reg("NickRequestSignal");
 
-const std::string& NickRequestSignal::getNick() const {
+const std::string &NickRequestSignal::getNick() const {
     return nick_;
 }
 
-void NickRequestSignal::acceptDispatcher(MessageDispatcher& dispatcher){
+void NickRequestSignal::acceptDispatcher(MessageDispatcher &dispatcher) {
     dispatcher.dispatch(*this);
 }
 
@@ -20,5 +20,5 @@ void NickRequestSignal::serialize() {
 }
 
 void NickRequestSignal::fillData(Json::Value data) {
-	nick_ = data.get("value","").asString();
+    nick_ = data.get("value", "").asString();
 }

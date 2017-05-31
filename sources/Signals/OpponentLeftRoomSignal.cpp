@@ -4,7 +4,9 @@
 
 #include "OpponentLeftRoomSignal.hpp"
 #include "MessageDispatcher.hpp"
+
 Register<OpponentLeftRoomSignal> OpponentLeftRoomSignal::reg("OpponentLeftRoomSignal");
+
 void OpponentLeftRoomSignal::acceptDispatcher(MessageDispatcher &) {
     throw std::runtime_error("Dispatcher should not dispatch this kind of a signal");
 }

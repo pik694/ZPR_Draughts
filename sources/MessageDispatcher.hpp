@@ -20,18 +20,24 @@ class MessageDispatcher {
 public:
 
     void dispatch(EnterRoomSignal &);
+
     void dispatch(LeaveRoomSignal &);
+
     void dispatch(NewGameSignal &);
+
     void dispatch(NewRoomRequestSignal &);
+
     void dispatch(NickRequestSignal &);
+
     void dispatch(TextMessage &);
+
     void dispatch(MoveSignal &);
 
 private:
     using room_ptr = std::shared_ptr<Room>;
     using player_ptr = std::shared_ptr<Player>;
 
-    player_ptr getPlayerFromSignal(Signal*);
+    player_ptr getPlayerFromSignal(Signal *);
 
 };
 

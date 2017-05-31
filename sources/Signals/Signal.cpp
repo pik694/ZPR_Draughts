@@ -6,10 +6,10 @@
 #include "Signal.hpp"
 #include "ConnectionProtocolHandler.hpp"
 
-Signal::Signal(ConnectionProtocolHandler* hdl) {
+Signal::Signal(ConnectionProtocolHandler *hdl) {
     connectionProtocolHandler_ = hdl;
 }
 
-ConnectionProtocolHandler* Signal::getConnectionProtocolHandler() {
+ConnectionProtocolHandler *Signal::getConnectionProtocolHandler() {
     return connectionProtocolHandler_;
 }

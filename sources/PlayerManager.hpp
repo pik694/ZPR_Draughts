@@ -13,22 +13,22 @@ class PlayerManager {
 
 public:
 
-	static PlayerManager* getInstance();
+    static PlayerManager *getInstance();
 
-	bool validateNick(std::string);
+    bool validateNick(std::string);
 
-	void addPlayer(std::string nick, ConnectionProtocolHandler* hdl);
+    void addPlayer(std::string nick, ConnectionProtocolHandler *hdl);
 
-	player_ptr getPlayer(ConnectionProtocolHandler*);
+    player_ptr getPlayer(ConnectionProtocolHandler *);
 
-	void removePlayer(ConnectionProtocolHandler *);
+    void removePlayer(ConnectionProtocolHandler *);
 
-    PlayerManager(const PlayerManager&) = delete;
+    PlayerManager(const PlayerManager &) = delete;
 
 private:
-    static PlayerManager* instance_;
+    static PlayerManager *instance_;
 
-	std::map<ConnectionProtocolHandler*, player_ptr> players_;
+    std::map<ConnectionProtocolHandler *, player_ptr> players_;
 
     PlayerManager();
 

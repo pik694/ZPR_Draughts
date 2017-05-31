@@ -11,38 +11,38 @@ size_t Board::ROWS_OF_PIECES = 3;
 using namespace std::placeholders;
 
 
-Board::Board(): board_ (BOARD_SIZE, row_t (BOARD_SIZE, PieceKind::none)) {
+Board::Board() : board_(BOARD_SIZE, row_t(BOARD_SIZE, PieceKind::none)) {
 
-	for (int column = 0; column < BOARD_SIZE; column++){
-		for (int row = 0; row <  ROWS_OF_PIECES; row++){
-			if (row % 2 == column % 2){
-				board_.at(row).at(column) = PieceKind::whiteMen;
-			}
-			else {
-				board_.at(BOARD_SIZE - row - 1).at(column) = PieceKind ::blackMen;
-			}
-		}
-	}
+    for (int column = 0; column < BOARD_SIZE; column++) {
+        for (int row = 0; row < ROWS_OF_PIECES; row++) {
+            if (row % 2 == column % 2) {
+                board_.at(row).at(column) = PieceKind::whiteMen;
+            } else {
+                board_.at(BOARD_SIZE - row - 1).at(column) = PieceKind::blackMen;
+            }
+        }
+    }
 }
-Board::Board(std::initializer_list<row_t> list):board_(){
+
+Board::Board(std::initializer_list<row_t> list) : board_() {
 
 
     if (list.size() != BOARD_SIZE)
-        throw std::invalid_argument ("Invalid column size in board_. "
-                                             "Got : " +  std::to_string(list.size()) +
-                                             ", but expected : " + std::to_string(BOARD_SIZE));
+        throw std::invalid_argument("Invalid column size in board_. "
+                                            "Got : " + std::to_string(list.size()) +
+                                    ", but expected : " + std::to_string(BOARD_SIZE));
 
 
-	for (auto row = list.end(); row != list.begin(); ){
+    for (auto row = list.end(); row != list.begin();) {
 
-		--row;
+        --row;
 
-		if (row->size() != BOARD_SIZE)
-			throw std::invalid_argument ("Invalid row size in board_. "
-												 "Got : " +  std::to_string(row->size()) +
-										 ", but expected : " + std::to_string(BOARD_SIZE));
-		this->board_.push_back(*row);
-	}
+        if (row->size() != BOARD_SIZE)
+            throw std::invalid_argument("Invalid row size in board_. "
+                                                "Got : " + std::to_string(row->size()) +
+                                        ", but expected : " + std::to_string(BOARD_SIZE));
+        this->board_.push_back(*row);
+    }
 
 }
 
@@ -55,10 +55,10 @@ PieceKind Board::getPieceAt(Point point, PlayerColour side) const {
 
 void Board::setPieceAt(PieceKind piece, Point point, PlayerColour side) {
 
-    if (point.x_%2 != point.y_ %2)
+    if (point.x_ % 2 != point.y_ % 2)
         throw std::invalid_argument("Points parity does not match. "
                                             "x:" + std::to_string(point.x_) +
-                                            " y:" + std::to_string(point.y_));
+                                    " y:" + std::to_string(point.y_));
 
     pieceAt(point, side) = piece;
 }
@@ -70,7 +70,6 @@ void Board::removePieceAt(Point point, PlayerColour side) {
 }
 
 
-
 Json::Value Board::toJSON() const {
-	throw std::runtime_error("Not implemented yet");
+    throw std::runtime_error("Not implemented yet");
 }

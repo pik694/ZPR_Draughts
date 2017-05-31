@@ -13,15 +13,17 @@
 
 class MoveSignal : public Signal {
 public:
-    MoveSignal(std::initializer_list<Point> path, ConnectionProtocolHandler* hdl):
+    MoveSignal(std::initializer_list<Point> path, ConnectionProtocolHandler *hdl) :
             Signal(hdl),
-            move_(path){}
+            move_(path) {}
 
-    const std::vector<Point>& getMove() const;
+    const std::vector<Point> &getMove() const;
 
     virtual void fillData(Json::Value);
+
     virtual void serialize();
-    virtual void acceptDispatcher(MessageDispatcher&);
+
+    virtual void acceptDispatcher(MessageDispatcher &);
 
 private:
 

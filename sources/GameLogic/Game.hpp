@@ -11,15 +11,14 @@
 #include "Board.hpp"
 #include "PlayerColour.hpp"
 
-class Game
-{
+class Game {
 public:
 
-    Game(): gameObserver_(nullptr){
+    Game() : gameObserver_(nullptr) {
         startGame();
     }
 
-    Game(Board&& board):board_(board), gameObserver_(nullptr) {
+    Game(Board &&board) : board_(board), gameObserver_(nullptr) {
 
 
         currentTurn_ = PlayerColour::white;
@@ -31,20 +30,25 @@ public:
 
     void startGame();
 
-    bool makeMove(PlayerColour, const std::vector<Point>&);
+    bool makeMove(PlayerColour, const std::vector<Point> &);
+
     bool makeMove(PlayerColour, Point, Point);
 
-    const Board&  getBoard() const;
+    const Board &getBoard() const;
 
     PlayerColour whoseTurn() const;
 
 private:
 
-    bool validatePoints(PieceKind , Point begin, Point end);
-    bool validateMove(PlayerColour , const std::vector<Point>&);
-    void movePiece(PlayerColour , const std::vector<Point>&);
+    bool validatePoints(PieceKind, Point begin, Point end);
+
+    bool validateMove(PlayerColour, const std::vector<Point> &);
+
+    void movePiece(PlayerColour, const std::vector<Point> &);
+
     int findDirection(int begin, int end);
-    void changeIntoAKing(PieceKind&);
+
+    void changeIntoAKing(PieceKind &);
 
     Board board_;
     PlayerColour currentTurn_;
@@ -54,7 +58,8 @@ private:
     int whitePieces_;
     int blackPieces_;
 
-    GameObserver* gameObserver_;
+    GameObserver *gameObserver_;
 
 };
+
 #endif // GAME_HPP

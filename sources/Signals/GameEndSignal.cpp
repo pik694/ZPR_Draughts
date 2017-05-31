@@ -2,6 +2,7 @@
 #include "MessageDispatcher.hpp"
 
 Register<GameEndSignal> GameEndSignal::reg("GameEndSignal");
-void GameEndSignal::acceptDispatcher(MessageDispatcher& dispatcher) {
+
+void GameEndSignal::acceptDispatcher(MessageDispatcher &dispatcher) {
 
 }

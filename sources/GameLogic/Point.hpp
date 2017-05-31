@@ -8,28 +8,28 @@
 
 struct Point {
 
-    Point(int x, int y): x_(x), y_(y) { }
+    Point(int x, int y) : x_(x), y_(y) {}
 
-    Point& operator+= (const Point& _rv){
+    Point &operator+=(const Point &_rv) {
         this->y_ += _rv.y_;
         this->x_ += _rv.x_;
         return *this;
     }
 
-    Point operator+ (const Point& _rv) const {
+    Point operator+(const Point &_rv) const {
 
         return Point(this->x_ + _rv.x_, this->y_ + _rv.y_);
     }
 
-    Point operator- (const Point& _rv) const {
+    Point operator-(const Point &_rv) const {
         return Point(this->x_ - _rv.x_, this->y_ - _rv.y_);
     }
 
-    bool operator== (const Point& _rv) const {
+    bool operator==(const Point &_rv) const {
         return this->x_ == _rv.x_ && this->y_ == _rv.y_;
     }
 
-    bool operator!= (const Point& _rv) const {
+    bool operator!=(const Point &_rv) const {
         return !operator==(_rv);
     }
 

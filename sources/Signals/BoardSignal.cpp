@@ -3,12 +3,14 @@
 //
 
 #include "BoardSignal.hpp"
+
 Register<BoardSignal> BoardSignal::reg("BoardSignal");
-const Board& BoardSignal::getBoard() const {
+
+const Board &BoardSignal::getBoard() const {
     return board_;
 }
 
-void BoardSignal::acceptDispatcher(MessageDispatcher&){
+void BoardSignal::acceptDispatcher(MessageDispatcher &) {
     throw std::runtime_error("Dispatcher should not dispatch this kind of a signal");
 }
 

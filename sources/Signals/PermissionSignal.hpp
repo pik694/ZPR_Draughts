@@ -9,17 +9,21 @@
 #include "Signals/Signal.hpp"
 #include "SignalFactory.hpp"
 
-class PermissionSignal : public Signal{
+class PermissionSignal : public Signal {
 
 
 public:
-	PermissionSignal() : givenPermission_(false) {}
-    PermissionSignal(ConnectionProtocolHandler* hdl, bool givenPermission):Signal(hdl), givenPermission_(givenPermission){}
+    PermissionSignal() : givenPermission_(false) {}
+
+    PermissionSignal(ConnectionProtocolHandler *hdl, bool givenPermission) : Signal(hdl),
+                                                                             givenPermission_(givenPermission) {}
 
     const bool getGivenPermission() const;
 
-    virtual void acceptDispatcher(MessageDispatcher&);
-    virtual void fillData(Json::Value){};
+    virtual void acceptDispatcher(MessageDispatcher &);
+
+    virtual void fillData(Json::Value) {};
+
     virtual void serialize();
 
 private:

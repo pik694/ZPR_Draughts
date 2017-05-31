@@ -4,7 +4,9 @@
 
 #include "PermissionSignal.hpp"
 #include "MessageDispatcher.hpp"
+
 Register<PermissionSignal> PermissionSignal::reg("PermissionSignal");
+
 const bool PermissionSignal::getGivenPermission() const {
     return givenPermission_;
 }

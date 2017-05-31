@@ -13,7 +13,8 @@ class GameObserver {
 public:
 
     virtual void playerWon(PlayerColour) =  0;
-    virtual ~GameObserver(){}
+
+    virtual ~GameObserver() {}
 };
 
 

@@ -1,8 +1,8 @@
 #include "Game.hpp"
 
-void Game::setGameObserver(GameObserver* observer) {
+void Game::setGameObserver(GameObserver *observer) {
 
-	gameObserver_ = observer;
+    gameObserver_ = observer;
 
 }
 
@@ -10,15 +10,15 @@ void Game::startGame() {
 
 
     duringGame_ = true;
-	board_ = Board();
-	currentTurn_ = PlayerColour::white;
+    board_ = Board();
+    currentTurn_ = PlayerColour::white;
 
-	blackPieces_ = whitePieces_ = Board::BOARD_SIZE * Board::ROWS_OF_PIECES / 2;
+    blackPieces_ = whitePieces_ = Board::BOARD_SIZE * Board::ROWS_OF_PIECES / 2;
 
 
 }
 
-bool Game::makeMove(PlayerColour player, const std::vector<Point>& points) {
+bool Game::makeMove(PlayerColour player, const std::vector<Point> &points) {
 
     if (!duringGame_) return false;
 
@@ -27,25 +27,26 @@ bool Game::makeMove(PlayerColour player, const std::vector<Point>& points) {
 
     movePiece(player, points);
 
-    currentTurn_ = currentTurn_ == PlayerColour::white ? PlayerColour::black : PlayerColour ::white;
+    currentTurn_ = currentTurn_ == PlayerColour::white ? PlayerColour::black : PlayerColour::white;
     return true;
 
 }
+
 bool Game::makeMove(PlayerColour player, Point begin, Point end) {
 
     return makeMove(player, {begin, end});
 
 }
 
-const Board& Game::getBoard() const {
+const Board &Game::getBoard() const {
 
-	return board_;
+    return board_;
 
 }
 
 PlayerColour Game::whoseTurn() const {
 
-	return currentTurn_;
+    return currentTurn_;
 
 }
 
@@ -55,19 +56,19 @@ PlayerColour Game::whoseTurn() const {
 bool Game::validatePoints(PieceKind piece, Point begin, Point end) {
 
 
-	return !((begin.y_ >= Board::BOARD_SIZE || begin.y_ < 0)
-		|| (begin.x_ >= Board::BOARD_SIZE || begin.x_ < 0)
-		|| (end.y_ >= Board::BOARD_SIZE || end.y_ < 0)
-		|| (end.x_ >= Board::BOARD_SIZE || end.x_ < 0)
-		|| ((begin.x_ % 2 != begin.y_ % 2) || (end.x_ % 2 != end.y_ % 2))
-		|| (piece == PieceKind::none)
-		|| ((piece == PieceKind::whiteMen || piece == PieceKind::blackMen) && (begin.y_ >= end.y_))
-        || (abs(begin.x_ - end.x_) != abs(begin.y_ - end.y_))
-        || ((piece == PieceKind::whiteMen || piece == PieceKind::blackMen) && abs(begin.x_ - end.x_) > 2));
+    return !((begin.y_ >= Board::BOARD_SIZE || begin.y_ < 0)
+             || (begin.x_ >= Board::BOARD_SIZE || begin.x_ < 0)
+             || (end.y_ >= Board::BOARD_SIZE || end.y_ < 0)
+             || (end.x_ >= Board::BOARD_SIZE || end.x_ < 0)
+             || ((begin.x_ % 2 != begin.y_ % 2) || (end.x_ % 2 != end.y_ % 2))
+             || (piece == PieceKind::none)
+             || ((piece == PieceKind::whiteMen || piece == PieceKind::blackMen) && (begin.y_ >= end.y_))
+             || (abs(begin.x_ - end.x_) != abs(begin.y_ - end.y_))
+             || ((piece == PieceKind::whiteMen || piece == PieceKind::blackMen) && abs(begin.x_ - end.x_) > 2));
 }
 
 
-bool Game::validateMove(PlayerColour player, const std::vector<Point>& points) {
+bool Game::validateMove(PlayerColour player, const std::vector<Point> &points) {
 
     //TODO: refactor
 
@@ -75,7 +76,7 @@ bool Game::validateMove(PlayerColour player, const std::vector<Point>& points) {
 
     bool captured = true;
 
-    for (auto begin = points.begin(), end = begin + 1; end != points.end(); ++begin, ++end){
+    for (auto begin = points.begin(), end = begin + 1; end != points.end(); ++begin, ++end) {
 
         if (!captured) return false;
         captured = false;
@@ -84,21 +85,22 @@ bool Game::validateMove(PlayerColour player, const std::vector<Point>& points) {
         PieceKind piece = tempBoard.getPieceAt(*begin, player);
 
         if ((player == PlayerColour::white && piece != PieceKind::whiteKing && piece != PieceKind::whiteMen)
-                || (player == PlayerColour::black && piece != PieceKind::blackKing && piece != PieceKind::blackMen))
+            || (player == PlayerColour::black && piece != PieceKind::blackKing && piece != PieceKind::blackMen))
             return false;
 
         tempBoard.removePieceAt(*begin, player);
 
         if (!validatePoints(piece, *begin, *end)
-            || tempBoard.getPieceAt(*end, player) != PieceKind::none) return false;
+            || tempBoard.getPieceAt(*end, player) != PieceKind::none)
+            return false;
 
 
-        Point direction (findDirection(begin->x_, end->x_), findDirection(begin->y_, end->y_));
+        Point direction(findDirection(begin->x_, end->x_), findDirection(begin->y_, end->y_));
 
 
-        if (*end - direction != *begin && tempBoard.getPieceAt(*end - direction, player) != PieceKind::none){
+        if (*end - direction != *begin && tempBoard.getPieceAt(*end - direction, player) != PieceKind::none) {
             PieceKind foundPiece = tempBoard.getPieceAt(*end - direction, player);
-            switch (piece){
+            switch (piece) {
                 case PieceKind::whiteMen:
                 case PieceKind::whiteKing:
                     if (foundPiece != PieceKind::blackMen && foundPiece != PieceKind::blackKing)
@@ -118,7 +120,7 @@ bool Game::validateMove(PlayerColour player, const std::vector<Point>& points) {
                     break;
 
                 default:
-                    throw  std::runtime_error("Invalid piece" + std::to_string((uint8_t)piece));
+                    throw std::runtime_error("Invalid piece" + std::to_string((uint8_t) piece));
             }
 
         }
@@ -127,7 +129,9 @@ bool Game::validateMove(PlayerColour player, const std::vector<Point>& points) {
             if (tempBoard.getPieceAt(curr, player) != PieceKind::none) return false;
         }
 
-        if (!captured && (piece == PieceKind::whiteMen || piece == PieceKind::blackMen) && abs(begin->x_ - end->x_) > 1) return false;
+        if (!captured && (piece == PieceKind::whiteMen || piece == PieceKind::blackMen) &&
+            abs(begin->x_ - end->x_) > 1)
+            return false;
 
         if (end->y_ == Board::BOARD_SIZE - 1) changeIntoAKing(piece);
 
@@ -136,24 +140,24 @@ bool Game::validateMove(PlayerColour player, const std::vector<Point>& points) {
 
     }
 
-    return (!captured && points.size() > 2) ? false : true;
+    return !(!captured && points.size() > 2);
 }
 
-void Game::movePiece(PlayerColour player, const std::vector<Point>& points) {
+void Game::movePiece(PlayerColour player, const std::vector<Point> &points) {
 
-    for (auto begin = points.begin(), end = begin + 1; end != points.end(); ++begin, ++end){
+    for (auto begin = points.begin(), end = begin + 1; end != points.end(); ++begin, ++end) {
 
         PieceKind piece = board_.getPieceAt(*begin, player);
 
         board_.removePieceAt(*begin, player);
 
-        Point direction (findDirection(end->x_, begin->x_), findDirection(end->y_, begin->y_));
+        Point direction(findDirection(end->x_, begin->x_), findDirection(end->y_, begin->y_));
 
-        if (board_.getPieceAt(Point(end->x_, end->y_) + direction, player) != PieceKind::none){
+        if (board_.getPieceAt(Point(end->x_, end->y_) + direction, player) != PieceKind::none) {
 
-            int& count = player == PlayerColour::white ? (blackPieces_) : (whitePieces_);
+            int &count = player == PlayerColour::white ? (blackPieces_) : (whitePieces_);
 
-            if (--count == 0){
+            if (--count == 0) {
                 gameObserver_->playerWon(player);
                 duringGame_ = false;
             }
@@ -170,12 +174,12 @@ void Game::movePiece(PlayerColour player, const std::vector<Point>& points) {
 }
 
 
-int Game::findDirection(int begin, int end){
+int Game::findDirection(int begin, int end) {
     return end - begin < 0 ? -1 : 1;
 }
 
-void Game::changeIntoAKing(PieceKind& piece){
-    switch (piece){
+void Game::changeIntoAKing(PieceKind &piece) {
+    switch (piece) {
         case PieceKind::whiteMen:
             piece = PieceKind::whiteKing;
             break;
@@ -184,7 +188,7 @@ void Game::changeIntoAKing(PieceKind& piece){
             break;
         default:
             if (piece != PieceKind::blackKing && piece != PieceKind::whiteKing)
-                    throw  std::runtime_error("Invalid piece" + std::to_string((uint8_t)piece));
+                throw std::runtime_error("Invalid piece" + std::to_string((uint8_t) piece));
             else break;
     }
 }

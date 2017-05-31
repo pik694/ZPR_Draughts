@@ -5,33 +5,35 @@
 
 #include "Room.hpp"
 
-class RoomManager{
+class RoomManager {
 
-	using room_ptr = std::shared_ptr<Room>;
-	using player_ptr = std::shared_ptr<Player>;
+    using room_ptr = std::shared_ptr<Room>;
+    using player_ptr = std::shared_ptr<Player>;
 
 
 public:
-	static RoomManager* getInstance();
+    static RoomManager *getInstance();
 
-	room_ptr getRoom(int id);
+    room_ptr getRoom(int id);
 
-	room_ptr newRoom();
+    room_ptr newRoom();
 
-	void deleteRoom(Room*);
+    void deleteRoom(Room *);
 
-	RoomManager(const RoomManager&) = delete;
-	~RoomManager();
+    RoomManager(const RoomManager &) = delete;
+
+    ~RoomManager();
 
 private:
 
 
-	static RoomManager* instance_;
-	static const size_t  MAX_NUMBER_OF_ROOMS;
+    static RoomManager *instance_;
+    static const size_t MAX_NUMBER_OF_ROOMS;
 
-	RoomManager();
+    RoomManager();
 
-	int currentRoomID_;
-	std::list<room_ptr> rooms_;
+    int currentRoomID_;
+    std::list<room_ptr> rooms_;
 };
+
 #endif // ROOM_MANAGER_HPP

@@ -1,5 +1,6 @@
 #ifndef ZPR_DRAUGHTS_CONNECTION_HPP
 #define ZPR_DRAUGHTS_CONNECTION_HPP
+
 #include <jsoncpp/json/json.h>
 #include <string>
 #include <sstream>
@@ -56,27 +57,32 @@ using websocketpp::lib::mutex;
 using websocketpp::lib::condition_variable;
 typedef websocketpp::server<websocketpp::config::asio> server;
 typedef server::message_ptr message_ptr;
-enum ConnectionStates {JUST_STARTED, NICK_SET, ROOM_ASSIGNED, PLAYER_READY, GAME_IN_PROGRESS };
+enum ConnectionStates {
+    JUST_STARTED, NICK_SET, ROOM_ASSIGNED, PLAYER_READY, GAME_IN_PROGRESS
+};
 using websocketpp::connection_hdl;
 typedef websocketpp::server<websocketpp::config::asio> server;
 
 
-class ConnectionProtocolHandler
-{
+class ConnectionProtocolHandler {
 public:
-	// there is going to be an event handler on_message here
-	ConnectionProtocolHandler(connection_hdl &con);
+    // there is going to be an event handler on_message here
+    ConnectionProtocolHandler(connection_hdl &con);
 
-	void onMessage(websocketpp::connection_hdl hdl, message_ptr msg);
-	void parseJson(std::string data);
+    void onMessage(websocketpp::connection_hdl hdl, message_ptr msg);
+
+    void parseJson(std::string data);
+
 private:
-	void invalidRequest();
-	bool tryToAssingName(const std::string &name);
-	connection_hdl currentConnection_;
-	std::queue<Action> actions_;
-	ConnectionStates state_;
-	MessageDispatcher dispatcher_;
-	//Player player_;
+    void invalidRequest();
+
+    bool tryToAssingName(const std::string &name);
+
+    connection_hdl currentConnection_;
+    std::queue<Action> actions_;
+    ConnectionStates state_;
+    MessageDispatcher dispatcher_;
+    //Player player_;
 };
 
 #endif

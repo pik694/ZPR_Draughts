@@ -11,14 +11,16 @@
 
 class OpponentEnteredTheRoomSignal : public Signal {
 public:
-	OpponentEnteredTheRoomSignal() {}
-    OpponentEnteredTheRoomSignal (ConnectionProtocolHandler* hdl, std::string opponentNick):Signal(hdl), opponentNick_(opponentNick){}
+    OpponentEnteredTheRoomSignal() {}
 
-    virtual void acceptDispatcher(MessageDispatcher&);
+    OpponentEnteredTheRoomSignal(ConnectionProtocolHandler *hdl, std::string opponentNick) : Signal(hdl), opponentNick_(
+            opponentNick) {}
+
+    virtual void acceptDispatcher(MessageDispatcher &);
 
     virtual void serialize();
 
-    const std::string& getOpponentNick() const;
+    const std::string &getOpponentNick() const;
 
 
 private:

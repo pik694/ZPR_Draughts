@@ -12,13 +12,16 @@
 
 class OpponentLeftRoomSignal : public Signal {
 public:
-	OpponentLeftRoomSignal() {}
-    OpponentLeftRoomSignal(ConnectionProtocolHandler* hdl):Signal(hdl){}
+    OpponentLeftRoomSignal() {}
 
-    virtual void acceptDispatcher(MessageDispatcher&);
+    OpponentLeftRoomSignal(ConnectionProtocolHandler *hdl) : Signal(hdl) {}
+
+    virtual void acceptDispatcher(MessageDispatcher &);
+
     virtual void serialize();
+
 private:
-	static Register<OpponentLeftRoomSignal> reg;
+    static Register<OpponentLeftRoomSignal> reg;
 };
 
 

@@ -22,25 +22,26 @@ public:
     using row_t = std::vector<PieceKind>;
 
     Board();
+
     Board(std::initializer_list<row_t>);
 
 
     PieceKind getPieceAt(Point, PlayerColour) const;
 
-    void setPieceAt(PieceKind ,Point, PlayerColour);
+    void setPieceAt(PieceKind, Point, PlayerColour);
 
-    void removePieceAt(Point,PlayerColour);
+    void removePieceAt(Point, PlayerColour);
 
-    Json::Value toJSON() const ;
+    Json::Value toJSON() const;
 
-    static size_t  BOARD_SIZE;
-    static size_t  ROWS_OF_PIECES;
+    static size_t BOARD_SIZE;
+    static size_t ROWS_OF_PIECES;
 
 private:
 
-    PieceKind& pieceAt (const Point& point, const PlayerColour& side){
+    PieceKind &pieceAt(const Point &point, const PlayerColour &side) {
         return side == PlayerColour::white ?
-                board_.at(point.y_).at(point.x_) : board_.at(BOARD_SIZE - point.y_ - 1).at(BOARD_SIZE - point.x_ - 1);
+               board_.at(point.y_).at(point.x_) : board_.at(BOARD_SIZE - point.y_ - 1).at(BOARD_SIZE - point.x_ - 1);
     }
 
 

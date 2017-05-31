@@ -15,31 +15,37 @@ using websocketpp::connection_hdl;
 
 class ConnectionProtocolHandler;
 
-class Player
-{
-	using room_ptr = std::shared_ptr<Room>;
+class Player {
+    using room_ptr = std::shared_ptr<Room>;
 
 public:
 
-	Player();
-	Player(std::string nick, ConnectionProtocolHandler* hdl);
+    Player();
 
-	void setNickName(std::string nick_a);
-	void setRoom(int roomID);
-	void setRoom(room_ptr room);
+    Player(std::string nick, ConnectionProtocolHandler *hdl);
+
+    void setNickName(std::string nick_a);
+
+    void setRoom(int roomID);
+
+    void setRoom(room_ptr room);
+
     int getRoomID();
-	room_ptr getRoom();
-	std::string getName();
 
-	ConnectionProtocolHandler* getConnectionProtocolHandler();
+    room_ptr getRoom();
 
-	~Player();
+    std::string getName();
+
+    ConnectionProtocolHandler *getConnectionProtocolHandler();
+
+    ~Player();
 
 private:
-	static int clientIds_;
-	std::string nickname_;
-	room_ptr room_;
-	const int clientID_;
-	ConnectionProtocolHandler* connectionProtocolHandler_;
+    static int clientIds_;
+    std::string nickname_;
+    room_ptr room_;
+    const int clientID_;
+    ConnectionProtocolHandler *connectionProtocolHandler_;
 };
+
 #endif // CLIENT_HPP
