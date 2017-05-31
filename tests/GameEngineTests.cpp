@@ -13,6 +13,30 @@
 #include <GameLogic/PieceKind.hpp>
 #include <GameLogic/PlayerColour.hpp>
 
+class TestGameObserver : public GameObserver{
+public:
+    TestGameObserver():somebodyWon_(false){}
+
+    virtual void playerWon(PlayerColour player){
+        somebodyWon_ = true;
+        whoWon_ = player;
+    }
+
+    bool hasSomebodyWon(){
+        return somebodyWon_;
+    }
+
+    PlayerColour whoWon(){
+        return whoWon_;
+    }
+
+private:
+
+    bool somebodyWon_;
+    PlayerColour whoWon_;
+
+};
+
 
 void testBoard (const Board& board, std::vector < std::pair <Point, PieceKind> > pathToBeChecked){
     for (auto pair : pathToBeChecked){
@@ -24,12 +48,6 @@ void testBoard (const Board& board, std::vector < std::pair <Point, PieceKind> >
 
 BOOST_AUTO_TEST_SUITE(GameEngineTests)
 
-
-//    BOOST_AUTO_TEST_CASE(InvalidArgumentsGivenToTheConstructor){
-//
-//        throw std::runtime_error("Not implemented yet");
-//
-//    }
 
     BOOST_AUTO_TEST_CASE(ValidMensMovesWithoutCapture){
 
@@ -51,7 +69,6 @@ BOOST_AUTO_TEST_SUITE(GameEngineTests)
         BOOST_CHECK(game.makeMove(PlayerColour::black, Point(6, 2), Point(5, 3)));
 
     }
-
 
     BOOST_AUTO_TEST_CASE(ChangingTurns){
 
@@ -465,44 +482,276 @@ BOOST_AUTO_TEST_SUITE(GameEngineTests)
         }
     }
 
+    BOOST_AUTO_TEST_CASE(InvalidPositionInPathWhenCapturingSeveral){
 
-//    BOOST_AUTO_TEST_CASE(InvalidPositionInPathWhenCapturingSeveral){
-//
-//        BOOST_REQUIRE( 1==1 );
-//
-//
-//    }
-//
-//    BOOST_AUTO_TEST_CASE(InvalidCapturingBackwardsCase){
-//
-//        BOOST_REQUIRE( 1==1 );
-//
-//
-//    }
-//
-//    BOOST_AUTO_TEST_CASE(InvalidCapturingSeveralBackwardsCase){
-//
-//        BOOST_REQUIRE( 1==1 );
-//
-//
-//    }
-//
-//    BOOST_AUTO_TEST_CASE(MenChangesIntoAKing){
-//
-//        BOOST_REQUIRE( 1==1 );
-//
-//
-//    }
-//
-//    BOOST_AUTO_TEST_CASE(PlayerWon){
-//
-//        BOOST_REQUIRE( 1==1 );
-//
-//
-//    }
-//
-//    BOOST_AUTO_TEST_CASE(ValidKingsMovesWithoutCapture){
-//
-//    }
+        {
+            Game game(std::move(Board(
+                    {
+                            {PieceKind::none,     PieceKind::blackMen, PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::blackMen, PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::blackMen, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::blackMen, PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::blackMen, PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::whiteMen, PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                    }
+            )));
+
+
+            BOOST_CHECK_EQUAL(game.makeMove(PlayerColour::white, {Point(0, 0), Point(2, 2), Point(4,4)}), false);
+
+
+            testBoard(game.getBoard(), {
+                    {Point(0, 0), PieceKind::whiteMen},
+                    {Point(1, 1), PieceKind::blackMen},
+                    {Point(2, 2), PieceKind::none},
+                    {Point(3, 3), PieceKind::blackMen},
+                    {Point(4, 4), PieceKind::blackMen}
+            });
+        }
+
+        {
+            Game game(std::move(Board(
+                    {
+                            {PieceKind::none,     PieceKind::blackMen, PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::blackMen, PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::blackMen, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::blackMen, PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::blackMen, PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::whiteMen, PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                    }
+            )));
+
+
+            BOOST_CHECK_EQUAL(game.makeMove(PlayerColour::white, {Point(0, 0), Point(2, 2), Point(5,5)}), false);
+
+
+            testBoard(game.getBoard(), {
+                    {Point(0, 0), PieceKind::whiteMen},
+                    {Point(1, 1), PieceKind::blackMen},
+                    {Point(2, 2), PieceKind::none},
+                    {Point(3, 3), PieceKind::blackMen},
+                    {Point(4, 4), PieceKind::blackMen}
+            });
+        }
+
+        {
+            Game game(std::move(Board(
+                    {
+                            {PieceKind::none,     PieceKind::blackMen, PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::blackMen, PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::blackMen, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::blackMen, PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::blackMen, PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::whiteMen, PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                    }
+            )));
+
+
+            BOOST_CHECK_EQUAL(game.makeMove(PlayerColour::white, {Point(0, 0), Point(2, 2), Point(4,3)}), false);
+
+
+            testBoard(game.getBoard(), {
+                    {Point(0, 0), PieceKind::whiteMen},
+                    {Point(1, 1), PieceKind::blackMen},
+                    {Point(2, 2), PieceKind::none},
+                    {Point(3, 3), PieceKind::blackMen},
+                    {Point(4, 4), PieceKind::blackMen}
+            });
+        }
+
+
+
+
+    }
+
+    BOOST_AUTO_TEST_CASE(InvalidCapturingBackwardsCase){
+
+        {
+            Game game(std::move(Board(
+                    {
+                            {PieceKind::none,     PieceKind::blackMen, PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::blackMen, PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::whiteMen, PieceKind::none,     PieceKind::blackMen, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::blackMen, PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::blackMen, PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::whiteMen, PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none},
+                    }
+            )));
+
+
+            BOOST_CHECK_EQUAL(game.makeMove(PlayerColour::white, {Point(2, 4), Point(4, 2)}), false);
+
+
+            testBoard(game.getBoard(), {
+                    {Point(2, 4), PieceKind::whiteMen},
+                    {Point(3, 3), PieceKind::blackMen},
+                    {Point(4, 2), PieceKind::none}
+            });
+        }
+
+    }
+
+    BOOST_AUTO_TEST_CASE(InvalidCapturingSeveralBackwardsCase){
+
+        {
+            Game game(std::move(Board(
+                    {
+                            {PieceKind::none,     PieceKind::blackMen, PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::blackMen, PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::blackMen, PieceKind::none, PieceKind::blackMen, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::blackMen, PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::whiteMen, PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                    }
+            )));
+
+
+            BOOST_CHECK_EQUAL(game.makeMove(PlayerColour::white, {Point(0, 0), Point(2, 2), Point(4,4), Point(6, 2)}), false);
+
+
+            testBoard(game.getBoard(), {
+                    {Point(0, 0), PieceKind::whiteMen},
+                    {Point(1, 1), PieceKind::blackMen},
+                    {Point(2, 2), PieceKind::none},
+                    {Point(3, 3), PieceKind::blackMen},
+                    {Point(4, 4), PieceKind::none},
+                    {Point(5, 3), PieceKind::blackMen},
+                    {Point(6, 2), PieceKind::none}
+            });
+        }
+
+
+    }
+
+    BOOST_AUTO_TEST_CASE(MenChangesIntoAKing){
+
+        {
+            Game game(std::move(Board(
+                    {
+                            {PieceKind::none,     PieceKind::blackMen, PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::whiteMen,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::blackMen, PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::blackMen, PieceKind::none, PieceKind::blackMen, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::blackMen, PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::whiteMen, PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                    }
+            )));
+
+
+            BOOST_CHECK_EQUAL(game.makeMove(PlayerColour::white, {Point(2, 6), Point(3, 7)}), true);
+
+
+            testBoard(game.getBoard(), {
+                    {Point(2, 6), PieceKind::none},
+                    {Point(3, 7), PieceKind::whiteKing}
+            });
+        }
+
+        {
+            Game game(std::move(Board(
+                    {
+                            {PieceKind::none,     PieceKind::none, PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::blackMen,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::whiteMen, PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::blackMen, PieceKind::none, PieceKind::blackMen, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::blackMen, PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::whiteMen, PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                    }
+            )));
+
+
+            BOOST_CHECK_EQUAL(game.makeMove(PlayerColour::white, {Point(3, 5), Point(1, 7)}), true);
+
+
+            testBoard(game.getBoard(), {
+                    {Point(3, 5), PieceKind::none},
+                    {Point(2, 6), PieceKind::none},
+                    {Point(1, 7), PieceKind::whiteKing}
+            });
+        }
+
+
+    }
+
+    BOOST_AUTO_TEST_CASE(PlayerWon){
+
+        {
+            Game game(std::move(Board(
+                    {
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::blackMen, PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::whiteMen, PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                    }
+            )));
+
+            TestGameObserver gameObserver;
+
+            game.setGameObserver(&gameObserver);
+
+
+            BOOST_CHECK_EQUAL(game.makeMove(PlayerColour::white, {Point(0, 0), Point(2, 2)}), true);
+
+            BOOST_CHECK_EQUAL(gameObserver.hasSomebodyWon(), true);
+            BOOST_CHECK_EQUAL(gameObserver.whoWon(), PlayerColour::white);
+
+        }
+
+
+    }
+
+    BOOST_AUTO_TEST_CASE(ValidKingsMovesWithoutCapture){
+
+        {
+            Game game(std::move(Board(
+                    {
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::none,     PieceKind::whiteKing,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::none,     PieceKind::blackMen, PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                            {PieceKind::whiteMen, PieceKind::none,     PieceKind::none,     PieceKind::none,     PieceKind::none, PieceKind::none, PieceKind::none, PieceKind::none},
+                    }
+            )));
+
+            TestGameObserver gameObserver;
+
+            game.setGameObserver(&gameObserver);
+
+            BOOST_CHECK_EQUAL(game.makeMove(PlayerColour::white, {Point(2, 2), Point(0, 4)}), true);
+
+            testBoard(game.getBoard(), {
+                    {Point(2, 2), PieceKind::none},
+                    {Point(1, 3), PieceKind::none},
+                    {Point(0, 4), PieceKind::whiteKing}
+            });
+
+
+
+            BOOST_CHECK_EQUAL(gameObserver.hasSomebodyWon(), false);
+
+        }
+
+    }
 
 BOOST_AUTO_TEST_SUITE_END()

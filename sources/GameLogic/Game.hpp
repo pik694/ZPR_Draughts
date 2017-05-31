@@ -22,7 +22,22 @@ public:
 
 
         currentTurn_ = PlayerColour::white;
-        blackPieces_ = whitePieces_ = Board::BOARD_SIZE * Board::ROWS_OF_PIECES / 2;
+
+        blackPieces_ = whitePieces_ = 0;
+
+        for (int i = 0; i < Board::BOARD_SIZE; ++i){
+            for (int j = 0; j < Board::BOARD_SIZE; ++j) {
+                PieceKind currPiece = board_.getPieceAt(Point(i, j), PlayerColour::white);
+
+                if (currPiece == PieceKind::whiteMen || currPiece == PieceKind::whiteKing){
+                    ++whitePieces_;
+                }
+                else if (currPiece == PieceKind::blackMen || currPiece == PieceKind::blackKing){
+                    ++blackPieces_;
+                }
+
+            }
+        }
 
         duringGame_ = true;
 
