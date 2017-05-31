@@ -4,7 +4,7 @@
 
 #include "NewRoomRequestSignal.hpp"
 #include "MessageDispatcher.hpp"
-
+Register<NewRoomRequestSignal> NewRoomRequestSignal::reg("NewRoomRequestSignal");
 const std::string& NewRoomRequestSignal::getRoomID() const {
     return roomID_;
 }

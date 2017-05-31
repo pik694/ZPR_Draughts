@@ -5,7 +5,7 @@
 #include "NickRequestSignal.hpp"
 #include "MessageDispatcher.hpp"
 
-Register<NickRequestSignal> NickRequestSignal::reg("nickRequest");
+Register<NickRequestSignal> NickRequestSignal::reg("NickRequestSignal");
 
 const std::string& NickRequestSignal::getNick() const {
     return nick_;

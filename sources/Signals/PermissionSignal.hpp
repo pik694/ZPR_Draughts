@@ -7,12 +7,13 @@
 
 #include <string>
 #include "Signals/Signal.hpp"
-
+#include "SignalFactory.hpp"
 
 class PermissionSignal : public Signal{
 
 
 public:
+	PermissionSignal() : givenPermission_(false) {}
     PermissionSignal(ConnectionProtocolHandler* hdl, bool givenPermission):Signal(hdl), givenPermission_(givenPermission){}
 
     const bool getGivenPermission() const;
@@ -23,6 +24,7 @@ public:
 
 private:
     const bool givenPermission_;
+    static Register<PermissionSignal> reg;
 };
 
 

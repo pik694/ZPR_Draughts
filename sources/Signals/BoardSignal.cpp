@@ -3,7 +3,7 @@
 //
 
 #include "BoardSignal.hpp"
-
+Register<BoardSignal> BoardSignal::reg("BoardSignal");
 const Board& BoardSignal::getBoard() const {
     return board_;
 }

@@ -4,7 +4,7 @@
 
 #include <MessageDispatcher.hpp>
 #include "TextMessage.hpp"
-
+Register<TextMessage> TextMessage::reg("TextMessage");
 void TextMessage::acceptDispatcher(MessageDispatcher& dispatcher){
     dispatcher.dispatch(*this);
 }

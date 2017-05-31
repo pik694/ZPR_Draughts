@@ -8,10 +8,10 @@
 
 #include "Signals/Signal.hpp"
 #include <string>
-
+#include "SignalFactory.hpp"
 class NewRoomRequestSignal : public Signal{
 public:
-
+	NewRoomRequestSignal() {}
     NewRoomRequestSignal(ConnectionProtocolHandler* hdl, std::string roomID):Signal(hdl), roomID_(roomID){}
 
 
@@ -22,6 +22,7 @@ public:
 
 private:
     const std::string roomID_;
+    static Register<NewRoomRequestSignal> reg;
 };
 
 

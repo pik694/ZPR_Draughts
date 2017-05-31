@@ -17,8 +17,8 @@ public:
     Signal (ConnectionProtocolHandler* hdl = nullptr);
 
     virtual void acceptDispatcher (MessageDispatcher&) = 0;
-    virtual void fillData(Json::Value data) = 0;
-    virtual void serialize() = 0;
+    virtual void fillData(Json::Value data) {}
+    virtual void serialize() {}
 
     virtual ~Signal(){}
 

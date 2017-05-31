@@ -8,10 +8,10 @@
 
 #include "Signal.hpp"
 #include <string>
-
+#include "SignalFactory.hpp"
 class EnterRoomSignal : public Signal{
 public:
-
+	EnterRoomSignal() {}
     EnterRoomSignal(ConnectionProtocolHandler* hdl, int roomID):Signal(hdl), roomID_(roomID){}
 
     virtual void acceptDispatcher(MessageDispatcher&);
@@ -21,6 +21,7 @@ public:
 
 private:
    int roomID_;
+   static Register<EnterRoomSignal> reg;
 };
 
 

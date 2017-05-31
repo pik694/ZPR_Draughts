@@ -8,12 +8,12 @@
 #include <string>
 
 #include "Signal.hpp"
-
+#include "SignalFactory.hpp"
 class Signal;
 
 class TextMessage : public Signal {
 public:
-
+	TextMessage() {}
     TextMessage(ConnectionProtocolHandler* hdl, std::string message):Signal(hdl), message_(message){}
 
     virtual void acceptDispatcher(MessageDispatcher&);
@@ -23,6 +23,7 @@ public:
 
 private:
     std::string message_;
+    static Register<TextMessage> reg;
 };
 
 

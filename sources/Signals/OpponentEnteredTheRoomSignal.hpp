@@ -7,11 +7,11 @@
 
 #include <string>
 #include "Signals/Signal.hpp"
-
+#include "SignalFactory.hpp"
 
 class OpponentEnteredTheRoomSignal : public Signal {
 public:
-
+	OpponentEnteredTheRoomSignal() {}
     OpponentEnteredTheRoomSignal (ConnectionProtocolHandler* hdl, std::string opponentNick):Signal(hdl), opponentNick_(opponentNick){}
 
     virtual void acceptDispatcher(MessageDispatcher&);
@@ -23,6 +23,7 @@ public:
 
 private:
     std::string opponentNick_;
+    static Register<OpponentEnteredTheRoomSignal> reg;
 };
 
 

@@ -7,14 +7,18 @@
 
 
 #include "Signals/Signal.hpp"
+#include "SignalFactory.hpp"
 #include <string>
 
 class OpponentLeftRoomSignal : public Signal {
 public:
+	OpponentLeftRoomSignal() {}
     OpponentLeftRoomSignal(ConnectionProtocolHandler* hdl):Signal(hdl){}
 
     virtual void acceptDispatcher(MessageDispatcher&);
     virtual void serialize();
+private:
+	static Register<OpponentLeftRoomSignal> reg;
 };
 
 

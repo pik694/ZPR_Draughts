@@ -13,16 +13,22 @@ class PlayerManager {
 
 public:
 
-    static PlayerManager* getInstance();
+    static PlayerManager* getInstance () {
+		if (instance_ == nullptr){
+			instance_ = new PlayerManager();
+		}
 
-    player_ptr getPlayer(ConnectionProtocolHandler*);
+		return instance_;
+	}
+
+    player_ptr getPlayer(ConnectionProtocolHandler*) {}
 
 
     PlayerManager(const PlayerManager&) = delete;
 private:
     static PlayerManager* instance_;
 
-    PlayerManager();
+    PlayerManager() {}
 
 
 };

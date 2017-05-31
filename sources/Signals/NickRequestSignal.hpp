@@ -10,7 +10,7 @@
 #include "SignalFactory.hpp"
 class NickRequestSignal : public Signal{
 public:
-
+	NickRequestSignal() {}
     NickRequestSignal(ConnectionProtocolHandler* hdl): Signal(hdl) {}
 
     virtual void fillData(Json::Value data);

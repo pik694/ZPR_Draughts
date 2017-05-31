@@ -7,13 +7,16 @@
 
 
 #include "Signal.hpp"
-
+#include "SignalFactory.hpp"
 class NewGameSignal : public Signal{
 public:
+	NewGameSignal() {}
     NewGameSignal(ConnectionProtocolHandler* hdl): Signal(hdl){}
 
     virtual void acceptDispatcher(MessageDispatcher&);
     virtual void serialize();
+private:
+	static Register<NewGameSignal> reg;
 };
 
 

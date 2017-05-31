@@ -3,3 +3,4 @@
 //
 
 #include "PlayerManager.hpp"
+PlayerManager* PlayerManager::instance_ = nullptr;

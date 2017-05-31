@@ -4,6 +4,7 @@
 
 #include "NewGameSignal.hpp"
 #include "MessageDispatcher.hpp"
+Register<NewGameSignal> NewGameSignal::reg("NewGameSignal");
 
 void NewGameSignal::acceptDispatcher(MessageDispatcher& dispatcher) {
     dispatcher.dispatch(*this);

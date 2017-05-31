@@ -4,7 +4,7 @@
 
 #include "EnterRoomSignal.hpp"
 #include "MessageDispatcher.hpp"
-
+Register<EnterRoomSignal> EnterRoomSignal::reg("EnterRoomSignal");
 void EnterRoomSignal::acceptDispatcher(MessageDispatcher& dispatcher){
     dispatcher.dispatch(*this);
 }

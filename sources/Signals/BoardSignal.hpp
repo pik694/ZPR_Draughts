@@ -8,10 +8,11 @@
 
 #include <GameLogic/Board.hpp>
 #include "Signal.hpp"
+#include "SignalFactory.hpp"
 
 class BoardSignal : public  Signal {
 public:
-
+	BoardSignal() {}
     BoardSignal(ConnectionProtocolHandler* hdl, Board board):Signal(hdl),  board_(board){}
 
     const Board& getBoard() const;
@@ -22,6 +23,7 @@ public:
 
 private:
     const Board board_;
+    static Register<BoardSignal> reg;
 };
 
 
