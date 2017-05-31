@@ -1,8 +1,8 @@
 #include "Game.hpp"
 
-void Game::setGameObserver(GameObserver *observer) {
+void Game::setGameObserver(GameObserver* observer) {
 
-	gameObservers_.push_back(observer);
+	gameObserver_ = observer;
 
 }
 
@@ -133,6 +133,7 @@ bool Game::validateMove(PlayerColour player, const std::vector<Point>& points) {
 
         tempBoard.setPieceAt(piece, *end, player);
 
+
     }
 
     return (!captured && points.size() > 2) ? false : true;
@@ -146,15 +147,26 @@ void Game::movePiece(PlayerColour player, const std::vector<Point>& points) {
 
         board_.removePieceAt(*begin, player);
 
-        int xDir = findDirection(end->x_, begin->x_);
-        int yDir = findDirection(end->y_, begin->y_);
+        Point direction (findDirection(end->x_, begin->x_), findDirection(end->y_, begin->y_));
 
-        board_.removePieceAt(Point(end->x_ + xDir, end->y_ + yDir), player);
+        if (board_.getPieceAt(Point(end->x_, end->y_) + direction, player) != PieceKind::none){
+
+            int& count = player == PlayerColour::white ? (blackPieces_) : (whitePieces_);
+
+            if (--count == 0){
+                gameObserver_->playerWon(player);
+                duringGame_ = false;
+            }
+        }
+
+        board_.removePieceAt(Point(end->x_, end->y_) + direction, player);
 
         if (end->y_ == Board::BOARD_SIZE - 1) changeIntoAKing(piece);
 
         board_.setPieceAt(piece, *end, player);
     }
+
+
 }
 
 

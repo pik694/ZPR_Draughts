@@ -15,11 +15,11 @@ class Game
 {
 public:
 
-    Game(): gameObservers_(){
+    Game(): gameObserver_(nullptr){
         startGame();
     }
 
-    Game(Board&& board):board_(board), gameObservers_() {
+    Game(Board&& board):board_(board), gameObserver_(nullptr) {
 
 
         currentTurn_ = PlayerColour::white;
@@ -54,7 +54,7 @@ private:
     int whitePieces_;
     int blackPieces_;
 
-    std::vector<GameObserver*> gameObservers_;
+    GameObserver* gameObserver_;
 
 };
 #endif // GAME_HPP
