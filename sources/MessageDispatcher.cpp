@@ -97,6 +97,10 @@ void MessageDispatcher::dispatch(TextMessage& textMessage) {
 
 }
 
+void MessageDispatcher::dispatch(MoveSignal &) {
+    throw  std::runtime_error("Not implemented yet");
+}
+
 MessageDispatcher::player_ptr MessageDispatcher::getPlayerFromSignal(Signal* signal) {
 
     player_ptr player = PlayerManager::getInstance()->getPlayer(signal->getConnectionProtocolHandler());
@@ -106,3 +110,5 @@ MessageDispatcher::player_ptr MessageDispatcher::getPlayerFromSignal(Signal* sig
     return player;
 
 }
+
+

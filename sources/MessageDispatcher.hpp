@@ -13,6 +13,7 @@
 #include <Signals/NewRoomRequestSignal.hpp>
 #include <Signals/NickRequestSignal.hpp>
 #include <Signals/TextMessage.hpp>
+#include <Signals/MoveSignal.hpp>
 #include "Player.hpp"
 
 class MessageDispatcher {
@@ -24,6 +25,7 @@ public:
     void dispatch(NewRoomRequestSignal &);
     void dispatch(NickRequestSignal &);
     void dispatch(TextMessage &);
+    void dispatch(MoveSignal &);
 
 private:
     using room_ptr = std::shared_ptr<Room>;
