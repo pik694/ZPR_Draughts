@@ -41,23 +41,18 @@ public:
 	void run(int port);
 	void processMessages();
 
-	bool validateNick(std::string);
-
-	void addPlayer(std::string nick, ConnectionProtocolHandler* hdl);
-
 	void putMessageInQueue(std::shared_ptr<Signal>);
 
 	Server(const Server&) = delete;
 
 private:
 
-	static Server* instance_; //TODO: unique_ptrale
+	static Server* instance_;
 
 	Server();
 	void stopServer();
 
 	websocketpp::server <websocketpp::config::asio> webSocketServer_;
-	std::list<ConnectionProtocolHandler*> connections_;
 	typedef std::set<connection_hdl,std::owner_less<connection_hdl> > con_list;
 
     con_list m_connections;
@@ -68,8 +63,7 @@ private:
 	condition_variable m_action_cond;
 	std::queue<Action> m_actions;
 
-//TODO: move to PlayerManager
-	std::map<ConnectionProtocolHandler*, std::shared_ptr<Player>> players_;
+
 
 };
 #endif //SERVER_HPP

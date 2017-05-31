@@ -24,6 +24,8 @@ public:
 	void playerWon(PlayerColour);
 	void startNewGame();
 
+    void makeMove(const std::vector<Point>&, player_ptr);
+
 
 
 	void sendTextMessage(player_ptr ,const std::string&);

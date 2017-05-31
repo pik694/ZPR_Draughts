@@ -9,6 +9,7 @@ void Game::setGameObserver(GameObserver *observer) {
 void Game::startGame() {
 
 
+    duringGame_ = true;
 	board_ = Board();
 	currentTurn_ = PlayerColour::white;
 
@@ -18,6 +19,8 @@ void Game::startGame() {
 }
 
 bool Game::makeMove(PlayerColour player, const std::vector<Point>& points) {
+
+    if (!duringGame_) return false;
 
     if (currentTurn_ != player || !validateMove(player, points))
         return false;

@@ -11,7 +11,7 @@
 #include "PlayerManager.hpp"
 
 
-void MessageDispatcher::dispatch(EnterRoomSignal& enterRoomSignal) {
+void MessageDispatcher::dispatch(EnterRoomSignal& enterRoomSignal){
 
     room_ptr room = RoomManager::getInstance()->getRoom(enterRoomSignal.getRoomID());
     player_ptr player = getPlayerFromSignal(&enterRoomSignal);
@@ -73,10 +73,10 @@ void MessageDispatcher::dispatch(NickRequestSignal& nickRequest) {
     //TODO: PlayerManager should take care of this
     bool answer = false;
 
-    if (Server::getInstance()->validateNick(nickRequest.getNick())){
+    if (PlayerManager::getInstance()->validateNick(nickRequest.getNick())){
         answer = true;
 
-        Server::getInstance()->addPlayer(nickRequest.getNick(), nickRequest.getConnectionProtocolHandler());
+        PlayerManager::getInstance()->addPlayer(nickRequest.getNick(), nickRequest.getConnectionProtocolHandler());
     }
 
     Server::getInstance()->putMessageInQueue(
@@ -97,8 +97,17 @@ void MessageDispatcher::dispatch(TextMessage& textMessage) {
 
 }
 
-void MessageDispatcher::dispatch(MoveSignal &) {
-    throw  std::runtime_error("Not implemented yet");
+void MessageDispatcher::dispatch(MoveSignal& moveSignal) {
+
+    player_ptr player =  getPlayerFromSignal(&moveSignal);
+
+    room_ptr room = player->getRoom();
+
+    if (room != nullptr){
+        room->makeMove(moveSignal.getMove(), player);
+    }
+
+
 }
 
 MessageDispatcher::player_ptr MessageDispatcher::getPlayerFromSignal(Signal* signal) {

@@ -8,6 +8,7 @@
 class RoomManager{
 
 	using room_ptr = std::shared_ptr<Room>;
+	using player_ptr = std::shared_ptr<Player>;
 
 
 public:

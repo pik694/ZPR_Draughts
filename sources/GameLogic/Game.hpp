@@ -21,6 +21,7 @@ public:
 
     Game(Board&& board):board_(board), gameObservers_() {
 
+
         currentTurn_ = PlayerColour::white;
         blackPieces_ = whitePieces_ = Board::BOARD_SIZE * Board::ROWS_OF_PIECES / 2;
 
@@ -47,6 +48,8 @@ private:
 
     Board board_;
     PlayerColour currentTurn_;
+
+    bool duringGame_;
 
     int whitePieces_;
     int blackPieces_;

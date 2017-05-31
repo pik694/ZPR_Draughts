@@ -13,22 +13,24 @@ class PlayerManager {
 
 public:
 
-    static PlayerManager* getInstance () {
-		if (instance_ == nullptr){
-			instance_ = new PlayerManager();
-		}
+	static PlayerManager* getInstance();
 
-		return instance_;
-	}
+	bool validateNick(std::string);
 
-    player_ptr getPlayer(ConnectionProtocolHandler*){throw std::runtime_error("Not implemented yet");}
+	void addPlayer(std::string nick, ConnectionProtocolHandler* hdl);
 
+	player_ptr getPlayer(ConnectionProtocolHandler*);
+
+	void removePlayer(ConnectionProtocolHandler *);
 
     PlayerManager(const PlayerManager&) = delete;
+
 private:
     static PlayerManager* instance_;
 
-    PlayerManager(){throw std::runtime_error("Not implemented yet");}
+	std::map<ConnectionProtocolHandler*, player_ptr> players_;
+
+    PlayerManager();
 
 
 };

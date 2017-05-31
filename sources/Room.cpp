@@ -2,6 +2,7 @@
 #include <Signals/GameEndSignal.hpp>
 #include <Signals/BoardSignal.hpp>
 #include <Signals/TextMessage.hpp>
+#include <Signals/OpponentLeftRoomSignal.hpp>
 #include "Room.hpp"
 #include "Server.hpp"
 #include "RoomManager.hpp"
@@ -56,11 +57,15 @@ bool Room::leaveRoom(player_ptr player) {
 
 	if (removed){
 		if (whitePlayer_ != nullptr){
-
-		}//TODO: send signal
+			Server::getInstance()->putMessageInQueue(
+				std::make_shared<OpponentLeftRoomSignal>(whitePlayer_->getConnectionProtocolHandler())
+			);
+		}
 		else if (blackPlayer_ != nullptr){
-
-		} //TODO: send signal
+			Server::getInstance()->putMessageInQueue(
+					std::make_shared<OpponentLeftRoomSignal>(blackPlayer_->getConnectionProtocolHandler())
+			);
+		}
 
 		player->setRoom(-1);
 		--numberOfPlayers_;
@@ -115,6 +120,22 @@ void Room::startNewGame() {
 
 	Server::getInstance()->putMessageInQueue(
 			std::make_shared<BoardSignal>(blackPlayer_->getConnectionProtocolHandler(), game_.getBoard(), false)
+	);
+
+}
+
+void Room::makeMove(const std::vector<Point>& move, Room::player_ptr player) {
+
+	PlayerColour playerColour = player == whitePlayer_ ? PlayerColour::white : PlayerColour::black;
+
+	game_.makeMove(playerColour, move);
+
+	Server::getInstance()->putMessageInQueue(
+			std::make_shared<BoardSignal>(whitePlayer_->getConnectionProtocolHandler(),game_.getBoard(), game_.whoseTurn() == PlayerColour::white)
+	);
+
+	Server::getInstance()->putMessageInQueue(
+			std::make_shared<BoardSignal>(blackPlayer_->getConnectionProtocolHandler(),game_.getBoard(), game_.whoseTurn() == PlayerColour::black)
 	);
 
 }
