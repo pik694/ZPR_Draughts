@@ -17,11 +17,11 @@ public:
 
     virtual void acceptDispatcher(MessageDispatcher&);
     virtual void serlialize();
-
+    virtual void fillData(Json::Value data);
     const std::string& getRoomID() const;
 
 private:
-    const std::string roomID_;
+    std::string roomID_;
     static Register<NewRoomRequestSignal> reg;
 };
 

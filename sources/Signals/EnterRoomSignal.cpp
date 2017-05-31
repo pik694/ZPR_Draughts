@@ -16,3 +16,7 @@ int EnterRoomSignal::getRoomID() const {
 void EnterRoomSignal::serialize() {
     throw std::runtime_error("Not implemented yet");
 }
+
+void EnterRoomSignal::fillData(Json::Value data) {
+	roomID_ = data.get("value",0).asInt();
+}

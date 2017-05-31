@@ -15,6 +15,7 @@ public:
     EnterRoomSignal(ConnectionProtocolHandler* hdl, int roomID):Signal(hdl), roomID_(roomID){}
 
     virtual void acceptDispatcher(MessageDispatcher&);
+    virtual void fillData(Json::Value data);
     virtual void serialize();
 
     int getRoomID() const;

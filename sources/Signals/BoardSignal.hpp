@@ -18,7 +18,6 @@ public:
     const Board& getBoard() const;
 
     virtual void acceptDispatcher(MessageDispatcher&);
-
     virtual void serialize();
 
 private:
