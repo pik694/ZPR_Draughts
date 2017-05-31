@@ -24,6 +24,8 @@ public:
         currentTurn_ = PlayerColour::white;
         blackPieces_ = whitePieces_ = Board::BOARD_SIZE * Board::ROWS_OF_PIECES / 2;
 
+        duringGame_ = true;
+
     }
 
     void setGameObserver(GameObserver *);
