@@ -83,7 +83,7 @@ void MessageDispatcher::dispatch(NickRequestSignal &nickRequest) {
     }
 
     Server::getInstance()->putMessageInQueue(
-            std::make_shared<PermissionSignal>(nickRequest.getConnectionProtocolHandler(), answer,"NickRequestSignal")
+            std::make_shared<PermissionSignal>(nickRequest.getConnectionProtocolHandler(), answer, "NickRequestSignal")
     );
 
 }
