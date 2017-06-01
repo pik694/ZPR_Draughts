@@ -16,5 +16,8 @@ const std::string &OpponentEnteredTheRoomSignal::getOpponentNick() const {
 }
 
 Json::Value OpponentEnteredTheRoomSignal::serialize() {
-    throw std::runtime_error("Not implemented yet");
+    Json::Value answer;
+    answer["type"] = "OpponentEnteredTheRoomSignal";
+    answer["value"] = opponentNick_;
+    return answer;
 }

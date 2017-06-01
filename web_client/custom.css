@@ -24,11 +24,19 @@ body {
 }
 
 #chat {
+	overflow-x: ;
 	overflow-y: scroll;
 	height: 400px;
 	background-color: #ffffff;
+	text-align: left;
+	word-wrap: break-word;
 }
 
 #chat_input {
 	width: 100%;
+}
+
+#players_info {
+	border-style: dotted;
+	border-width: 5px;
 }

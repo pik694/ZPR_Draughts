@@ -26,7 +26,7 @@ public:
 
     void makeMove(const std::vector<Point> &, player_ptr);
 
-
+    bool isOpponent();
     void sendTextMessage(player_ptr, const std::string &);
 
 private:

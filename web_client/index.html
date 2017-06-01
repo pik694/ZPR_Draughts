@@ -56,9 +56,15 @@
                      <canvas id="game" width="500" height="500"></canvas>
                 </div>
                 <div class="four columns">
-                    <div id="nick_output"></div>
-                    <div id="room_name_output"></div>
-                    <button id="start_game">StartGame</button>
+                    <div id="players_info">
+                        Room:
+                        <div id="room_name_output"></div>
+                        You:
+                        <div id="nick_output"></div>
+                        Opponent:
+                        <div id="opponent_nick_output"></div>
+                    </div>
+                    <button disabled id="start_game">StartGame</button>
                     <button id="leave_room">Leave room</button>
                     <div id="chat"></div>
                     <input id="chat_input" type="text">
@@ -68,9 +74,9 @@
         <div hidden id="room_form">
             <input id="new_room_value" value="123" type="text">
             <button id="submit_new_room" type="button">Create room</button>
-            <ul><a class="room">Room 1</a></ul>
-            <ul><a class="room">Room 2</a></ul>
-            <ul><a class="room">Room 3</a></ul>
+            <ul id="list_of_rooms">
+                
+            </ul>
         </div>
     </section>
 </div>

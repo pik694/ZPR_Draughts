@@ -74,7 +74,6 @@ void MessageDispatcher::dispatch(NickRequestSignal &nickRequest) {
 
     //TODO : change answer to false, changing it to true for testing purposes
     bool answer = false;
-    printf("connection protocol handler %d\n",nickRequest.getConnectionProtocolHandler());
 
     if (PlayerManager::getInstance()->validateNick(nickRequest.getNick())) {
         answer = true;
@@ -117,7 +116,7 @@ void MessageDispatcher::dispatch(RoomsRequestSignal& roomsRequestSignal) {
     std::vector<int> rooms = RoomManager::getInstance()->getRooms();
 
     Server::getInstance()->putMessageInQueue(
-        std::make_shared<RoomsSignal>(roomsRequestSignal.getConnectionProtocolHandler(), rooms)
+        std::make_shared<RoomsSignal>(roomsRequestSignal.getConnectionProtocolHandler(), rooms,"RoomsRequestSignal")
     );
 
 

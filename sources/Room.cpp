@@ -13,7 +13,9 @@ Room::Room(int ID) :
         numberOfPlayers_(0),
         roomID_(ID) {}
 
-
+bool Room::isOpponent() {
+    return numberOfPlayers_ == 1;
+}
 bool Room::joinRoom(player_ptr player) {
 
     if (numberOfPlayers_ == 2) return false;
@@ -29,8 +31,13 @@ bool Room::joinRoom(player_ptr player) {
         player_ptr opponent = player == whitePlayer_ ? blackPlayer_ : whitePlayer_;
 
         Server::getInstance()->putMessageInQueue(
-                std::make_shared<OpponentEnteredTheRoomSignal>(opponent->getConnectionProtocolHandler(),
-                                                               player->getName())
+                std::make_shared<OpponentEnteredTheRoomSignal>(blackPlayer_->getConnectionProtocolHandler(),
+                                                               whitePlayer_->getName())
+        );
+
+        Server::getInstance()->putMessageInQueue(
+                std::make_shared<OpponentEnteredTheRoomSignal>(whitePlayer_->getConnectionProtocolHandler(),
+                                                               blackPlayer_->getName())
         );
     }
 

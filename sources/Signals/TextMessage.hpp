@@ -19,7 +19,7 @@ public:
     TextMessage(ConnectionProtocolHandler *hdl, std::string message) : Signal(hdl), message_(message) {}
 
     virtual void acceptDispatcher(MessageDispatcher &);
-
+    virtual void fillData(Json::Value data);
     virtual Json::Value serialize();
 
     const std::string &getMessage() const;

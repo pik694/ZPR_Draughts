@@ -15,5 +15,12 @@ const std::string &TextMessage::getMessage() const {
 }
 
 Json::Value TextMessage::serialize() {
-    throw std::runtime_error("Not implemented yet");
+    Json::Value answer;
+    answer["type"] = "TextMessage";
+    answer["value"] = message_;
+    return answer;
+}
+
+void TextMessage::fillData(Json::Value data) {
+    message_ = data.get("value", "").asString();
 }
