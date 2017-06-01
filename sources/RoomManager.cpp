@@ -44,4 +44,17 @@ RoomManager::~RoomManager() {
 
 }
 
+std::vector<int> RoomManager::getRooms() {
+
+    std::vector<int> rooms;
+
+    std::for_each(rooms_.begin(), rooms_.end(),
+                  [&](room_ptr room){
+                      rooms.push_back(room->getRoomID());
+    });
+
+    return rooms;
+
+}
+
 RoomManager::RoomManager() : currentRoomID_(0), rooms_() {}

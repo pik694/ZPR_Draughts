@@ -5,6 +5,7 @@
 #include <memory>
 #include <stdio.h>
 #include <Signals/PermissionSignal.hpp>
+#include <Signals/RoomsSignal.hpp>
 #include "MessageDispatcher.hpp"
 #include "Server.hpp"
 #include "RoomManager.hpp"
@@ -15,9 +16,10 @@ void MessageDispatcher::dispatch(EnterRoomSignal &enterRoomSignal) {
 
     room_ptr room = RoomManager::getInstance()->getRoom(enterRoomSignal.getRoomID());
     player_ptr player = getPlayerFromSignal(&enterRoomSignal);
+
     bool answer = false;
 
-    if (room != nullptr && room->joinRoom(player)) {
+    if (player->getRoom() == nullptr && room != nullptr && room->joinRoom(player)) {
         answer = true;
     }
 
@@ -70,16 +72,16 @@ void MessageDispatcher::dispatch(NewRoomRequestSignal &newRoomRequestSignal) {
 void MessageDispatcher::dispatch(NickRequestSignal &nickRequest) {
 
 
-    //TODO: PlayerManager should take care of this
     //TODO : change answer to false, changing it to true for testing purposes
     bool answer = false;
     printf("connection protocol handler %d\n",nickRequest.getConnectionProtocolHandler());
+
     if (PlayerManager::getInstance()->validateNick(nickRequest.getNick())) {
         answer = true;
 
         PlayerManager::getInstance()->addPlayer(nickRequest.getNick(), nickRequest.getConnectionProtocolHandler());
     }
-    printf("connection protocol handler %d\n",nickRequest.getConnectionProtocolHandler());
+
     Server::getInstance()->putMessageInQueue(
             std::make_shared<PermissionSignal>(nickRequest.getConnectionProtocolHandler(), answer,"NickRequestSignal")
     );
@@ -107,6 +109,16 @@ void MessageDispatcher::dispatch(MoveSignal &moveSignal) {
     if (room != nullptr) {
         room->makeMove(moveSignal.getMove(), player);
     }
+
+}
+
+void MessageDispatcher::dispatch(RoomsRequestSignal& roomsRequestSignal) {
+
+    std::vector<int> rooms = RoomManager::getInstance()->getRooms();
+
+    Server::getInstance()->putMessageInQueue(
+        std::make_shared<RoomsSignal>(roomsRequestSignal.getConnectionProtocolHandler(), rooms)
+    );
 
 
 }

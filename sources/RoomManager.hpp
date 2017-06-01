@@ -14,6 +14,8 @@ class RoomManager {
 public:
     static RoomManager *getInstance();
 
+    std::vector<int> getRooms();
+
     room_ptr getRoom(int id);
 
     room_ptr newRoom();
