@@ -23,10 +23,11 @@ public:
         auto it = getMap()->find(s);
         if (it == getMap()->end())
             return nullptr;
-        it->second()->fillProtocolHandler(handler);
-        printf("fillProtocolHandler %d\n",it->second()->getConnectionProtocolHandler());
-        it->second()->fillData(data);
-        return it->second();
+        Signal *tmp = it->second();
+        tmp->fillProtocolHandler(handler);
+        //printf("fillProtocolHandler %d\n",it->second()->getConnectionProtocolHandler());
+        tmp->fillData(data);
+        return tmp;
     }
 
 
