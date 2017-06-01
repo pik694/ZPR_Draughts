@@ -3,7 +3,9 @@
 
 #include <string>
 #include <map>
+#include <stdio.h>
 #include "Signal.hpp"
+class ConnectionProtocolHandler;
 
 class Signal;
 
@@ -16,11 +18,13 @@ class SignalFactory {
 public:
     typedef std::map<std::string, Signal *(*)()> map_type;
 
-    static Signal *createInstance(Json::Value data) {
+    static Signal *createInstance(Json::Value data,ConnectionProtocolHandler *handler) {
         std::string s = data.get("type", "").asString();
         auto it = getMap()->find(s);
         if (it == getMap()->end())
             return nullptr;
+        it->second()->fillProtocolHandler(handler);
+        printf("fillProtocolHandler %d\n",it->second()->getConnectionProtocolHandler());
         it->second()->fillData(data);
         return it->second();
     }

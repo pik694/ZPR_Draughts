@@ -13,7 +13,7 @@ void MoveSignal::fillData(Json::Value) {
     throw std::runtime_error("Not implemented yet");
 }
 
-void MoveSignal::serialize() {
+Json::Value MoveSignal::serialize() {
     throw std::runtime_error("Not implemented yet");
 }
 

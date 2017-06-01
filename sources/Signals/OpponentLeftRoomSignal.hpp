@@ -18,7 +18,7 @@ public:
 
     virtual void acceptDispatcher(MessageDispatcher &);
 
-    virtual void serialize();
+    virtual Json::Value serialize();
 
 private:
     static Register<OpponentLeftRoomSignal> reg;

@@ -136,10 +136,7 @@ void Server::processMessages() {
         } else if (a.type == MESSAGE) {
             lock_guard<mutex> guard(m_connection_lock);
             std::cout << "sending a message" << std::endl;
-            con_list::iterator it;
-            for (it = m_connections.begin(); it != m_connections.end(); ++it) {
-                webSocketServer_.send(*it, a.msg);
-            }
+            webSocketServer_.send(a.hdl, a.msg,websocketpp::frame::opcode::value::text);
         }
         std::cout << "total connections: " << m_connections.size() << std::endl;
     }
@@ -149,11 +146,16 @@ void Server::processMessages() {
 
 void Server::putMessageInQueue(std::shared_ptr<Signal> signal) {
 
-    throw std::runtime_error("Not implemented yet");
-
-//	{
-//		lock_guard<mutex> guard(m_action_lock);
-//		m_actions.push(Action(MESSAGE,hdl,msg));
-//	}
-//	m_action_cond.notify_one();
+    //throw std::runtime_error("Not implemented yet");
+    std::cout<<"Inside putMessageInQueue"<<std::endl;
+    std::cout<<signal->serialize()<<std::endl;
+    Json::FastWriter writer;
+    std::string myMsgString = writer.write(signal->serialize());
+    signal->getConnectionProtocolHandler();
+	{
+		lock_guard<mutex> guard(m_action_lock);
+        std::cout<<"seg fault?"<<std::endl;
+		m_actions.push(Action(MESSAGE,signal->getConnectionProtocolHandler()->getConnectionHdl(),myMsgString));
+	}
+	m_action_cond.notify_one();
 }

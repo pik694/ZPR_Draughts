@@ -20,13 +20,14 @@ public:
 
     virtual void fillData(Json::Value data);
 
-    virtual void serialize();
+    virtual Json::Value serialize();
 
     int getRoomID() const;
 
+    static Register<EnterRoomSignal> reg;
 private:
     int roomID_;
-    static Register<EnterRoomSignal> reg;
+    
 };
 
 

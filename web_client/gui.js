@@ -8,10 +8,55 @@ window.onload = function() {
 	mySocket.onmessage = function(event) {
 		var msg = JSON.parse(event.data);
 		console.log(event.data);
+        switch(msg.type) {
+            case "NickRequestSignal":
+                console.log("nick request signal switch fine");
+                if(msg.value == true)
+                    switchToRooms();
+            break;
+            case "NewRoomRequestSignal":
+                if(msg.value == true)
+                    EnterRoomSignal();
+            break;
+            case "EnterRoomSignal":
+                if(msg.value == true)
+                    gameSwitch();
+            break;
+        }
 	}
-	$("button").on("click",nickButton);
+    $("#submit_new_room").on("click",NewRoomRequestSignal);
+	$("#submit_nick").on("click",NickRequestSignal);
 	InitGame();
 }
+
+
+// messages
+function sendRequest(msg) {
+    if(mySocket.readyState === WebSocket.OPEN)
+        mySocket.send(JSON.stringify(msg));
+}
+function NickRequestSignal(event) {
+    var msg = {
+        type: "NickRequestSignal",
+        value: document.getElementById("nickname").value
+    };
+    sendRequest(msg);
+}
+function NewRoomRequestSignal(event) {
+    var msg = {
+        type: "NewRoomRequestSignal",
+        value: parseInt(document.getElementById("new_room_value").value)
+    };
+    sendRequest(msg);
+}
+function EnterRoomSignal() {
+    var msg = {
+        type: "EnterRoomSignal",
+        value: parseInt(document.getElementById("new_room_value").value)
+    };
+    sendRequest(msg);
+}
+
 
 // game form
 
@@ -44,6 +89,7 @@ function roomClickHandler() {
 
 
 
+
 // utility functions
 function hideAll() {
     $("#room_form").hide();
@@ -54,20 +100,12 @@ function hideAll() {
 
 
 // nick form
-function nickButton(event) {
+
+function switchToRooms(event) {
     currentNick = document.getElementById("nickname").value;
     hideAll();
     $("#room_form").show("slow");
-    console.log("button clicked");
-    var msg = {
-        type: "nickRequest",
-        value: document.getElementById("nickname").value
-    };
-    if(mySocket.readyState === WebSocket.OPEN)
-        mySocket.send(JSON.stringify(msg));
 }
-
-
 
 
 

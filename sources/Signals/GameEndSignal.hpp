@@ -22,10 +22,10 @@ public:
 
     virtual void acceptDispatcher(MessageDispatcher &);
 
-
+    static Register<GameEndSignal> reg;
 private:
     const bool won_;
-    static Register<GameEndSignal> reg;
+    
 };
 
 

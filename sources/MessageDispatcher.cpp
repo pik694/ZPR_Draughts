@@ -3,7 +3,7 @@
 //
 
 #include <memory>
-
+#include <stdio.h>
 #include <Signals/PermissionSignal.hpp>
 #include "MessageDispatcher.hpp"
 #include "Server.hpp"
@@ -22,7 +22,7 @@ void MessageDispatcher::dispatch(EnterRoomSignal &enterRoomSignal) {
     }
 
     Server::getInstance()->putMessageInQueue(
-            std::make_shared<PermissionSignal>(enterRoomSignal.getConnectionProtocolHandler(), answer)
+            std::make_shared<PermissionSignal>(enterRoomSignal.getConnectionProtocolHandler(), answer,"EnterRoomSignal")
     );
 
 }
@@ -61,7 +61,7 @@ void MessageDispatcher::dispatch(NewRoomRequestSignal &newRoomRequestSignal) {
     }
 
     Server::getInstance()->putMessageInQueue(
-            std::make_shared<PermissionSignal>(newRoomRequestSignal.getConnectionProtocolHandler(), answer)
+            std::make_shared<PermissionSignal>(newRoomRequestSignal.getConnectionProtocolHandler(), answer,"NewRoomRequestSignal")
     );
 
 
@@ -71,16 +71,17 @@ void MessageDispatcher::dispatch(NickRequestSignal &nickRequest) {
 
 
     //TODO: PlayerManager should take care of this
-    bool answer = false;
-
+    //TODO : change answer to false, changing it to true for testing purposes
+    bool answer = true;
+    printf("connection protocol handler %d\n",nickRequest.getConnectionProtocolHandler());
     if (PlayerManager::getInstance()->validateNick(nickRequest.getNick())) {
         answer = true;
 
         PlayerManager::getInstance()->addPlayer(nickRequest.getNick(), nickRequest.getConnectionProtocolHandler());
     }
-
+    printf("connection protocol handler %d\n",nickRequest.getConnectionProtocolHandler());
     Server::getInstance()->putMessageInQueue(
-            std::make_shared<PermissionSignal>(nickRequest.getConnectionProtocolHandler(), answer)
+            std::make_shared<PermissionSignal>(nickRequest.getConnectionProtocolHandler(), answer,"NickRequestSignal")
     );
 
 }

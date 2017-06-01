@@ -73,6 +73,7 @@ public:
 
     void parseJson(std::string data);
 
+    connection_hdl getConnectionHdl();
 private:
     void invalidRequest();
 

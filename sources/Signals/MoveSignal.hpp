@@ -21,11 +21,9 @@ public:
 
     virtual void fillData(Json::Value);
 
-    virtual void serialize();
+    virtual Json::Value serialize();
 
     virtual void acceptDispatcher(MessageDispatcher &);
-
-private:
 
     const std::vector<Point> move_;
 };

@@ -18,14 +18,13 @@ public:
 
     virtual void acceptDispatcher(MessageDispatcher &);
 
-    virtual void serialize();
+    virtual Json::Value serialize();
 
     const std::string &getOpponentNick() const;
 
-
+    static Register<OpponentEnteredTheRoomSignal> reg;
 private:
     std::string opponentNick_;
-    static Register<OpponentEnteredTheRoomSignal> reg;
 };
 
 

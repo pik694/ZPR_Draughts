@@ -22,12 +22,12 @@ public:
 
     virtual void acceptDispatcher(MessageDispatcher &);
 
-    virtual void serialize();
+    virtual Json::Value serialize();
 
+    static Register<BoardSignal> reg;
 private:
     const Board board_;
     const bool isPlayersMove_;
-    static Register<BoardSignal> reg;
 };
 
 

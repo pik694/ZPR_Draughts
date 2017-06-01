@@ -5,7 +5,7 @@
 #ifndef ZPR_DRAUGHTS_PLAYER_COLOUR_HPP
 #define ZPR_DRAUGHTS_PLAYER_COLOUR_HPP
 
-
+#include <cstdint>
 enum class PlayerColour : uint8_t {
     white,
     black,

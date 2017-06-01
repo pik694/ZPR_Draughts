@@ -11,6 +11,6 @@ void NewGameSignal::acceptDispatcher(MessageDispatcher &dispatcher) {
     dispatcher.dispatch(*this);
 }
 
-void NewGameSignal::serialize() {
+Json::Value NewGameSignal::serialize() {
     throw std::runtime_error("Not implemented yet");
 }

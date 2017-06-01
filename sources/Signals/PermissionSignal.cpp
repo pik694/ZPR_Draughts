@@ -15,6 +15,9 @@ void PermissionSignal::acceptDispatcher(MessageDispatcher &) {
     throw std::runtime_error("Dispatcher should not dispatch this kind of a signal");
 }
 
-void PermissionSignal::serialize() {
-    throw std::runtime_error("Not implemented yet");
+Json::Value PermissionSignal::serialize() {
+    Json::Value answer;
+    answer["type"] = action_;
+    answer["value"] = givenPermission_;
+    return answer;
 }

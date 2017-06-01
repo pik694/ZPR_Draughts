@@ -14,6 +14,6 @@ const std::string &TextMessage::getMessage() const {
     return message_;
 }
 
-void TextMessage::serialize() {
+Json::Value TextMessage::serialize() {
     throw std::runtime_error("Not implemented yet");
 }

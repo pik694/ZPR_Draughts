@@ -19,15 +19,14 @@ public:
 
     virtual void acceptDispatcher(MessageDispatcher &);
 
-    virtual void serlialize();
+    virtual Json::Value serialize();
 
     virtual void fillData(Json::Value data);
 
     const std::string &getRoomID() const;
-
+    static Register<NewRoomRequestSignal> reg;
 private:
     std::string roomID_;
-    static Register<NewRoomRequestSignal> reg;
 };
 
 

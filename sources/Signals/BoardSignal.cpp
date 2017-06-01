@@ -14,7 +14,7 @@ void BoardSignal::acceptDispatcher(MessageDispatcher &) {
     throw std::runtime_error("Dispatcher should not dispatch this kind of a signal");
 }
 
-void BoardSignal::serialize() {
+Json::Value BoardSignal::serialize() {
 
     throw std::runtime_error("Not implemented yet");
 

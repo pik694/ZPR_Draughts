@@ -1,7 +1,7 @@
 //
 // Created by Piotr Żelazko on 29.05.2017.
 //
-
+#include <exception>
 #include "NewRoomRequestSignal.hpp"
 #include "MessageDispatcher.hpp"
 
@@ -12,13 +12,18 @@ const std::string &NewRoomRequestSignal::getRoomID() const {
 }
 
 void NewRoomRequestSignal::fillData(Json::Value data) {
-    roomID_ = data.get("value", -1).asInt();
+	try {
+		roomID_ = data.get("value", -1).asInt();
+	}
+	catch(std::exception &e) {
+		std::cout<<"error reading room name"<<std::endl;
+	}
 }
 
 void NewRoomRequestSignal::acceptDispatcher(MessageDispatcher &dispatcher) {
     dispatcher.dispatch(*this);
 }
 
-void NewRoomRequestSignal::serlialize() {
+Json::Value NewRoomRequestSignal::serialize() {
     throw std::runtime_error("Not implemented yet");
 }

@@ -15,8 +15,8 @@ class PermissionSignal : public Signal {
 public:
     PermissionSignal() : givenPermission_(false) {}
 
-    PermissionSignal(ConnectionProtocolHandler *hdl, bool givenPermission) : Signal(hdl),
-                                                                             givenPermission_(givenPermission) {}
+    PermissionSignal(ConnectionProtocolHandler *hdl, bool givenPermission,std::string action="") : Signal(hdl),
+                                                                             givenPermission_(givenPermission),action_(action) {}
 
     const bool getGivenPermission() const;
 
@@ -24,10 +24,11 @@ public:
 
     virtual void fillData(Json::Value) {};
 
-    virtual void serialize();
+    virtual Json::Value serialize();
 
 private:
     const bool givenPermission_;
+    std::string action_;
     static Register<PermissionSignal> reg;
 };
 

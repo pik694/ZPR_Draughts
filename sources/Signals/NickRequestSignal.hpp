@@ -19,13 +19,12 @@ public:
 
     virtual void acceptDispatcher(MessageDispatcher &);
 
-    virtual void serialize();
+    virtual Json::Value serialize();
 
     const std::string &getNick() const;
-
+    static Register<NickRequestSignal> reg;
 private:
     std::string nick_;
-    static Register<NickRequestSignal> reg;
 };
 
 

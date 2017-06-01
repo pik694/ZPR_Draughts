@@ -7,25 +7,25 @@
 
 #include <jsoncpp/json/json.h>
 
-
 class ConnectionProtocolHandler;
 
 class MessageDispatcher;
 
 class Signal {
 public:
-
-    Signal(ConnectionProtocolHandler *hdl = nullptr);
+	Signal() {}
+    Signal(ConnectionProtocolHandler *hdl);
 
     virtual void acceptDispatcher(MessageDispatcher &) = 0;
 
     virtual void fillData(Json::Value data) {}
 
-    virtual void serialize() {}
+    virtual void fillProtocolHandler(ConnectionProtocolHandler *);
+    virtual Json::Value serialize() {return nullptr;}
 
     virtual ~Signal() {}
 
-    ConnectionProtocolHandler *getConnectionProtocolHandler();
+    virtual ConnectionProtocolHandler *getConnectionProtocolHandler();
 
 private:
     ConnectionProtocolHandler *connectionProtocolHandler_;

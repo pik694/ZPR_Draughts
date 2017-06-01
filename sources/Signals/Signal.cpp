@@ -13,3 +13,7 @@ Signal::Signal(ConnectionProtocolHandler *hdl) {
 ConnectionProtocolHandler *Signal::getConnectionProtocolHandler() {
     return connectionProtocolHandler_;
 }
+
+void Signal::fillProtocolHandler(ConnectionProtocolHandler *connectionProtocolHandler) {
+	connectionProtocolHandler_ = connectionProtocolHandler;
+}

@@ -1,5 +1,5 @@
 #include "ConnectionProtocolHandler.hpp"
-
+#include <stdio.h>
 using websocketpp::connection_hdl;
 using websocketpp::lib::thread;
 using websocketpp::lib::lock_guard;
@@ -10,7 +10,9 @@ ConnectionProtocolHandler::ConnectionProtocolHandler(connection_hdl &con) {
     currentConnection_ = con;
     state_ = ConnectionStates::JUST_STARTED;
 }
-
+connection_hdl ConnectionProtocolHandler::getConnectionHdl() {
+    return currentConnection_;
+}
 void ConnectionProtocolHandler::parseJson(std::string data) {
     //throw std::runtime_error("Not implemented yet");
     Json::Value root;
@@ -19,12 +21,16 @@ void ConnectionProtocolHandler::parseJson(std::string data) {
     myData >> root;
     //std::string myType = root.get("type","nothing").asString();
 
-    Signal *currentSignal = SignalFactory::createInstance(root);
+    Signal *currentSignal = SignalFactory::createInstance(root,this);
     if (currentSignal == nullptr) {
         //invalidRequest();
         std::cout << "not found sorry" << std::endl;
         return;
     }
+    // TODO
+    // weird bug it doesn't initialize in factory
+    currentSignal->fillProtocolHandler(this);
+    printf("INSIDE PARSE JSON %d\n",currentSignal->getConnectionProtocolHandler());
     currentSignal->acceptDispatcher(dispatcher_);
 }
 
@@ -49,9 +55,10 @@ void ConnectionProtocolHandler::invalidRequest() {
 }
 
 void ConnectionProtocolHandler::onMessage(websocketpp::connection_hdl hdl, message_ptr msg) {
-
+    currentConnection_ = hdl;
     std::cout << "Message: ";
     std::cout << msg->get_payload() << std::endl;
+    std::cout<<msg->get_opcode()<<std::endl;
     parseJson(msg->get_payload());
 
     // TODO : should I call this method there ?
