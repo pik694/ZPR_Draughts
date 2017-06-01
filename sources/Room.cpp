@@ -149,9 +149,18 @@ void Room::sendTextMessage(Room::player_ptr sender, const std::string &message) 
 
     player_ptr receiver = sender == whitePlayer_ ? blackPlayer_ : whitePlayer_;
 
-    Server::getInstance()->putMessageInQueue(
-            std::make_shared<TextMessage>(receiver->getConnectionProtocolHandler(), message)
-    );
+    if (receiver == nullptr) {
+        Server::getInstance()->putMessageInQueue(
+                std::make_shared<TextMessage>(sender->getConnectionProtocolHandler(), "Message was lost due to the lack of an opponent.")
+        );
+    }
+
+    else{
+        Server::getInstance()->putMessageInQueue(
+                std::make_shared<TextMessage>(receiver->getConnectionProtocolHandler(), message)
+        );
+    }
+
 
 }
 
