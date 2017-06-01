@@ -4,7 +4,7 @@
 
 #include "NickRequestSignal.hpp"
 #include "MessageDispatcher.hpp"
-
+#include <stdio.h>
 Register<NickRequestSignal> NickRequestSignal::reg("NickRequestSignal");
 
 const std::string &NickRequestSignal::getNick() const {
@@ -21,4 +21,5 @@ Json::Value NickRequestSignal::serialize() {
 
 void NickRequestSignal::fillData(Json::Value data) {
     nick_ = data.get("value", "").asString();
+    std::printf("inside nick_: %s\n", nick_.c_str());
 }

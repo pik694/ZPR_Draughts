@@ -72,7 +72,7 @@ void MessageDispatcher::dispatch(NickRequestSignal &nickRequest) {
 
     //TODO: PlayerManager should take care of this
     //TODO : change answer to false, changing it to true for testing purposes
-    bool answer = true;
+    bool answer = false;
     printf("connection protocol handler %d\n",nickRequest.getConnectionProtocolHandler());
     if (PlayerManager::getInstance()->validateNick(nickRequest.getNick())) {
         answer = true;
