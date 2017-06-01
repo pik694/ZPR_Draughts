@@ -51,7 +51,7 @@ public:
 
     bool makeMove(PlayerColour, Point, Point);
 
-    const Board &getBoard() const;
+    Board getBoard(PlayerColour) const;
 
     PlayerColour whoseTurn() const;
 

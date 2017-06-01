@@ -38,7 +38,18 @@ bool Game::makeMove(PlayerColour player, Point begin, Point end) {
 
 }
 
-const Board &Game::getBoard() const {
+Board Game::getBoard(PlayerColour playerColour) const {
+
+    if (playerColour == PlayerColour::white) return board_;
+
+    Board board;
+
+    for(int i = 0; i < Board::BOARD_SIZE; ++i){
+        for (int j = 0; j < Board::BOARD_SIZE; ++j) {
+            Point point (i,j);
+            board.setPieceAt(board_.getPieceAt(point, PlayerColour::black), point, PlayerColour::black);
+        }
+    }
 
     return board_;
 
