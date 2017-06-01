@@ -25,10 +25,10 @@ public:
 
     virtual ~Signal() {}
 
-    virtual ConnectionProtocolHandler *getConnectionProtocolHandler();
+    virtual ConnectionProtocolHandler* getConnectionProtocolHandler();
 
 private:
-    ConnectionProtocolHandler *connectionProtocolHandler_;
+    ConnectionProtocolHandler* connectionProtocolHandler_;
 
 };
 

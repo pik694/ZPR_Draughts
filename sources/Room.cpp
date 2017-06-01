@@ -99,7 +99,7 @@ void Room::playerWon(PlayerColour colour) {
 
 }
 
-int Room::getRoomID() {
+const int Room::getRoomID() const{
     return roomID_;
 }
 

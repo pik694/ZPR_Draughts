@@ -18,7 +18,7 @@ public:
 
     bool leaveRoom(player_ptr);
 
-    int getRoomID();
+    const int getRoomID() const;
 
     void playerWon(PlayerColour);
 
