@@ -17,6 +17,8 @@ PlayerManager *PlayerManager::getInstance() {
 
 bool PlayerManager::validateNick(std::string nick) {
 
+    if (nick.length() == 0) return false;
+
     for (auto player : players_) {
         if (player.second->getName() == nick) return false;
     }
