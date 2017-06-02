@@ -4,7 +4,7 @@ var currentRoom = ""
 var currentNick = ""
 window.onload = function() {
     InitGame();
-	mySocket = new WebSocket("ws://127.0.0.1:9002");
+	mySocket = new WebSocket("ws://" + location.hostname + ":9002");
 	mySocket.onmessage = function(event) {
 		var msg = JSON.parse(event.data);
 		console.log(event.data);
