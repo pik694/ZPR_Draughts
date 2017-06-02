@@ -13,17 +13,24 @@ var board = null;
 var board_size = 1000;
 // boards contants
 var EMPTY_FIELD = 0;
-var WHITE_PAWN = 1;
-var BROWN_PAWN = 2;
+var WHITE_PAWN = 2;
+var BROWN_PAWN = 1;
 
-var PLAYER_TEAM = 1; // 1 - WHITE, 2 - BROWN
+var PLAYER_TEAM = 1; // 1 - BROWN, 2 - WHITE
+
+
+var x1 = -1;
+var y1 = -1;
+var x2 = -1;
+var y2 = -1;
 
 
 function getMousePos(canvas, evt) {
     var rect = canvas.getBoundingClientRect();
+    console.log(rect.right - rect.left);
     return {
-        x: evt.clientX - rect.left,
-        y: evt.clientY - rect.top
+        x: (evt.clientX - rect.left) * (1000/(rect.right - rect.left)),
+        y: (evt.clientY - rect.top) * (1000/(rect.right - rect.left))
     };
 }
 
@@ -37,27 +44,29 @@ function FocusOnPawn(x,y)
     context.globalAlpha = 0.4;
     context.fillStyle = FIELDS_TO_MOVE;
 
-    // check which one to focus
-    if(board[x][y] === PLAYER_TEAM) {
-        if (board[x][y] === WHITE_PAWN) {
-            if (y < 7) {
-                paintFocus(context, x, y, size, -1);
-            }
-        }
-        else if (board[x][y] === BROWN_PAWN) {
-            if (y > 0) {
-                paintFocus(context, x, y, size, 1);
-            }
-        }
-        context.fillStyle = PAWN_FOCUSED;
-        context.fillRect(x*size,y*size,size,size);
+    if(board[x][y] === PLAYER_TEAM)
+        paintField(context,x,y,size);
+
+
+    if(board[x][y] == EMPTY_FIELD) {
+        x2 = x;
+        y2 = y;
+        BasicMoveSignal(x1,y1,x2,y2);
     }
 
+    if(board[x][y] === PLAYER_TEAM) {
+        x1 = x;
+        y1 = y;
+    }
     //context.fillStyle =
     //context.fillRect(x*size,y*size,size,size);
 
 
     context.globalAlpha = 1.0;
+}
+
+function paintField(context,x,y,size) {
+    context.fillRect(x*size,y*size,size,size);
 }
 
 function paintFocus(context,x,y,size,direction) {
@@ -83,7 +92,7 @@ function InitGame() {
     myGame.addEventListener('click', function(evt) {
         var mousePos = getMousePos(myGame, evt);
         console.log('Mouse position: ' + mousePos.x + ',' + mousePos.y);
-        FocusOnPawn(Math.floor(mousePos.x/100.0),Math.floor(mousePos.y/100.0));
+        FocusOnPawn(Math.floor(mousePos.x/125.0),Math.floor(mousePos.y/125.0));
     }, false);
     DrawEverything();
 }
@@ -101,6 +110,7 @@ function DrawEverything()
 {
     var myGame = document.getElementById("game");
     var context = myGame.getContext("2d");
+    context.clearRect(0, 0, myGame.width, myGame.height);
     context.fillStyle = "rgb(255,255,255)";
     context.rect(0,0,myGame.width,myGame.width);
     context.fill();
@@ -165,6 +175,11 @@ function InitBoard()
     }
 }
 
+function DrawPawnsHelper() {
+    var myGame = document.getElementById("game");
+    var context = myGame.getContext("2d");
+    DrawPawns(context,1000);
+}
 
 function DrawPawns(context, size)
 {

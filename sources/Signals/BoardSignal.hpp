@@ -13,8 +13,8 @@
 class BoardSignal : public Signal {
 public:
     BoardSignal() : isPlayersMove_(false) {} //TODO: remove this constructor
-    BoardSignal(ConnectionProtocolHandler *hdl, Board board, bool isPlayersMove) : Signal(hdl), board_(board),
-                                                                                   isPlayersMove_(isPlayersMove) {}
+    BoardSignal(ConnectionProtocolHandler *hdl, Board board, bool isPlayersMove,std::string team) : Signal(hdl), board_(board),
+                                                                                   isPlayersMove_(isPlayersMove),team_(team) {}
 
     const Board &getBoard() const;
 
@@ -28,6 +28,7 @@ public:
 private:
     const Board board_;
     const bool isPlayersMove_;
+    std::string team_;
 };
 
 

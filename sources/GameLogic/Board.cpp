@@ -3,7 +3,7 @@
 //
 
 #include "Board.hpp"
-
+#include <string>
 
 size_t Board::BOARD_SIZE = 8;
 size_t Board::ROWS_OF_PIECES = 3;
@@ -71,5 +71,11 @@ void Board::removePieceAt(Point point, PlayerColour side) {
 
 
 Json::Value Board::toJSON() const {
-    throw std::runtime_error("Not implemented yet");
+    Json::Value boardList;
+    for(int i=0;i<BOARD_SIZE;++i) {
+        for(int j=0;j<BOARD_SIZE;++j) {
+            boardList.append((int)board_[i][j]);
+        }
+    }
+    return boardList;
 }

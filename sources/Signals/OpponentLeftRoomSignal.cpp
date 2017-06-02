@@ -12,5 +12,7 @@ void OpponentLeftRoomSignal::acceptDispatcher(MessageDispatcher &) {
 }
 
 Json::Value OpponentLeftRoomSignal::serialize() {
-    throw std::runtime_error("Not implemented yet");
+    Json::Value answer;
+    answer["type"] = "OpponentLeftRoomSignal";
+    return answer;
 }

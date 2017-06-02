@@ -71,6 +71,7 @@ void Server::onOpen(connection_hdl hdl) {
 
     server::connection_ptr con = webSocketServer_.get_con_from_hdl(hdl);
     ConnectionProtocolHandler *myHandler = new ConnectionProtocolHandler(hdl);
+    connections_.push_back(myHandler);
     con->set_message_handler(bind(&ConnectionProtocolHandler::onMessage, myHandler, ::_1, ::_2));
 
     //con->set_message_handler(bind(&ConnectionProtocolHandler::))
@@ -85,6 +86,15 @@ void Server::onClose(connection_hdl hdl) {
         m_actions.push(Action(UNSUBSCRIBE, hdl));
     }
     m_action_cond.notify_one();
+    //server::connection_ptr con = webSocketServer_.get_con_from_hdl(hdl);
+    for(auto it=connections_.begin();it!=connections_.end();++it) {
+        //server::connection_ptr tmp = webSocketServer_.get_con_from_hdl((*it)->getConnectionHdl());
+        if(hdl.lock() == (*it)->getConnectionHdl().lock()) {
+            PlayerManager::getInstance()->removePlayer(*it);
+            break;
+        }
+    }
+    //PlayerManager::getInstance()->removePlayer(hdl);
     //std::cout<<"connection closed"<<std::endl;
 
     //TODO: remove player from players list

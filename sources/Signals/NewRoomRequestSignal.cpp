@@ -7,17 +7,10 @@
 
 Register<NewRoomRequestSignal> NewRoomRequestSignal::reg("NewRoomRequestSignal");
 
-const std::string &NewRoomRequestSignal::getRoomID() const {
-    return roomID_;
-}
+
 
 void NewRoomRequestSignal::fillData(Json::Value data) {
-	try {
-		roomID_ = data.get("value", -1).asInt();
-	}
-	catch(std::exception &e) {
-		std::cout<<"error reading room name"<<std::endl;
-	}
+	
 }
 
 void NewRoomRequestSignal::acceptDispatcher(MessageDispatcher &dispatcher) {

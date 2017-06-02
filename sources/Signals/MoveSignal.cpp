@@ -5,12 +5,17 @@
 #include "MoveSignal.hpp"
 #include "MessageDispatcher.hpp"
 
+Register<MoveSignal> MoveSignal::reg("MoveSignal");
+
 const std::vector<Point> &MoveSignal::getMove() const {
     return move_;
 }
 
-void MoveSignal::fillData(Json::Value) {
-    throw std::runtime_error("Not implemented yet");
+void MoveSignal::fillData(Json::Value val) {
+	
+    
+    move_.push_back(Point(val["value"][0].asInt(),val["value"][1].asInt()));
+    move_.push_back(Point(val["value"][2].asInt(),val["value"][3].asInt()));
 }
 
 Json::Value MoveSignal::serialize() {

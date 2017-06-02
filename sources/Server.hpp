@@ -64,6 +64,8 @@ private:
     typedef std::set<connection_hdl, std::owner_less<connection_hdl> > con_list;
 
     con_list m_connections;
+
+    std::vector<ConnectionProtocolHandler*> connections_;
     //std::queue<Action> m_actions;
 
     mutex m_connection_lock;

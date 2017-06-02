@@ -118,11 +118,11 @@ void Room::startNewGame() {
     game_.setGameObserver(this);
 
     Server::getInstance()->putMessageInQueue(
-            std::make_shared<BoardSignal>(whitePlayer_->getConnectionProtocolHandler(), game_.getBoard(PlayerColour::white), true)
+            std::make_shared<BoardSignal>(whitePlayer_->getConnectionProtocolHandler(), game_.getBoard(PlayerColour::white), true,"white")
     );
 
     Server::getInstance()->putMessageInQueue(
-            std::make_shared<BoardSignal>(blackPlayer_->getConnectionProtocolHandler(), game_.getBoard(PlayerColour::black), false)
+            std::make_shared<BoardSignal>(blackPlayer_->getConnectionProtocolHandler(), game_.getBoard(PlayerColour::black), false,"black")
     );
 
 }
@@ -135,12 +135,12 @@ void Room::makeMove(const std::vector<Point> &move, Room::player_ptr player) {
 
     Server::getInstance()->putMessageInQueue(
             std::make_shared<BoardSignal>(whitePlayer_->getConnectionProtocolHandler(), game_.getBoard(PlayerColour::white),
-                                          game_.whoseTurn() == PlayerColour::white)
+                                          game_.whoseTurn() == PlayerColour::white,"white")
     );
 
     Server::getInstance()->putMessageInQueue(
             std::make_shared<BoardSignal>(blackPlayer_->getConnectionProtocolHandler(), game_.getBoard(PlayerColour::black),
-                                          game_.whoseTurn() == PlayerColour::black)
+                                          game_.whoseTurn() == PlayerColour::black,"black")
     );
 
 }

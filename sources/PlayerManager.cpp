@@ -32,12 +32,16 @@ void PlayerManager::addPlayer(std::string nick, ConnectionProtocolHandler *hdl) 
 }
 
 void PlayerManager::removePlayer(ConnectionProtocolHandler *hdl) {
-
+    if(players_.find(hdl) == players_.end())
+        return;
     player_ptr toBeRemoved = players_[hdl];
 
+    if(toBeRemoved == nullptr)
+        return;
     players_.erase(hdl);
 
-    toBeRemoved->getRoom()->leaveRoom(toBeRemoved);
+    if(toBeRemoved->getRoomID() != -1)
+        toBeRemoved->getRoom()->leaveRoom(toBeRemoved);
 
 }
 

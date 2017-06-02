@@ -47,11 +47,11 @@ Board Game::getBoard(PlayerColour playerColour) const {
     for(int i = 0; i < Board::BOARD_SIZE; ++i){
         for (int j = 0; j < Board::BOARD_SIZE / 2; ++j) {
             Point point (i, 2*j + (i % 2));
-            board.setPieceAt(board_.getPieceAt(point, PlayerColour::black), point, PlayerColour::black);
+            board.setPieceAt(board_.getPieceAt(point, PlayerColour::black), point, PlayerColour::white);
         }
     }
 
-    return board_;
+    return board;
 
 }
 

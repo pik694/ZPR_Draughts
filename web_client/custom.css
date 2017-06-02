@@ -37,6 +37,11 @@ body {
 }
 
 #players_info {
-	border-style: dotted;
+	border-style: solid;
+	border-width: 5px;
+}
+
+#whose_turn {
+	border-style: solid;
 	border-width: 5px;
 }

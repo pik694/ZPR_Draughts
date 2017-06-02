@@ -9,10 +9,11 @@
 
 #include <GameLogic/Point.hpp>
 #include "Signal.hpp"
-
+#include "SignalFactory.hpp"
 
 class MoveSignal : public Signal {
 public:
+	MoveSignal() {}
     MoveSignal(std::initializer_list<Point> path, ConnectionProtocolHandler *hdl) :
             Signal(hdl),
             move_(path) {}
@@ -25,7 +26,9 @@ public:
 
     virtual void acceptDispatcher(MessageDispatcher &);
 
-    const std::vector<Point> move_;
+    std::vector<Point> move_;
+
+    static Register<MoveSignal> reg;
 };
 
 

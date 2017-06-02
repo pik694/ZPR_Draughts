@@ -3,6 +3,7 @@ var mySocket = null
 var currentRoom = ""
 var currentNick = ""
 window.onload = function() {
+    InitGame();
 	mySocket = new WebSocket("ws://127.0.0.1:9002");
 	mySocket.onmessage = function(event) {
 		var msg = JSON.parse(event.data);
@@ -32,12 +33,20 @@ window.onload = function() {
             case "TextMessage":
                 appendChat(msg.value);
             break;
+            case "BoardSignal":
+                gameController(msg);
+            break;
+            case "OpponentLeftRoomSignal":
+                opponentLeft();
+            break;
         }
 	}
     $("#submit_new_room").on("click",NewRoomRequestSignal);
 	$("#submit_nick").on("click",NickRequestSignal);
+    $("#start_game").on("click",NewGameSignal);
     $("#chat_input").on("keyup",TextMessage);
-	InitGame();
+    $("#leave_room").on("click",LeaveRoomSignal);
+	//InitGame();
 }
 
 
@@ -54,10 +63,9 @@ function NickRequestSignal(event) {
     sendRequest(msg);
 }
 function NewRoomRequestSignal(event) {
-    currentRoom = document.getElementById("new_room_value").value;
+    //currentRoom = document.getElementById("new_room_value").value;
     var msg = {
-        type: "NewRoomRequestSignal",
-        value: parseInt(document.getElementById("new_room_value").value)
+        type: "NewRoomRequestSignal"
     };
     sendRequest(msg);
 }
@@ -89,8 +97,69 @@ function TextMessage(event) {
     sendRequest(msg);
 }
 
+function NewGameSignal() {
+    console.log("new game signal");
+    var msg = {
+        type: "NewGameSignal"
+    };
+    sendRequest(msg);
+}
+function BasicMoveSignal(x1,y1,x2,y2) {
+    console.log("new move signal");
+    points = new Array(4);
+    points[0] = x1;
+    points[1] = 8 - y1;
+    points[2] = x2;
+    points[3] = 8 - y2;
+    var msg = {
+        type: "MoveSignal",
+        value: points
+    };
+    sendRequest(msg);
+}
+function LeaveRoomSignal() {
+    var msg = {
+        type: "LeaveRoomSignal"
+    }
+    sendRequest(msg);
+    switchToRooms();
+    RoomsRequestSignal();
+}
 
 // game form
+
+function opponentLeft() {
+    document.getElementById("whose_turn").innerHTML = "Opponent Left";
+}
+
+function gameController(message) {
+    if(message.team === "white") {
+        PLAYER_TEAM = WHITE_PAWN;
+    }
+    else {
+        PLAYER_TEAM = BROWN_PAWN;
+    }
+    if(message.move) {
+        document.getElementById("whose_turn").innerHTML = "Your turn";
+    }
+    else {
+        document.getElementById("whose_turn").innerHTML = "Opponent turn";
+    }
+    console.log(board[0][0]);
+    var i = 0;
+    var j = 0;
+    var counter = 0;
+    for(var k=0;k<message.value.length;k++) {
+        console.log(message.value[k]);
+        board[i][j] = message.value[k];
+        i++;
+        if(i == 8) {
+            i = 0;
+            j++;
+        }
+    }
+    DrawEverything();
+}
 
 function appendChat(text) {
     var data = document.getElementById("chat");
@@ -99,6 +168,7 @@ function appendChat(text) {
 
 function opponentArrived(name) {
     document.getElementById("opponent_nick_output").innerHTML = name;
+    document.getElementById("whose_turn").innerHTML = "Game not started";
 }
 
 function gameSwitch() {
@@ -114,12 +184,12 @@ function gameSwitch() {
 // room form
 // room_form  
 function genRooms(data) {
-    for(var i in data) {
-        var myRoomId = "room_" + i;
+    for(var i=0;i<data.length;++i) {
+        var myRoomId = "room_" + data[i];
         var ul_tag = document.createElement("li");
         var a_tag = document.createElement("a");
         a_tag.setAttribute("id",myRoomId);
-        var node = document.createTextNode(i);
+        var node = document.createTextNode(data[i]);
         a_tag.appendChild(node);
         ul_tag.appendChild(a_tag);
         var xyz = document.getElementById("list_of_rooms").appendChild(ul_tag);

@@ -14,7 +14,7 @@ class NewRoomRequestSignal : public Signal {
 public:
     NewRoomRequestSignal() {}
 
-    NewRoomRequestSignal(ConnectionProtocolHandler *hdl, std::string roomID) : Signal(hdl), roomID_(roomID) {}
+    NewRoomRequestSignal(ConnectionProtocolHandler *hdl, std::string roomID) : Signal(hdl) {}
 
 
     virtual void acceptDispatcher(MessageDispatcher &);
@@ -23,10 +23,10 @@ public:
 
     virtual void fillData(Json::Value data);
 
-    const std::string &getRoomID() const;
+  
     static Register<NewRoomRequestSignal> reg;
 private:
-    std::string roomID_;
+
 };
 
 
