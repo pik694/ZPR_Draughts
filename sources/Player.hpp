@@ -8,6 +8,8 @@
 
 #include <thread>
 #include <string>
+#include <Signals/Signal.hpp>
+#include <Signals/SendSignalDelegate.hpp>
 
 class Room;
 
@@ -22,7 +24,7 @@ public:
 
     Player();
 
-    Player(std::string nick, ConnectionProtocolHandler *hdl);
+    Player(std::string nick, ConnectionProtocolHandler *hdl, std::shared_ptr<SendSignalDelegate> delegate = std::make_shared<SendSignalDelegate>());
 
     void setNickName(std::string nick_a);
 
@@ -36,6 +38,8 @@ public:
 
     std::string getName();
 
+    void sendSignal(std::shared_ptr<Signal>);
+
     ConnectionProtocolHandler *getConnectionProtocolHandler();
 
     ~Player();
@@ -46,6 +50,8 @@ private:
     room_ptr room_;
     const int clientID_;
     ConnectionProtocolHandler *connectionProtocolHandler_;
+    const std::shared_ptr<SendSignalDelegate> delegate_;
+
 };
 
 #endif // CLIENT_HPP

@@ -3,7 +3,9 @@
 
 #include <list>
 
-#include "Room.hpp"
+
+class Room;
+class Player;
 
 class RoomManager {
 

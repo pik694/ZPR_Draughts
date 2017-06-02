@@ -3,13 +3,15 @@
 //
 
 #include <memory>
-#include <stdio.h>
 #include <Signals/PermissionSignal.hpp>
 #include <Signals/RoomsSignal.hpp>
 #include "MessageDispatcher.hpp"
-#include "Server.hpp"
 #include "RoomManager.hpp"
+#include "Room.hpp"
 #include "PlayerManager.hpp"
+#include "Player.hpp"
+
+
 
 
 void MessageDispatcher::dispatch(EnterRoomSignal &enterRoomSignal) {
@@ -23,7 +25,7 @@ void MessageDispatcher::dispatch(EnterRoomSignal &enterRoomSignal) {
         answer = true;
     }
 
-    Server::getInstance()->putMessageInQueue(
+    player->sendSignal(
             std::make_shared<PermissionSignal>(enterRoomSignal.getConnectionProtocolHandler(), answer,"EnterRoomSignal")
     );
 
@@ -62,7 +64,7 @@ void MessageDispatcher::dispatch(NewRoomRequestSignal &newRoomRequestSignal) {
         answer = false;
     }
 
-    Server::getInstance()->putMessageInQueue(
+    player->sendSignal(
             std::make_shared<PermissionSignal>(newRoomRequestSignal.getConnectionProtocolHandler(), answer,"NewRoomRequestSignal")
     );
 
@@ -72,7 +74,6 @@ void MessageDispatcher::dispatch(NewRoomRequestSignal &newRoomRequestSignal) {
 void MessageDispatcher::dispatch(NickRequestSignal &nickRequest) {
 
 
-    //TODO : change answer to false, changing it to true for testing purposes
     bool answer = false;
 
     if (PlayerManager::getInstance()->validateNick(nickRequest.getNick())) {
@@ -81,7 +82,9 @@ void MessageDispatcher::dispatch(NickRequestSignal &nickRequest) {
         PlayerManager::getInstance()->addPlayer(nickRequest.getNick(), nickRequest.getConnectionProtocolHandler());
     }
 
-    Server::getInstance()->putMessageInQueue(
+    player_ptr player = getPlayerFromSignal(&nickRequest);
+
+    player->sendSignal(
             std::make_shared<PermissionSignal>(nickRequest.getConnectionProtocolHandler(), answer, "NickRequestSignal")
     );
 
@@ -115,7 +118,9 @@ void MessageDispatcher::dispatch(RoomsRequestSignal& roomsRequestSignal) {
 
     std::vector<int> rooms = RoomManager::getInstance()->getRooms();
 
-    Server::getInstance()->putMessageInQueue(
+    player_ptr player = getPlayerFromSignal(&roomsRequestSignal);
+
+    player->sendSignal(
         std::make_shared<RoomsSignal>(roomsRequestSignal.getConnectionProtocolHandler(), rooms,"RoomsRequestSignal")
     );
 

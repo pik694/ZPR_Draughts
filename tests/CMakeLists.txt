@@ -51,7 +51,7 @@ if(_ENABLE_TESTS_AT_EACH_BUILD_)
 			../sources/Signals/Signal.cpp
 			../sources/Signals/MoveSignal.cpp
 			../sources/Signals/MoveSignal.hpp
-			)
+            ../sources/Signals/SendSignalDelegate.cpp ../sources/Signals/SendSignalDelegate.hpp)
 
 	set(TEST_SOURCES test_main.cpp CustomTests.cpp GameEngineTests.cpp)
 

@@ -1,5 +1,6 @@
 #include "Player.hpp"
 #include "ConnectionProtocolHandler.hpp"
+#include "Room.hpp"
 
 using room_ptr = std::shared_ptr<Room>;
 
@@ -10,10 +11,11 @@ Player::Player() : clientID_(clientIds_++), connectionProtocolHandler_(nullptr) 
     //TODO: throw std::runtime_error("This constructor should not be invoked");
 }
 
-Player::Player(std::string nick, ConnectionProtocolHandler *hdl) :
+Player::Player(std::string nick, ConnectionProtocolHandler *hdl, std::shared_ptr<SendSignalDelegate> delegate) :
         clientID_(clientIds_++),
         nickname_(nick),
-        connectionProtocolHandler_(hdl) {}
+        connectionProtocolHandler_(hdl),
+        delegate_(delegate) {}
 
 
 Player::~Player() {
@@ -51,4 +53,8 @@ std::string Player::getName() {
 
 ConnectionProtocolHandler *Player::getConnectionProtocolHandler() {
     return connectionProtocolHandler_;
+}
+
+void Player::sendSignal(std::shared_ptr<Signal> signal) {
+    delegate_->sendSignal(signal);
 }

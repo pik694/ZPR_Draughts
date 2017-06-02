@@ -7,6 +7,7 @@
 
 
 #include "RoomManager.hpp"
+#include "ConnectionProtocolHandler.hpp"
 
 class PlayerManager {
     using player_ptr = std::shared_ptr<Player>;

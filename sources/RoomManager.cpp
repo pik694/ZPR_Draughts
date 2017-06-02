@@ -1,4 +1,6 @@
 #include "RoomManager.hpp"
+#include "Room.hpp"
+#include "Player.hpp"
 
 RoomManager *RoomManager::instance_ = nullptr;
 const size_t RoomManager::MAX_NUMBER_OF_ROOMS = 32;
