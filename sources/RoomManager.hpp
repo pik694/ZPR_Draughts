@@ -3,7 +3,7 @@
 
 #include <list>
 #include <memory>
-
+#include <vector>
 
 class Room;
 class Player;
