@@ -4,7 +4,7 @@
 
 #include <forward_list>
 #include "RoomsSignal.hpp"
-#include <string>
+
 RoomsSignal::RoomsSignal(ConnectionProtocolHandler* hdl, const std::vector<int>& rooms,std::string action): Signal(hdl), rooms_(rooms),action_(action){}
 
 const std::vector<int> &RoomsSignal::getRooms() {

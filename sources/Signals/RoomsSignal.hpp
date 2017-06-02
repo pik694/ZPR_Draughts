@@ -11,7 +11,7 @@ class RoomsSignal : public Signal{
 
 public:
 
-    RoomsSignal(ConnectionProtocolHandler*, const std::vector<int>&,std::string action);
+    RoomsSignal(ConnectionProtocolHandler*, const std::vector<int>&, std::string action);
 
     virtual void acceptDispatcher(MessageDispatcher&){};
 

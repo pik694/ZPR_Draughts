@@ -51,9 +51,9 @@ if(_ENABLE_TESTS_AT_EACH_BUILD_)
 			../sources/Signals/Signal.cpp
 			../sources/Signals/MoveSignal.cpp
 			../sources/Signals/MoveSignal.hpp
-            ../sources/Signals/SendSignalDelegate.cpp ../sources/Signals/SendSignalDelegate.hpp)
+            ../sources/Signals/SendSignalDelegate.cpp ../sources/Signals/SendSignalDelegate.hpp Helpers/TestSignalSendDelegate.cpp Helpers/TestSignalSendDelegate.hpp)
 
-	set(TEST_SOURCES test_main.cpp CustomTests.cpp GameEngineTests.cpp)
+	set(TEST_SOURCES test_main.cpp CustomTests.cpp GameEngineTests.cpp Helpers/TestConnectionProtocolHandler.cpp Helpers/TestConnectionProtocolHandler.hpp)
 
 	add_executable(Tests  ${TEST_SOURCES} ${SOURCE_FILES})
 	target_link_libraries(Tests ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} ${Boost_SYSTEM_LIBRARY})

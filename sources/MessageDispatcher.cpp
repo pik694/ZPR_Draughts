@@ -4,7 +4,8 @@
 
 #include <memory>
 #include <Signals/PermissionSignal.hpp>
-#include <Signals/RoomsSignal.hpp>
+#include "Signals/RoomsRequestSignal.hpp"
+#include "Signals/RoomsSignal.hpp"
 #include "MessageDispatcher.hpp"
 #include "RoomManager.hpp"
 #include "Room.hpp"
