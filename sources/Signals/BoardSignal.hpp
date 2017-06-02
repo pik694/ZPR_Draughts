@@ -6,7 +6,7 @@
 #define ZPR_DRAUGHTS_BOARDSIGNAL_HPP
 
 
-#include <GameLogic/Board.hpp>
+#include "GameLogic/Board.hpp"
 #include "Signal.hpp"
 #include "SignalFactory.hpp"
 

@@ -5,9 +5,9 @@
 #ifndef ZPR_DRAUGHTS_NEWROOMREQUESTSIGNAL_HPP
 #define ZPR_DRAUGHTS_NEWROOMREQUESTSIGNAL_HPP
 
-
-#include "Signals/Signal.hpp"
 #include <string>
+
+#include "Signal.hpp"
 #include "SignalFactory.hpp"
 
 class NewRoomRequestSignal : public Signal {

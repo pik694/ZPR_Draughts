@@ -6,7 +6,8 @@
 #define ZPR_DRAUGHTS_OPPONENTENTEREDTHEROOMSIGNAL_HPP
 
 #include <string>
-#include "Signals/Signal.hpp"
+
+#include "Signal.hpp"
 #include "SignalFactory.hpp"
 
 class OpponentEnteredTheRoomSignal : public Signal {

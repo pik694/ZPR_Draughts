@@ -1,6 +1,6 @@
 #include "Game.hpp"
 
-void Game::setGameObserver(GameObserver *observer) {
+void Game::setGameObserver(GameObserver* observer) {
 
     gameObserver_ = observer;
 

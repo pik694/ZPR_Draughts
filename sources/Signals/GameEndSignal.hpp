@@ -6,8 +6,7 @@
 #define ZPR_DRAUGHTS_GAMEENDSIGNAL_HPP
 
 
-#include "Signals/Signal.hpp"
-
+#include "Signal.hpp"
 #include "SignalFactory.hpp"
 
 class GameEndSignal : public Signal {

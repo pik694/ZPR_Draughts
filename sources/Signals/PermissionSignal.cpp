@@ -3,7 +3,6 @@
 //
 
 #include "PermissionSignal.hpp"
-#include "MessageDispatcher.hpp"
 
 Register<PermissionSignal> PermissionSignal::reg("PermissionSignal");
 

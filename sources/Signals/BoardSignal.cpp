@@ -19,11 +19,13 @@ Json::Value BoardSignal::serialize() {
 	Json::Value roomList;
     answer["type"] = "BoardSignal";
 
-    answer["value"] = board_.toJSON();
+    answer["value"] = board_.serialize();
 
     answer["move"] = isPlayersMove_;
 
     answer["team"] = team_;
+
+    //TODO : should we remove this ?
     /*for(auto it=rooms_.begin();it!=rooms_.end();++it) {
     	roomList.append(std::to_string(*it));
     }*/

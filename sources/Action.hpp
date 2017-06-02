@@ -5,6 +5,8 @@
 
 #include <websocketpp/server.hpp>
 #include <string>
+
+
 typedef websocketpp::server<websocketpp::config::asio> server;
 using websocketpp::connection_hdl;
 enum action_type {

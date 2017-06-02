@@ -1,5 +1,6 @@
 #include "Player.hpp"
 #include "ConnectionProtocolHandler.hpp"
+#include "RoomManager.hpp"
 #include "Room.hpp"
 
 using room_ptr = std::shared_ptr<Room>;

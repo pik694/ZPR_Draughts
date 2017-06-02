@@ -6,15 +6,13 @@
 #define ZPR_DRAUGHTS_SIGNAL_HPP
 
 #include <jsoncpp/json/json.h>
-
-class ConnectionProtocolHandler;
-
-class MessageDispatcher;
+#include "ConnectionProtocolHandler.hpp"
+#include "MessageDispatcher.hpp"
 
 class Signal {
 public:
-	Signal() {}
-    Signal(ConnectionProtocolHandler *hdl);
+	Signal() {} //TODO : this constructor should not be used
+    Signal(ConnectionProtocolHandler* hdl);
 
     virtual void acceptDispatcher(MessageDispatcher &) = 0;
 

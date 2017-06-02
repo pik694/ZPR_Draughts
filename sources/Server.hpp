@@ -1,15 +1,18 @@
 #ifndef SERVER_HPP
 #define SERVER_HPP
 
+#include <list>
+#include <map>
+#include <set>
+
 #include <websocketpp/config/asio_no_tls.hpp>
 #include <websocketpp/server.hpp>
 #include <websocketpp/connection.hpp>
 #include <boost/asio/signal_set.hpp>
+
 #include "Signals/Signal.hpp"
 #include "Action.hpp"
-#include <list>
-#include <map>
-#include <set>
+
 
 class ConnectionProtocolHandler;
 

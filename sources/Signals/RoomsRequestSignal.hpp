@@ -7,6 +7,7 @@
 
 #include "Signal.hpp"
 #include "SignalFactory.hpp"
+
 class RoomsRequestSignal : public Signal{
 public:
 	RoomsRequestSignal() {}

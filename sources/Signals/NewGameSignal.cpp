@@ -3,7 +3,6 @@
 //
 
 #include "NewGameSignal.hpp"
-#include "MessageDispatcher.hpp"
 
 Register<NewGameSignal> NewGameSignal::reg("NewGameSignal");
 

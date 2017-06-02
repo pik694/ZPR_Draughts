@@ -4,7 +4,6 @@
 
 
 #include "Signal.hpp"
-#include "ConnectionProtocolHandler.hpp"
 
 Signal::Signal(ConnectionProtocolHandler *hdl) {
     connectionProtocolHandler_ = hdl;

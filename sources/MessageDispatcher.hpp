@@ -6,16 +6,20 @@
 #define ZPR_DRAUGHTS_MESSAGEDISPATCHER_HPP
 
 
-#include <Signals/Signal.hpp>
-#include <Signals/EnterRoomSignal.hpp>
-#include <Signals/LeaveRoomSignal.hpp>
-#include <Signals/NewGameSignal.hpp>
-#include <Signals/NewRoomRequestSignal.hpp>
-#include <Signals/NickRequestSignal.hpp>
-#include <Signals/TextMessage.hpp>
-#include <Signals/MoveSignal.hpp>
-#include <Signals/RoomsRequestSignal.hpp>
-#include "Player.hpp"
+class Signal;
+class EnterRoomSignal;
+class LeaveRoomSignal;
+class NewRoomRequestSignal;
+class NewGameSignal;
+class NickRequestSignal;
+class TextMessage;
+class MoveSignal;
+class RoomsRequestSignal;
+
+class Room;
+class Player;
+
+
 
 class MessageDispatcher {
 public:
@@ -40,7 +44,7 @@ private:
     using room_ptr = std::shared_ptr<Room>;
     using player_ptr = std::shared_ptr<Player>;
 
-    player_ptr getPlayerFromSignal(Signal *);
+    player_ptr getPlayerFromSignal(Signal*);
 
 };
 

@@ -1,5 +1,15 @@
 #include "ConnectionProtocolHandler.hpp"
-#include <stdio.h>
+
+#include "Server.hpp"
+#include "RoomManager.hpp"
+#include "PlayerManager.hpp"
+#include "Action.hpp"
+#include "MessageDispatcher.hpp"
+#include "Signals/Signal.hpp"
+#include "Signals/NickRequestSignal.hpp"
+#include "Signals/BoardSignal.hpp"
+#include "Signals/SignalFactory.hpp"
+
 using websocketpp::connection_hdl;
 using websocketpp::lib::thread;
 using websocketpp::lib::lock_guard;

@@ -2,6 +2,7 @@
 // Created by Piotr Żelazko on 29.05.2017.
 //
 
+#include "TextMessage.hpp"
 #include <MessageDispatcher.hpp>
 
 Register<TextMessage> TextMessage::reg("TextMessage");

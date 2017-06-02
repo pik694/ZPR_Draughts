@@ -8,14 +8,16 @@
 
 #include <thread>
 #include <string>
-#include <Signals/Signal.hpp>
-#include <Signals/SendSignalDelegate.hpp>
+
+#include "Signals/Signal.hpp"
+#include "Signals/SendSignalDelegate.hpp"
 
 class Room;
+class ConnectionProtocolHandler;
+
 
 using websocketpp::connection_hdl;
 
-class ConnectionProtocolHandler;
 
 class Player {
     using room_ptr = std::shared_ptr<Room>;

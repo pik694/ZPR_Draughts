@@ -3,7 +3,6 @@
 //
 #include <exception>
 #include "NewRoomRequestSignal.hpp"
-#include "MessageDispatcher.hpp"
 
 Register<NewRoomRequestSignal> NewRoomRequestSignal::reg("NewRoomRequestSignal");
 

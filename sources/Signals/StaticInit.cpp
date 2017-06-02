@@ -6,3 +6,4 @@ map_type *SignalFactory::map = nullptr;
 
 //Register<NickRequestSignal> NickRequestSignal::reg("nickRequest");
 
+//TODO: remove this file ?

@@ -7,7 +7,7 @@
 
 #include <jsoncpp/json/json.h>
 #include <algorithm>
-#include <iostream>
+#include <string>
 #include <functional>
 #include <stdexcept>
 
@@ -18,13 +18,11 @@
 
 class Board {
 public:
-
     using row_t = std::vector<PieceKind>;
 
     Board();
 
     Board(std::initializer_list<row_t>);
-
 
     PieceKind getPieceAt(Point, PlayerColour) const;
 
@@ -32,7 +30,7 @@ public:
 
     void removePieceAt(Point, PlayerColour);
 
-    Json::Value toJSON() const;
+    Json::Value serialize() const;
 
     static size_t BOARD_SIZE;
     static size_t ROWS_OF_PIECES;

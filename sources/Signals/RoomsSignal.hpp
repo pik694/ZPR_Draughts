@@ -5,8 +5,11 @@
 #ifndef ZPR_DRAUGHTS_ROOMSSIGNAL_HPP
 #define ZPR_DRAUGHTS_ROOMSSIGNAL_HPP
 
+#include <vector>
 
 #include "Signal.hpp"
+
+
 class RoomsSignal : public Signal{
 
 public:

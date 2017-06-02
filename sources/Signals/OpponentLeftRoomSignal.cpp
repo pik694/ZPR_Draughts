@@ -3,7 +3,6 @@
 //
 
 #include "OpponentLeftRoomSignal.hpp"
-#include "MessageDispatcher.hpp"
 
 Register<OpponentLeftRoomSignal> OpponentLeftRoomSignal::reg("OpponentLeftRoomSignal");
 

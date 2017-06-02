@@ -5,7 +5,7 @@
 #ifndef ZPR_DRAUGHTS_GAMEOBSERVER_HPP
 #define ZPR_DRAUGHTS_GAMEOBSERVER_HPP
 
-#include <GameLogic/PlayerColour.hpp>
+#include "GameLogic/PlayerColour.hpp"
 
 class Player;
 

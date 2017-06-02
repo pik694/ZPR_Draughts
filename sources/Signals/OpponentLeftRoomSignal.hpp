@@ -5,10 +5,11 @@
 #ifndef ZPR_DRAUGHTS_OPPONENTLEFTROOMSIGNAL_HPP
 #define ZPR_DRAUGHTS_OPPONENTLEFTROOMSIGNAL_HPP
 
-
-#include "Signals/Signal.hpp"
-#include "SignalFactory.hpp"
 #include <string>
+
+#include "Signal.hpp"
+#include "SignalFactory.hpp"
+
 
 class OpponentLeftRoomSignal : public Signal {
 public:

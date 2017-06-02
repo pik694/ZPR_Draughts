@@ -4,15 +4,20 @@
 #include <jsoncpp/json/json.h>
 #include <string>
 #include <sstream>
-#include "Server.hpp"
-#include "RoomManager.hpp"
-#include "PlayerManager.hpp"
+
+
 #include "Action.hpp"
 #include "MessageDispatcher.hpp"
-#include "Signals/Signal.hpp"
-#include "Signals/NickRequestSignal.hpp"
-#include "Signals/BoardSignal.hpp"
-#include "Signals/SignalFactory.hpp"
+
+class Signal;
+class Server;
+class RoomManager;
+class PlayerManger;
+class SignalFactory;
+class BoardSignal;
+class NickRequestSignal;
+
+
 // accepts data in JSON format, parses them and decides what to do
 
 /*

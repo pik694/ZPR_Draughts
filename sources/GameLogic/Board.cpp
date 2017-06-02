@@ -3,7 +3,6 @@
 //
 
 #include "Board.hpp"
-#include <string>
 
 size_t Board::BOARD_SIZE = 8;
 size_t Board::ROWS_OF_PIECES = 3;
@@ -70,7 +69,7 @@ void Board::removePieceAt(Point point, PlayerColour side) {
 }
 
 
-Json::Value Board::toJSON() const {
+Json::Value Board::serialize() const {
     Json::Value boardList;
     for(int i=0;i<BOARD_SIZE;++i) {
         for(int j=0;j<BOARD_SIZE;++j) {

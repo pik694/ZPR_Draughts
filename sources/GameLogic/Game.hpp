@@ -3,13 +3,14 @@
 
 #include <vector>
 #include <string>
+#include <memory>
 
-#include "Player.hpp"
-#include "Point.hpp"
-#include <GameLogic/PieceKind.hpp>
-#include "GameObserver.hpp"
-#include "Board.hpp"
 #include "PlayerColour.hpp"
+#include "Board.hpp"
+#include "GameObserver.hpp"
+#include "PieceKind.hpp"
+#include "Point.hpp"
+
 
 class Game {
 public:
@@ -43,7 +44,7 @@ public:
 
     }
 
-    void setGameObserver(GameObserver *);
+    void setGameObserver(GameObserver*);
 
     void startGame();
 
@@ -75,7 +76,7 @@ private:
     int whitePieces_;
     int blackPieces_;
 
-    GameObserver *gameObserver_;
+    GameObserver* gameObserver_;
 
 };
 

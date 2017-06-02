@@ -3,15 +3,22 @@
 //
 
 #include <memory>
-#include <Signals/PermissionSignal.hpp>
+#include "Signals/EnterRoomSignal.hpp"
+#include "Signals/PermissionSignal.hpp"
+#include "Signals/LeaveRoomSignal.hpp"
+#include "Signals/NewGameSignal.hpp"
+#include "Signals/NewRoomRequestSignal.hpp"
 #include "Signals/RoomsRequestSignal.hpp"
 #include "Signals/RoomsSignal.hpp"
-#include "MessageDispatcher.hpp"
-#include "RoomManager.hpp"
-#include "Room.hpp"
-#include "PlayerManager.hpp"
-#include "Player.hpp"
+#include "Signals/MoveSignal.hpp"
+#include "Signals/TextMessage.hpp"
+#include "Signals/NickRequestSignal.hpp"
 
+#include "Player.hpp"
+#include "PlayerManager.hpp"
+
+#include "Room.hpp"
+#include "RoomManager.hpp"
 
 
 
@@ -128,7 +135,7 @@ void MessageDispatcher::dispatch(RoomsRequestSignal& roomsRequestSignal) {
 
 }
 
-MessageDispatcher::player_ptr MessageDispatcher::getPlayerFromSignal(Signal *signal) {
+MessageDispatcher::player_ptr MessageDispatcher::getPlayerFromSignal(Signal* signal) {
 
     player_ptr player = PlayerManager::getInstance()->getPlayer(signal->getConnectionProtocolHandler());
 

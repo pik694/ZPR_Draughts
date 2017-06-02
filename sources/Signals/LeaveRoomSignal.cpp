@@ -3,7 +3,6 @@
 //
 
 #include "LeaveRoomSignal.hpp"
-#include "MessageDispatcher.hpp"
 
 Register<LeaveRoomSignal> LeaveRoomSignal::reg("LeaveRoomSignal");
 

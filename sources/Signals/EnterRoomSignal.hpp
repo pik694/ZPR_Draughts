@@ -5,14 +5,14 @@
 #ifndef ZPR_DRAUGHTS_ENTERROOMSIGNAL_HPP
 #define ZPR_DRAUGHTS_ENTERROOMSIGNAL_HPP
 
+#include <string>
 
 #include "Signal.hpp"
-#include <string>
 #include "SignalFactory.hpp"
 
 class EnterRoomSignal : public Signal {
 public:
-    EnterRoomSignal() {}
+    EnterRoomSignal() {} // TODO: this constructor should not be used
 
     EnterRoomSignal(ConnectionProtocolHandler *hdl, int roomID) : Signal(hdl), roomID_(roomID) {}
 

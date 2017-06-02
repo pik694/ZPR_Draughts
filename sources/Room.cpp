@@ -1,10 +1,12 @@
-#include <Signals/OpponentEnteredTheRoomSignal.hpp>
-#include <Signals/GameEndSignal.hpp>
-#include <Signals/BoardSignal.hpp>
-#include <Signals/TextMessage.hpp>
-#include <Signals/OpponentLeftRoomSignal.hpp>
+#include "Signals/Signal.hpp"
+#include "Signals/OpponentEnteredTheRoomSignal.hpp"
+#include "Signals/GameEndSignal.hpp"
+#include "Signals/BoardSignal.hpp"
+#include "Signals/TextMessage.hpp"
+#include "Signals/OpponentLeftRoomSignal.hpp"
+
+#include "Player.hpp"
 #include "Room.hpp"
-#include "Server.hpp"
 #include "RoomManager.hpp"
 
 Room::Room(int ID) :

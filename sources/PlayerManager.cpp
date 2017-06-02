@@ -3,6 +3,8 @@
 //
 
 #include "PlayerManager.hpp"
+#include "RoomManager.hpp"
+#include "Player.hpp"
 #include "Room.hpp"
 
 PlayerManager *PlayerManager::instance_ = nullptr;

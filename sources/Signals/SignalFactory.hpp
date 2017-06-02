@@ -4,10 +4,10 @@
 #include <string>
 #include <map>
 #include <stdio.h>
-#include "Signal.hpp"
-class ConnectionProtocolHandler;
 
-class Signal;
+#include "Signal.hpp"
+
+class ConnectionProtocolHandler;
 
 template<typename T>
 Signal *createT() {

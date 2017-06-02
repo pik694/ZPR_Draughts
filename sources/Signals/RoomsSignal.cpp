@@ -3,6 +3,7 @@
 //
 
 #include <forward_list>
+
 #include "RoomsSignal.hpp"
 
 RoomsSignal::RoomsSignal(ConnectionProtocolHandler* hdl, const std::vector<int>& rooms,std::string action): Signal(hdl), rooms_(rooms),action_(action){}

@@ -1,6 +1,7 @@
 #include "Server.hpp"
 
 #include "ConnectionProtocolHandler.hpp"
+#include "PlayerManager.hpp"
 
 typedef websocketpp::server<websocketpp::config::asio> server;
 using websocketpp::lib::bind;

@@ -6,7 +6,7 @@
 #define ZPR_DRAUGHTS_PERMISSIONSIGNAL_HPP
 
 #include <string>
-#include "Signals/Signal.hpp"
+#include "Signal.hpp"
 #include "SignalFactory.hpp"
 
 class PermissionSignal : public Signal {

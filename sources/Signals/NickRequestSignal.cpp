@@ -3,8 +3,8 @@
 //
 
 #include "NickRequestSignal.hpp"
-#include "MessageDispatcher.hpp"
-#include <stdio.h>
+
+
 Register<NickRequestSignal> NickRequestSignal::reg("NickRequestSignal");
 
 const std::string &NickRequestSignal::getNick() const {

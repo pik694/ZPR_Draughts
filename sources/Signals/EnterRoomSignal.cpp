@@ -3,7 +3,6 @@
 //
 
 #include "EnterRoomSignal.hpp"
-#include "MessageDispatcher.hpp"
 
 Register<EnterRoomSignal> EnterRoomSignal::reg("EnterRoomSignal");
 

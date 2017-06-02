@@ -3,7 +3,6 @@
 //
 
 #include "MoveSignal.hpp"
-#include "MessageDispatcher.hpp"
 
 Register<MoveSignal> MoveSignal::reg("MoveSignal");
 

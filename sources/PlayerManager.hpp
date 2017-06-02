@@ -5,8 +5,6 @@
 #ifndef ZPR_DRAUGHTS_PLAYERMANAGER_HPP
 #define ZPR_DRAUGHTS_PLAYERMANAGER_HPP
 
-
-#include "RoomManager.hpp"
 #include "ConnectionProtocolHandler.hpp"
 
 class PlayerManager {
