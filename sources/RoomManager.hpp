@@ -2,6 +2,7 @@
 #define ROOM_MANAGER_HPP
 
 #include <list>
+#include <memory>
 
 
 class Room;
