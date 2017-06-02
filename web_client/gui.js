@@ -39,6 +39,9 @@ window.onload = function() {
             case "OpponentLeftRoomSignal":
                 opponentLeft();
             break;
+            case "GameEndSignal":
+                gameEnded(msg.value);
+            break;
         }
 	}
     $("#submit_new_room").on("click",NewRoomRequestSignal);
@@ -143,6 +146,16 @@ function LeaveRoomSignal() {
 
 // game form
 
+function gameEnded(value) {
+    if(value) {
+        $("#you_won").show("slow");
+    }
+    else {
+        $("#you_lost").show("slow");
+    }
+}
+
+
 function opponentLeft() {
     document.getElementById("whose_turn").innerHTML = "Opponent Left";
 }
@@ -150,9 +163,11 @@ function opponentLeft() {
 function gameController(message) {
     if(message.team === "white") {
         PLAYER_TEAM = WHITE_PAWN;
+        PLAYER_KING = WHITE_KING;
     }
     else {
         PLAYER_TEAM = BROWN_PAWN;
+        PLAYER_KING = BLACK_KING;
     }
     if(message.move) {
         document.getElementById("whose_turn").innerHTML = "Your turn";
