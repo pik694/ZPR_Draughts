@@ -7,14 +7,20 @@ var WHITE = "#f6eaba";
 var BROWN_PAWN_COLOR = "#512800";
 var BROWN_PAWN_MIDDLE_COLOR = "#3f1600";
 var WHITE_PAWN_COLOR = "#dace8b";
+
 var FIELDS_TO_MOVE = "#2768ea";
 var PAWN_FOCUSED = "#010101";
 var board = null;
 var board_size = 1000;
+var path = null;
+var path_size = 0;
 // boards contants
 var EMPTY_FIELD = 0;
 var WHITE_PAWN = 2;
 var BROWN_PAWN = 1;
+
+var BLACK_KING = 3;
+var WHITE_KING = 4;
 
 var PLAYER_TEAM = 1; // 1 - BROWN, 2 - WHITE
 
@@ -48,7 +54,7 @@ function FocusOnPawn(x,y)
         paintField(context,x,y,size);
 
 
-    if(board[x][y] == EMPTY_FIELD) {
+    if(board[x][y] == EMPTY_FIELD && x1 != -1 && y1 !=-1) {
         x2 = x;
         y2 = y;
         BasicMoveSignal(x1,y1,x2,y2);
@@ -83,13 +89,42 @@ function paintFocus(context,x,y,size,direction) {
 function InitGame() {
     console.log("inting game");
     InitBoard();
-
+    path = new Array(128);
     // add event listener
     var myGame = document.getElementById("game");
+    myGame.oncontextmenu = function (e) {
+        e.preventDefault();
+        console.log("right click");
+        //console.log(e.clientX);
+        var mousePos = getMousePos(myGame,e);
+        mousePos.x = Math.floor(mousePos.x/125.0);
+        mousePos.y = Math.floor(mousePos.y/125.0);
+        console.log(mousePos.x);
+        console.log(mousePos.y);
+        if(x1 != -1 && y1 != -1) {
+            if(board[x1][y1] === PLAYER_TEAM) {
+                if(path_size == 0) {
+                    path[path_size] = x1;
+                    path[path_size+1] = y1;
+                    path_size = path_size + 2;
+                }
+                path[path_size] = mousePos.x;
+                path[path_size+1] = mousePos.y;
+                path_size = path_size + 2;
+            }
+        }
+    };
     myGame.width = 1000;
     myGame.height = 1000;
     board_size = 1000;
     myGame.addEventListener('click', function(evt) {
+        console.log(path.length);
+        if(path_size != 0) {
+            console.log("sending path");
+            PathMoveSignal(path,path_size);
+            path_size = 0;
+            return;
+        }
         var mousePos = getMousePos(myGame, evt);
         console.log('Mouse position: ' + mousePos.x + ',' + mousePos.y);
         FocusOnPawn(Math.floor(mousePos.x/125.0),Math.floor(mousePos.y/125.0));
@@ -163,7 +198,7 @@ function InitBoard()
     for(var i=0;i<8;i++)
         for(var j=0;j<8;j++)
             board[i][j] = EMPTY_FIELD;
-    for(var i=1;i<8;i+=2)
+    /*for(var i=1;i<8;i+=2)
     {
         board[i][0] = BROWN_PAWN;
         board[i][6] = WHITE_PAWN;
@@ -172,7 +207,7 @@ function InitBoard()
     {
         board[i][1] = BROWN_PAWN;
         board[i][7] = WHITE_PAWN;
-    }
+    }*/
 }
 
 function DrawPawnsHelper() {
@@ -187,9 +222,13 @@ function DrawPawns(context, size)
     for(var i=0;i<8;i++)
         for(var j=0;j<8;j++)
         {
-            if(board[i][j] === BROWN_PAWN)
+            if(board[i][j] === BROWN_PAWN || board[i][j] === BLACK_KING)
                 context.fillStyle = BROWN_PAWN_COLOR;
-            if(board[i][j] === WHITE_PAWN)
+                if(board[i][j] === BLACK_KING) {
+                    context.font ="20px Georgia";
+                    context.fillText("D",(lineOffset / 2) + i*lineOffset, (lineOffset / 2) + j*lineOffset);
+                }
+            if(board[i][j] === WHITE_PAWN || board[i][j] === WHITE_KING)
                 context.fillStyle = WHITE_PAWN_COLOR;
             if(board[i][j] !== EMPTY_FIELD)
             {

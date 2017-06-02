@@ -46,6 +46,8 @@ window.onload = function() {
     $("#start_game").on("click",NewGameSignal);
     $("#chat_input").on("keyup",TextMessage);
     $("#leave_room").on("click",LeaveRoomSignal);
+    $("#refresh_rooms").on("click",RoomsRequestSignal);
+
 	//InitGame();
 }
 
@@ -117,6 +119,19 @@ function BasicMoveSignal(x1,y1,x2,y2) {
     };
     sendRequest(msg);
 }
+function PathMoveSignal(data,size) {
+    var moves = new Array(size);
+    for(var i=0;i<size;i++) {
+        moves[i] = data[i];
+        if(i % 2 === 1)
+            moves[i] = 7 - moves[i];
+    }
+    var msg = {
+        type: "MoveSignal",
+        value: moves
+    };
+    sendRequest(msg);
+}
 function LeaveRoomSignal() {
     var msg = {
         type: "LeaveRoomSignal"
@@ -184,6 +199,7 @@ function gameSwitch() {
 // room form
 // room_form  
 function genRooms(data) {
+    document.getElementById("list_of_rooms").innerHTML = "";
     for(var i=0;i<data.length;++i) {
         var myRoomId = "room_" + data[i];
         var ul_tag = document.createElement("li");

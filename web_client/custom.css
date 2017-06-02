@@ -26,7 +26,7 @@ body {
 #chat {
 	overflow-x: ;
 	overflow-y: scroll;
-	height: 400px;
+	height: 200px;
 	background-color: #ffffff;
 	text-align: left;
 	word-wrap: break-word;
