@@ -108,9 +108,9 @@ function BasicMoveSignal(x1,y1,x2,y2) {
     console.log("new move signal");
     points = new Array(4);
     points[0] = x1;
-    points[1] = 8 - y1;
+    points[1] = 7 - y1;
     points[2] = x2;
-    points[3] = 8 - y2;
+    points[3] = 7 - y2;
     var msg = {
         type: "MoveSignal",
         value: points

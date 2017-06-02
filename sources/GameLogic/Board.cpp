@@ -71,7 +71,7 @@ void Board::removePieceAt(Point point, PlayerColour side) {
 
 Json::Value Board::serialize() const {
     Json::Value boardList;
-    for(int i=0;i<BOARD_SIZE;++i) {
+    for(int i=BOARD_SIZE-1;i>=0;--i) {
         for(int j=0;j<BOARD_SIZE;++j) {
             boardList.append((int)board_[i][j]);
         }
