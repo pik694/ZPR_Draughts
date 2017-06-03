@@ -62,6 +62,9 @@ bool Room::leaveRoom(player_ptr player) {
     }
 
     if (removed) {
+
+        game_.stopGame();
+
         if (whitePlayer_ != nullptr) {
             whitePlayer_->sendSignal(
                     std::make_shared<OpponentLeftRoomSignal>(whitePlayer_->getConnectionProtocolHandler())
@@ -133,6 +136,8 @@ bool Room::startNewGame() {
 void Room::makeMove(const std::vector<Point> &move, Room::player_ptr player) {
 
     PlayerColour playerColour = player == whitePlayer_ ? PlayerColour::white : PlayerColour::black;
+
+    if (!game_.isInProcess() || numberOfPlayers_ != 2) return;
 
     game_.makeMove(playerColour, move);
 

@@ -30,6 +30,9 @@ BOOST_AUTO_TEST_SUITE(GameEngineTests)
 
         Game game;
 
+
+        game.startGame();
+
         BOOST_CHECK(game.makeMove(PlayerColour::white, Point(0, 2), Point(1, 3)));
         BOOST_CHECK(game.makeMove(PlayerColour::black, Point(0, 2), Point(1, 3)));
 
@@ -50,6 +53,7 @@ BOOST_AUTO_TEST_SUITE(GameEngineTests)
     BOOST_AUTO_TEST_CASE(ChangingTurns){
 
         Game game;
+        game.startGame();
 
         game.makeMove(PlayerColour::white, Point(0, 2), Point(1, 3));
         BOOST_CHECK_EQUAL(game.whoseTurn(), PlayerColour::black);
@@ -59,7 +63,6 @@ BOOST_AUTO_TEST_SUITE(GameEngineTests)
 
         game.makeMove(PlayerColour::black, Point(1, 1), Point(0, 2));
         BOOST_CHECK_EQUAL(game.whoseTurn(), PlayerColour::white);
-
 
     }
 

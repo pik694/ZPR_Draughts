@@ -95,11 +95,6 @@ void Server::onClose(connection_hdl hdl) {
             break;
         }
     }
-    //PlayerManager::getInstance()->removePlayer(hdl);
-    //std::cout<<"connection closed"<<std::endl;
-
-    //TODO: remove player from players list
-    // PlayerManager::getInstance()->removePlayer(/* ConnectionProtocolHandler* */);
 
 }
 

@@ -203,3 +203,12 @@ void Game::changeIntoAKing(PieceKind &piece) {
             else break;
     }
 }
+
+
+void Game::stopGame() {
+    duringGame_ = false;
+}
+
+bool Game::isInProcess() {
+    return duringGame_;
+}

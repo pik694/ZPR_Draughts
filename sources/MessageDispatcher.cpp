@@ -19,7 +19,7 @@
 
 #include "Room.hpp"
 #include "RoomManager.hpp"
-
+#include "Server.hpp"
 
 
 void MessageDispatcher::dispatch(EnterRoomSignal &enterRoomSignal) {
@@ -90,11 +90,7 @@ void MessageDispatcher::dispatch(NickRequestSignal &nickRequest) {
         PlayerManager::getInstance()->addPlayer(nickRequest.getNick(), nickRequest.getConnectionProtocolHandler());
     }
 
-    player_ptr player = getPlayerFromSignal(&nickRequest);
-
-    player->sendSignal(
-            std::make_shared<PermissionSignal>(nickRequest.getConnectionProtocolHandler(), answer, "NickRequestSignal")
-    );
+    Server::getInstance()->putMessageInQueue(std::make_shared<PermissionSignal>(nickRequest.getConnectionProtocolHandler(), answer, "NickRequestSignal"));
 
 }
 

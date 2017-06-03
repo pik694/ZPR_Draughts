@@ -44,6 +44,7 @@ void PlayerManager::removePlayer(ConnectionProtocolHandler *hdl) {
 
     if(toBeRemoved == nullptr)
         return;
+
     players_.erase(hdl);
 
     if(toBeRemoved->getRoom() != nullptr)

@@ -15,8 +15,7 @@
 class Game {
 public:
 
-    Game() : gameObserver_(nullptr) {
-        startGame();
+    Game() : gameObserver_(nullptr), duringGame_(false){
     }
 
     Game(Board &&board) : board_(board), gameObserver_(nullptr) {
@@ -47,6 +46,10 @@ public:
     void setGameObserver(GameObserver*);
 
     void startGame();
+
+    void stopGame();
+
+    bool isInProcess();
 
     bool makeMove(PlayerColour, const std::vector<Point> &);
 
