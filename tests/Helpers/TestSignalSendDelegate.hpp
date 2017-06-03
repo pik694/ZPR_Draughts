@@ -7,12 +7,19 @@
 
 
 #include <Signals/SendSignalDelegate.hpp>
+#include <list>
 
 class TestSignalSendDelegate : public SendSignalDelegate {
-
+public:
     virtual void sendSignal(std::shared_ptr<Signal>);
 
     virtual ~TestSignalSendDelegate();
+
+    std::shared_ptr<Signal> getSignal();
+
+private:
+
+    std::list<std::shared_ptr<Signal>> receivedSignals_;
 
 };
 

@@ -23,7 +23,7 @@ public:
 
     room_ptr newRoom();
 
-    void deleteRoom(Room *);
+    void deleteRoom(room_ptr);
 
     RoomManager(const RoomManager &) = delete;
 

@@ -33,12 +33,10 @@ RoomManager::room_ptr RoomManager::newRoom() {
     return rooms_.front();
 }
 
-void RoomManager::deleteRoom(Room *room) {
+void RoomManager::deleteRoom(room_ptr room) {
 
-    rooms_.remove_if(
-            [room](RoomManager::room_ptr currRoom) -> bool {
-                return currRoom.get() == room;
-            });
+    rooms_.remove(room);
+
 }
 
 

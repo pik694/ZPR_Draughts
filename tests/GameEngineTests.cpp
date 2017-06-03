@@ -11,30 +11,8 @@
 #include <GameLogic/Point.hpp>
 #include <GameLogic/PieceKind.hpp>
 #include <GameLogic/PlayerColour.hpp>
+#include "Helpers/TestGameObserver.hpp"
 
-class TestGameObserver : public GameObserver{
-public:
-    TestGameObserver():somebodyWon_(false){}
-
-    virtual void playerWon(PlayerColour player){
-        somebodyWon_ = true;
-        whoWon_ = player;
-    }
-
-    bool hasSomebodyWon(){
-        return somebodyWon_;
-    }
-
-    PlayerColour whoWon(){
-        return whoWon_;
-    }
-
-private:
-
-    bool somebodyWon_;
-    PlayerColour whoWon_;
-
-};
 
 
 void testBoard (const Board& board, std::vector < std::pair <Point, PieceKind> > pathToBeChecked){

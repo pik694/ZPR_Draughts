@@ -20,6 +20,11 @@ Player::Player(std::string nick, ConnectionProtocolHandler *hdl, std::shared_ptr
 
 
 Player::~Player() {
+
+    if (room_.get() != nullptr){
+        room_->leaveRoom(shared_from_this());
+    }
+
 }
 
 
@@ -27,27 +32,23 @@ void Player::setNickName(std::string nick_a) {
     nickname_ = nick_a;
 }
 
-void Player::setRoom(room_ptr room) {
+bool Player::setRoom(room_ptr room) {
+    if (room != nullptr && room_ != nullptr) return false;
+
     room_ = room;
+    return true;
 }
 
-void Player::setRoom(int roomID) {
-
-    room_ = RoomManager::getInstance()->getRoom(roomID);
-
+void Player::resetRoom() {
+    room_ = nullptr;
 }
 
-int Player::getRoomID() {
-
-    return room_ != nullptr ? room_->getRoomID() : -1;
-
-}
 
 room_ptr Player::getRoom() {
     return room_;
 }
 
-std::string Player::getName() {
+std::string Player::getNick() {
     return nickname_;
 }
 

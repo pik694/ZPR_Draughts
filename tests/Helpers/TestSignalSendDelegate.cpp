@@ -7,8 +7,20 @@
 #include "Signals/Signal.hpp"
 
 
-void TestSignalSendDelegate::sendSignal(std::shared_ptr <Signal>) {
-    throw std::runtime_error("Not implemented yet");
+void TestSignalSendDelegate::sendSignal(std::shared_ptr <Signal> sentSignal) {
+    receivedSignals_.push_back(sentSignal);
+}
+
+std::shared_ptr<Signal> TestSignalSendDelegate::getSignal() {
+
+    if (receivedSignals_.empty()) return nullptr;
+
+    std::shared_ptr<Signal> tmp (*receivedSignals_.begin());
+
+    receivedSignals_.pop_front();
+
+    return tmp;
+
 }
 
 TestSignalSendDelegate::~TestSignalSendDelegate() {

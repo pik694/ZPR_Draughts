@@ -20,7 +20,7 @@ bool Room::isOpponent() {
 }
 bool Room::joinRoom(player_ptr player) {
 
-    if (numberOfPlayers_ == 2) return false;
+    if (numberOfPlayers_ == 2 || !player->setRoom(shared_from_this())) return false;
 
     if (whitePlayer_ == nullptr) {
         whitePlayer_ = player;
@@ -34,16 +34,14 @@ bool Room::joinRoom(player_ptr player) {
 
         blackPlayer_->sendSignal(
                 std::make_shared<OpponentEnteredTheRoomSignal>(blackPlayer_->getConnectionProtocolHandler(),
-                                                               whitePlayer_->getName())
+                                                               whitePlayer_->getNick())
         );
 
         whitePlayer_->sendSignal(
                 std::make_shared<OpponentEnteredTheRoomSignal>(whitePlayer_->getConnectionProtocolHandler(),
-                                                               blackPlayer_->getName())
+                                                               blackPlayer_->getNick())
         );
     }
-
-    player->setRoom(roomID_);
 
     ++numberOfPlayers_;
 
@@ -54,6 +52,7 @@ bool Room::joinRoom(player_ptr player) {
 bool Room::leaveRoom(player_ptr player) {
 
     bool removed = false;
+
     if (whitePlayer_ == player) {
         whitePlayer_ = nullptr;
         removed = true;
@@ -73,12 +72,12 @@ bool Room::leaveRoom(player_ptr player) {
             );
         }
 
-        player->setRoom(-1);
+        player->resetRoom();
         --numberOfPlayers_;
     }
 
     if (numberOfPlayers_ <= 0) {
-        RoomManager::getInstance()->deleteRoom(this);
+        RoomManager::getInstance()->deleteRoom(shared_from_this());
     }
 
     return removed;
@@ -112,9 +111,9 @@ const int Room::getRoomID() const{
     return roomID_;
 }
 
-void Room::startNewGame() {
+bool Room::startNewGame() {
 
-    if (numberOfPlayers_ != 2) return;
+    if (numberOfPlayers_ != 2) return false;
 
     game_.startGame();
     game_.setGameObserver(this);
@@ -126,6 +125,8 @@ void Room::startNewGame() {
     blackPlayer_->sendSignal(
             std::make_shared<BoardSignal>(blackPlayer_->getConnectionProtocolHandler(), game_.getBoard(PlayerColour::black), false,"black")
     );
+
+    return true;
 
 }
 
@@ -149,11 +150,19 @@ void Room::makeMove(const std::vector<Point> &move, Room::player_ptr player) {
 
 void Room::sendTextMessage(Room::player_ptr sender, const std::string &message) {
 
-    player_ptr receiver = sender == whitePlayer_ ? blackPlayer_ : whitePlayer_;
+    player_ptr receiver = nullptr;
+
+    if (sender == whitePlayer_){
+        receiver = blackPlayer_;
+    }
+    else if (sender == blackPlayer_){
+        receiver = whitePlayer_;
+    }
+
 
     if (receiver == nullptr) {
         sender->sendSignal(
-                std::make_shared<TextMessage>(sender->getConnectionProtocolHandler(), "Message was lost due to the lack of an opponent.")
+                std::make_shared<TextMessage>(sender->getConnectionProtocolHandler(), "Message was lost.")
         );
     }
 

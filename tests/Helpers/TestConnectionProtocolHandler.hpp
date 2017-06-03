@@ -11,6 +11,7 @@
 using websocketpp::connection_hdl;
 
 class TestConnectionProtocolHandler : public ConnectionProtocolHandler {
+public:
 
     TestConnectionProtocolHandler(): ConnectionProtocolHandler(*(new connection_hdl())){} // Memory leak but only on test purposes
 

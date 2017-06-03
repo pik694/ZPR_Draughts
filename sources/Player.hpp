@@ -19,9 +19,8 @@ class ConnectionProtocolHandler;
 using websocketpp::connection_hdl;
 
 
-class Player {
+class Player : public std::enable_shared_from_this<Player>{
     using room_ptr = std::shared_ptr<Room>;
-
 public:
 
     Player();
@@ -30,15 +29,13 @@ public:
 
     void setNickName(std::string nick_a);
 
-    void setRoom(int roomID);
+    bool setRoom(room_ptr room);
 
-    void setRoom(room_ptr room);
-
-    int getRoomID();
+    void resetRoom();
 
     room_ptr getRoom();
 
-    std::string getName();
+    std::string getNick();
 
     void sendSignal(std::shared_ptr<Signal>);
 

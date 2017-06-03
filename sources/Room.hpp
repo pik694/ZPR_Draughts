@@ -7,7 +7,7 @@
 #include "GameLogic/PlayerColour.hpp"
 
 
-class Room : public GameObserver {
+class Room : public GameObserver, public std::enable_shared_from_this<Room> {
 
     using player_ptr = std::shared_ptr<Player>;
 public:
@@ -22,7 +22,7 @@ public:
 
     void playerWon(PlayerColour);
 
-    void startNewGame();
+    bool startNewGame();
 
     void makeMove(const std::vector<Point> &, player_ptr);
 

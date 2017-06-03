@@ -4,6 +4,9 @@ using namespace websocketpp;
 using namespace std;
 
 
+//TODO: namespaces
+//TODO: shered_ptr -> weak_ptr<Room> in Player
+
 int main() {
 
     std::cout << "Server starting ... \n" << std::endl;

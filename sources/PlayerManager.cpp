@@ -11,6 +11,7 @@ PlayerManager *PlayerManager::instance_ = nullptr;
 
 
 PlayerManager *PlayerManager::getInstance() {
+
     if (instance_ == nullptr) {
         instance_ = new PlayerManager();
     }
@@ -23,7 +24,7 @@ bool PlayerManager::validateNick(std::string nick) {
     if (nick.length() == 0) return false;
 
     for (auto player : players_) {
-        if (player.second->getName() == nick) return false;
+        if (player.second->getNick() == nick) return false;
     }
 
     return true;
@@ -35,15 +36,17 @@ void PlayerManager::addPlayer(std::string nick, ConnectionProtocolHandler *hdl) 
 }
 
 void PlayerManager::removePlayer(ConnectionProtocolHandler *hdl) {
+
     if(players_.find(hdl) == players_.end())
         return;
+
     player_ptr toBeRemoved = players_[hdl];
 
     if(toBeRemoved == nullptr)
         return;
     players_.erase(hdl);
 
-    if(toBeRemoved->getRoomID() != -1)
+    if(toBeRemoved->getRoom() != nullptr)
         toBeRemoved->getRoom()->leaveRoom(toBeRemoved);
 
 }
