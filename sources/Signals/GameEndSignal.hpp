@@ -15,6 +15,8 @@ public:
 
     GameEndSignal(ConnectionProtocolHandler *hdl, bool won) : Signal(hdl), won_(won) {}
 
+    virtual Json::Value serialize();
+    
     const bool getWon() const {
         return won_;
     }

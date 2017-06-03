@@ -23,6 +23,7 @@ var BLACK_KING = 3;
 var WHITE_KING = 4;
 
 var PLAYER_TEAM = 1; // 1 - BROWN, 2 - WHITE
+var PLAYER_KING = 3;
 
 
 var x1 = -1;
@@ -50,7 +51,7 @@ function FocusOnPawn(x,y)
     context.globalAlpha = 0.4;
     context.fillStyle = FIELDS_TO_MOVE;
 
-    if(board[x][y] === PLAYER_TEAM)
+    if(board[x][y] === PLAYER_TEAM || board[x][y] === PLAYER_KING)
         paintField(context,x,y,size);
 
 
@@ -60,7 +61,7 @@ function FocusOnPawn(x,y)
         BasicMoveSignal(x1,y1,x2,y2);
     }
 
-    if(board[x][y] === PLAYER_TEAM) {
+    if(board[x][y] === PLAYER_TEAM || board[x][y] === PLAYER_KING) {
         x1 = x;
         y1 = y;
     }
@@ -102,7 +103,7 @@ function InitGame() {
         console.log(mousePos.x);
         console.log(mousePos.y);
         if(x1 != -1 && y1 != -1) {
-            if(board[x1][y1] === PLAYER_TEAM) {
+            if(board[x1][y1] === PLAYER_TEAM || board[x][y] === PLAYER_KING) {
                 if(path_size == 0) {
                     path[path_size] = x1;
                     path[path_size+1] = y1;
@@ -222,19 +223,23 @@ function DrawPawns(context, size)
     for(var i=0;i<8;i++)
         for(var j=0;j<8;j++)
         {
-            if(board[i][j] === BROWN_PAWN || board[i][j] === BLACK_KING)
+            if(board[i][j] === BROWN_PAWN || board[i][j] === BLACK_KING) {
                 context.fillStyle = BROWN_PAWN_COLOR;
-                if(board[i][j] === BLACK_KING) {
-                    context.font ="20px Georgia";
-                    context.fillText("D",(lineOffset / 2) + i*lineOffset, (lineOffset / 2) + j*lineOffset);
-                }
-            if(board[i][j] === WHITE_PAWN || board[i][j] === WHITE_KING)
+            }
+            if(board[i][j] === WHITE_PAWN || board[i][j] === WHITE_KING) {
                 context.fillStyle = WHITE_PAWN_COLOR;
+            }
             if(board[i][j] !== EMPTY_FIELD)
             {
                 context.beginPath();
                 context.arc((lineOffset / 2) + i*lineOffset, (lineOffset / 2) + j*lineOffset, lineOffset / 2.2, 0, 2 * Math.PI);
                 context.fill();
+            }
+            if(board[i][j] === BLACK_KING || board[i][j] === WHITE_KING) {
+                context.fillStyle = "red";
+                context.textAlign = "center";
+                context.font ="40px Georgia";
+                context.fillText("D",(lineOffset / 2) + i*lineOffset, (lineOffset / 2) + j*lineOffset);
             }
         }
 }

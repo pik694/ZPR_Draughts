@@ -4,7 +4,7 @@ var currentRoom = ""
 var currentNick = ""
 window.onload = function() {
     InitGame();
-	mySocket = new WebSocket("ws://127.0.0.1:9002");
+	mySocket = new WebSocket("ws://" + location.hostname + ":9002");
 	mySocket.onmessage = function(event) {
 		var msg = JSON.parse(event.data);
 		console.log(event.data);
@@ -38,6 +38,9 @@ window.onload = function() {
             break;
             case "OpponentLeftRoomSignal":
                 opponentLeft();
+            break;
+            case "GameEndSignal":
+                gameEnded(msg.value);
             break;
         }
 	}
@@ -143,6 +146,16 @@ function LeaveRoomSignal() {
 
 // game form
 
+function gameEnded(value) {
+    if(value) {
+        $("#you_won").show("slow");
+    }
+    else {
+        $("#you_lost").show("slow");
+    }
+}
+
+
 function opponentLeft() {
     document.getElementById("whose_turn").innerHTML = "Opponent Left";
 }
@@ -150,9 +163,11 @@ function opponentLeft() {
 function gameController(message) {
     if(message.team === "white") {
         PLAYER_TEAM = WHITE_PAWN;
+        PLAYER_KING = WHITE_KING;
     }
     else {
         PLAYER_TEAM = BROWN_PAWN;
+        PLAYER_KING = BLACK_KING;
     }
     if(message.move) {
         document.getElementById("whose_turn").innerHTML = "Your turn";
