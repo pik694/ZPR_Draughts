@@ -116,7 +116,7 @@ const int Room::getRoomID() const{
 
 bool Room::startNewGame() {
 
-    if (numberOfPlayers_ != 2) return false;
+    if (numberOfPlayers_ != 2 || game_.isInProcess()) return false;
 
     game_.startGame();
     game_.setGameObserver(this);

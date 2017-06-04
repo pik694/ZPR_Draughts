@@ -7,6 +7,11 @@
 
 #include <cstdint>
 
+
+/*!
+ * \file
+ * @brief An enumeration which represents possible player colours in game.
+ */
 enum class PlayerColour : uint8_t {
     white,
     black,

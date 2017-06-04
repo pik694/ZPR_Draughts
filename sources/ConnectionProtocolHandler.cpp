@@ -40,7 +40,7 @@ void ConnectionProtocolHandler::parseJson(std::string data) {
     // TODO
     // weird bug it doesn't initialize in factory
     currentSignal->fillProtocolHandler(this);
-    printf("INSIDE PARSE JSON %d\n",currentSignal->getConnectionProtocolHandler());
+    //printf("INSIDE PARSE JSON %d\n",currentSignal->getConnectionProtocolHandler()); //TODO : warning
     currentSignal->acceptDispatcher(dispatcher_);
 }
 
