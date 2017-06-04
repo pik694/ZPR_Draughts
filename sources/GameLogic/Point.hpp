@@ -5,8 +5,13 @@
 #ifndef ZPR_DRAUGHTS_POINT_H
 #define ZPR_DRAUGHTS_POINT_H
 
+/*! @file
+ * @brief Simple point structure.
+ *
+ */
 
-/*! \file
+
+/*!
  * @brief Simple point structure.
  *
  *  Structure consists of two attributes which represent coordinates in two-dimensional space. /br

@@ -27,12 +27,12 @@ Player::~Player() {
 
 }
 
-
 void Player::setNickName(std::string nick_a) {
     nickname_ = nick_a;
 }
 
 bool Player::setRoom(room_ptr room) {
+
     if (room != nullptr && room_ != nullptr) return false;
 
     room_ = room;

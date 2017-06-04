@@ -27,14 +27,16 @@ typedef server::message_ptr message_ptr;
 
 
 class ConnectionProtocolHandler;
-//typedef websocketpp::server<websocketpp::config::asio> server_t;
 
 class Server {
 public:
 
 
-    /// @brief Method through which one can access the only instance of the Server class.
-    /// \return valid pointer to the instance of Server class.
+    /*! @static
+     * @brief Method through which one can access the only instance of the Server class.
+     * return valid pointer to the instance of Server class.
+     */
+
     static Server *getInstance() {
         if (instance_ == nullptr) {
             instance_ = new Server();

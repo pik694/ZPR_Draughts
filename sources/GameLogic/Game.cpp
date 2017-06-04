@@ -82,6 +82,7 @@ bool Game::validatePoints(PieceKind piece, Point begin, Point end) {
 bool Game::validateMove(PlayerColour player, const std::vector<Point> &points) {
 
     //TODO: refactor
+    //TODO: comment this code
 
     Board tempBoard = board_;
 
