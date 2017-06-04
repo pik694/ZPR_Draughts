@@ -5,7 +5,7 @@
 #include <boost/test/unit_test.hpp>
 
 
-#include <OutputStreams.cpp>
+#include "OutputStreams.cpp"
 #include <GameLogic/Game.hpp>
 #include <GameLogic/Board.hpp>
 #include <GameLogic/Point.hpp>
