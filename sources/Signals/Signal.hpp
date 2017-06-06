@@ -21,10 +21,11 @@
  */
 class Signal {
 public:
+
 	/*!
-	 * @deprecated
+	 * @brief Constructor used by @link SignalFactory @endlink
 	 */
-	Signal() {} //TODO : this constructor should not be used
+	Signal() {}
 
 	/*!
 	 * Default constructor.

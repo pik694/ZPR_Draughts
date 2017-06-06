@@ -9,7 +9,6 @@ int Player::clientIds_ = 0;
 
 
 Player::Player() : clientID_(clientIds_++), connectionProtocolHandler_(nullptr) {
-    //TODO: throw std::runtime_error("This constructor should not be invoked");
 }
 
 Player::Player(std::string nick, ConnectionProtocolHandler *hdl, std::shared_ptr<SendSignalDelegate> delegate) :

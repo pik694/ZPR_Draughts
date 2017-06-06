@@ -10,13 +10,36 @@
 
 class RoomsRequestSignal : public Signal{
 public:
+
+	 /*!
+ 	 * @brief Constructor used by SignalFactory
+ 	 */
 	RoomsRequestSignal() {}
+
+	/*!
+ 	 * @brief Default constructor.
+	 * @param hdl sender
+	 */
     RoomsRequestSignal(ConnectionProtocolHandler*);
 
-    virtual void fillData(Json::Value data);
+	/*!
+     * @brief Reimplemented virtual method from Signal
+     * Implemented according to the instructions given in @link Signal::acceptDispatcher @endlink documentation.
+     */
+	virtual void acceptDispatcher(MessageDispatcher &);
 
-    virtual void acceptDispatcher(MessageDispatcher&);
+	/*!
+     * @brief parses Json::Value and sets its attributes according to the Json.
+     * @param data
+     */
+	virtual void fillData(Json::Value data);
 
+private:
+
+	/*!
+ 	 * @static
+ 	 * @brief Used to register this type in SignalFactory
+ 	 */
     static Register<RoomsRequestSignal> reg;
 
 };
