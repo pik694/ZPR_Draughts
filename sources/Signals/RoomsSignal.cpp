@@ -26,3 +26,4 @@ Json::Value RoomsSignal::serialize() {
 
     return answer;
 }
+

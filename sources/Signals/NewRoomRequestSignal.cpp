@@ -7,7 +7,6 @@
 Register<NewRoomRequestSignal> NewRoomRequestSignal::reg("NewRoomRequestSignal");
 
 
-
 void NewRoomRequestSignal::fillData(Json::Value data) {
 	
 }
