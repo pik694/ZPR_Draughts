@@ -12,6 +12,7 @@ var FIELDS_TO_MOVE = "#2768ea";
 var PAWN_FOCUSED = "#010101";
 var board = null;
 var board_size = 1000;
+var square_size = 125.0;
 var path = null;
 var path_size = 0;
 // boards contants
@@ -36,8 +37,8 @@ function getMousePos(canvas, evt) {
     var rect = canvas.getBoundingClientRect();
     console.log(rect.right - rect.left);
     return {
-        x: (evt.clientX - rect.left) * (1000/(rect.right - rect.left)),
-        y: (evt.clientY - rect.top) * (1000/(rect.right - rect.left))
+        x: (evt.clientX - rect.left) * (board_size/(rect.right - rect.left)),
+        y: (evt.clientY - rect.top) * (board_size/(rect.right - rect.left))
     };
 }
 
@@ -95,13 +96,9 @@ function InitGame() {
     var myGame = document.getElementById("game");
     myGame.oncontextmenu = function (e) {
         e.preventDefault();
-        console.log("right click");
-        //console.log(e.clientX);
         var mousePos = getMousePos(myGame,e);
-        mousePos.x = Math.floor(mousePos.x/125.0);
-        mousePos.y = Math.floor(mousePos.y/125.0);
-        console.log(mousePos.x);
-        console.log(mousePos.y);
+        mousePos.x = Math.floor(mousePos.x/square_size);
+        mousePos.y = Math.floor(mousePos.y/square_size);
         if(x1 != -1 && y1 != -1) {
             if(board[x1][y1] === PLAYER_TEAM || board[x][y] === PLAYER_KING) {
                 if(path_size == 0) {
@@ -115,33 +112,21 @@ function InitGame() {
             }
         }
     };
-    myGame.width = 1000;
-    myGame.height = 1000;
-    board_size = 1000;
+    myGame.width = board_size;
+    myGame.height = board_size;
     myGame.addEventListener('click', function(evt) {
         console.log(path.length);
         if(path_size != 0) {
-            console.log("sending path");
             PathMoveSignal(path,path_size);
             path_size = 0;
             return;
         }
         var mousePos = getMousePos(myGame, evt);
-        console.log('Mouse position: ' + mousePos.x + ',' + mousePos.y);
         FocusOnPawn(Math.floor(mousePos.x/125.0),Math.floor(mousePos.y/125.0));
     }, false);
     DrawEverything();
 }
-/*window.onload = function() {
-    $("button").on("click",function(event) {
-        alert("hey");
-        console.log("button clicked");
-    });
-    communication();
-    InitGame();
 
-}
-*/
 function DrawEverything()
 {
     var myGame = document.getElementById("game");
@@ -199,16 +184,7 @@ function InitBoard()
     for(var i=0;i<8;i++)
         for(var j=0;j<8;j++)
             board[i][j] = EMPTY_FIELD;
-    /*for(var i=1;i<8;i+=2)
-    {
-        board[i][0] = BROWN_PAWN;
-        board[i][6] = WHITE_PAWN;
-    }
-    for(var i=0;i<8;i+=2)
-    {
-        board[i][1] = BROWN_PAWN;
-        board[i][7] = WHITE_PAWN;
-    }*/
+   
 }
 
 function DrawPawnsHelper() {

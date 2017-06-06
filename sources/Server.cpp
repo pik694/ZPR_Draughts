@@ -92,15 +92,13 @@ void Server::onClose(connection_hdl hdl) {
         //server::connection_ptr tmp = webSocketServer_.get_con_from_hdl((*it)->getConnectionHdl());
         if(hdl.lock() == (*it)->getConnectionHdl().lock()) {
             PlayerManager::getInstance()->removePlayer(*it);
+            delete *it;
             break;
         }
     }
 
 }
 
-void Server::onMessage(websocketpp::connection_hdl hdl, message_ptr msg) {
-
-}
 
 void Server::run(int port) {
     webSocketServer_.set_access_channels(websocketpp::log::alevel::all);
@@ -108,7 +106,6 @@ void Server::run(int port) {
     webSocketServer_.init_asio();
     webSocketServer_.set_open_handler(bind(&Server::onOpen, this, ::_1));
     webSocketServer_.set_close_handler(bind(&Server::onClose, this, ::_1));
-    webSocketServer_.set_message_handler(bind(&Server::onMessage, this, ::_1, ::_2));
     webSocketServer_.listen(port);
     webSocketServer_.start_accept();
 

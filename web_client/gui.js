@@ -15,11 +15,14 @@ window.onload = function() {
                     RoomsRequestSignal();
                     switchToRooms();
                 }
+                else {
+                    nickOccupied();
+                }
             break;
             case "NewRoomRequestSignal":
                 if(msg.value == true)
                     gameSwitch();
-            break;
+            break;  
             case "EnterRoomSignal":
                 if(msg.value == true)
                     gameSwitch();
@@ -265,6 +268,11 @@ function switchToRooms(event) {
     currentNick = document.getElementById("nickname").value;
     hideAll();
     $("#room_form").show("slow");
+}
+
+function nickOccupied(event) {
+    $("#nick_occupied_alert").hide();
+    $("#nick_occupied_alert").show("slow");
 }
 
 

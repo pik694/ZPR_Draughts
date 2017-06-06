@@ -1,6 +1,12 @@
 #ifndef SERVER_HPP
 #define SERVER_HPP
 
+/*!
+ * @file
+ * @brief Class representing server, it starts throught run() function
+ */ 
+
+
 #include <list>
 #include <map>
 #include <set>
@@ -28,6 +34,9 @@ typedef server::message_ptr message_ptr;
 
 class ConnectionProtocolHandler;
 
+/*!
+ * @brief Class representing server, it starts throught run() function
+ */ 
 class Server {
 public:
 
@@ -48,18 +57,17 @@ public:
     ~Server();
 
 
-    /// @brief Method used when new client connects.
-    /// \param hdl
-    void onOpen(connection_hdl hdl);
-
-    void onClose(connection_hdl hdl);
-
-    void onMessage(connection_hdl hdl, message_ptr msg);
-
+     /*!
+     * @brief Method through which one can run server
+     * @param port which server will run on
+     */
     void run(int port);
 
-    void processMessages();
 
+    /*!
+     * @brief Method through which one can put messages in output queue
+     * @param message to put in output queue
+     */
     void putMessageInQueue(std::shared_ptr<Signal>);
 
     Server(const Server &) = delete;
@@ -72,6 +80,12 @@ private:
 
     void stopServer();
 
+     
+    void onOpen(connection_hdl hdl);
+
+    void onClose(connection_hdl hdl);
+
+    void processMessages();
     websocketpp::server<websocketpp::config::asio> webSocketServer_;
     typedef std::set<connection_hdl, std::owner_less<connection_hdl> > con_list;
 

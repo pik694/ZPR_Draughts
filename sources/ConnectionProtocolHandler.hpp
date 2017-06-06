@@ -1,6 +1,12 @@
 #ifndef ZPR_DRAUGHTS_CONNECTION_HPP
 #define ZPR_DRAUGHTS_CONNECTION_HPP
 
+/*!
+ * @file
+ * @brief Class representing single connection handler, there is one for every client
+ */ 
+
+
 #include <jsoncpp/json/json.h>
 #include <string>
 #include <sstream>
@@ -26,36 +32,33 @@ Typical scenario:
 2.Player sends nickname_ request in json
 JSON
 {
-	"action" : "nick_request",
-	"requested_name" : "[name send by client]"
+	"action" : "NickRequestSignal",
+	"value" : "[name send by client]"
 }
 3. Server accepts or if nick already taken declines
-4. Player request access to room
+4. Player requests available rooms
 JSON
 {
-	"action" : "room_request",
+    "action" : "RoomsRequestSignal",
+}
+5. Player request access to room
+JSON
+{
+	"action" : "EnterRoomSignal",
 	"requested_room" : "[number send by client]"
 }
-5. Server now waits for players to be ready, they must send
+5. Player can now start the game, one of them sends a message
 JSON 
 {
-	"action" : "ready_to_play"
+	"action" : "NewGameSignal"
 }
 6. Game begins, clients send their request movements
 JSON
 {
-	"action" : "move_pawn",
-	"pos_x" : "[NUMBER]",
-	"pos_y" : "[NUMBER]",
-	"requested_pos_x" : "[NUMBER]",
-	"request_pos_y" : "[NUMBER]"
+	"action" : "MoveSignal",
+	"value" : "[list of movements]"
 }
-7. Player may surrender by sending:
-JSON
-{
-	"action" : "surrender"
-}
-8. After game ended players go back to [5]
+
 */
 using websocketpp::connection_hdl;
 using websocketpp::lib::mutex;
@@ -69,20 +72,35 @@ using websocketpp::connection_hdl;
 typedef websocketpp::server<websocketpp::config::asio> server;
 
 
+
+/*!
+ * @brief Class representing single connection handler, there is one for every client
+ */
 class ConnectionProtocolHandler {
 public:
-    // there is going to be an event handler on_message here
+    
     ConnectionProtocolHandler(connection_hdl &con);
 
+    /*!
+     * Callback that gets called when
+     * @param hdl Connection hdl
+     * @param msg message sent by client
+     */
     void onMessage(websocketpp::connection_hdl hdl, message_ptr msg);
 
-    void parseJson(std::string data);
-
+    /*!
+     * Returns connection handle
+     * @return connection handle
+     */
     connection_hdl getConnectionHdl();
 private:
     void invalidRequest();
 
     bool tryToAssingName(const std::string &name);
+
+    
+
+    void parseJson(std::string data);
 
     connection_hdl currentConnection_;
     std::queue<Action> actions_;

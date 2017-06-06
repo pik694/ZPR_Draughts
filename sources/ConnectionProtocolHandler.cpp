@@ -37,10 +37,7 @@ void ConnectionProtocolHandler::parseJson(std::string data) {
         std::cout << "not found sorry" << std::endl;
         return;
     }
-    // TODO
-    // weird bug it doesn't initialize in factory
-    currentSignal->fillProtocolHandler(this);
-    //printf("INSIDE PARSE JSON %d\n",currentSignal->getConnectionProtocolHandler()); //TODO : warning
+   
     currentSignal->acceptDispatcher(dispatcher_);
 }
 
