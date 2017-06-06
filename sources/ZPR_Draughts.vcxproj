@@ -1,0 +1,383 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{B296BE98-07DC-3F96-BB4B-7761AD728145}</ProjectGUID>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>ZPR_Draughts</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\John\Desktop\checkers\sources\Debug\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ZPR_Draughts.dir\Debug\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ZPR_Draughts</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\John\Desktop\checkers\sources\Release\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">ZPR_Draughts.dir\Release\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">ZPR_Draughts</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.exe</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\John\Desktop\checkers\sources\MinSizeRel\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">ZPR_Draughts.dir\MinSizeRel\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">ZPR_Draughts</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.exe</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\John\Desktop\checkers\sources\RelWithDebInfo\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">ZPR_Draughts.dir\RelWithDebInfo\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">ZPR_Draughts</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.exe</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\John\Desktop\checkers\sources;C:\local\boost_1_64_0\boost;C:\local\jsoncpp-master\include;C:\local\websocketpp-master;C:\local\boost_1_64_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\John\Desktop\checkers\sources;C:\local\boost_1_64_0\boost;C:\local\jsoncpp-master\include;C:\local\websocketpp-master;C:\local\boost_1_64_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\John\Desktop\checkers\sources;C:\local\boost_1_64_0\boost;C:\local\jsoncpp-master\include;C:\local\websocketpp-master;C:\local\boost_1_64_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions>%(AdditionalOptions)  /machine:X86</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;C:\local\boost_1_64_0\lib32-msvc-14.0\libboost_system-vc140-mt-gd-1_64.lib;C:\local\jsoncpp-master\makefiles\msvc2010\Release\lib_json.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/local/boost_1_64_0/lib32-msvc-14.0;C:/local/boost_1_64_0/lib32-msvc-14.0/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>Debug</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/John/Desktop/checkers/sources/Debug/ZPR_Draughts.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/John/Desktop/checkers/sources/Debug/ZPR_Draughts.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\John\Desktop\checkers\sources;C:\local\boost_1_64_0\boost;C:\local\jsoncpp-master\include;C:\local\websocketpp-master;C:\local\boost_1_64_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\John\Desktop\checkers\sources;C:\local\boost_1_64_0\boost;C:\local\jsoncpp-master\include;C:\local\websocketpp-master;C:\local\boost_1_64_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\John\Desktop\checkers\sources;C:\local\boost_1_64_0\boost;C:\local\jsoncpp-master\include;C:\local\websocketpp-master;C:\local\boost_1_64_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions>%(AdditionalOptions)  /machine:X86</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;C:\local\boost_1_64_0\lib32-msvc-14.0\libboost_system-vc140-mt-1_64.lib;C:\local\jsoncpp-master\makefiles\msvc2010\Release\lib_json.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/local/boost_1_64_0/lib32-msvc-14.0;C:/local/boost_1_64_0/lib32-msvc-14.0/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/John/Desktop/checkers/sources/Release/ZPR_Draughts.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/John/Desktop/checkers/sources/Release/ZPR_Draughts.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\John\Desktop\checkers\sources;C:\local\boost_1_64_0\boost;C:\local\jsoncpp-master\include;C:\local\websocketpp-master;C:\local\boost_1_64_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\John\Desktop\checkers\sources;C:\local\boost_1_64_0\boost;C:\local\jsoncpp-master\include;C:\local\websocketpp-master;C:\local\boost_1_64_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\John\Desktop\checkers\sources;C:\local\boost_1_64_0\boost;C:\local\jsoncpp-master\include;C:\local\websocketpp-master;C:\local\boost_1_64_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions>%(AdditionalOptions)  /machine:X86</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;C:\local\boost_1_64_0\lib32-msvc-14.0\libboost_system-vc140-mt-1_64.lib;C:\local\jsoncpp-master\makefiles\msvc2010\Release\lib_json.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/local/boost_1_64_0/lib32-msvc-14.0;C:/local/boost_1_64_0/lib32-msvc-14.0/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/John/Desktop/checkers/sources/MinSizeRel/ZPR_Draughts.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/John/Desktop/checkers/sources/MinSizeRel/ZPR_Draughts.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\John\Desktop\checkers\sources;C:\local\boost_1_64_0\boost;C:\local\jsoncpp-master\include;C:\local\websocketpp-master;C:\local\boost_1_64_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\John\Desktop\checkers\sources;C:\local\boost_1_64_0\boost;C:\local\jsoncpp-master\include;C:\local\websocketpp-master;C:\local\boost_1_64_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\John\Desktop\checkers\sources;C:\local\boost_1_64_0\boost;C:\local\jsoncpp-master\include;C:\local\websocketpp-master;C:\local\boost_1_64_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions>%(AdditionalOptions)  /machine:X86</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;C:\local\boost_1_64_0\lib32-msvc-14.0\libboost_system-vc140-mt-1_64.lib;C:\local\jsoncpp-master\makefiles\msvc2010\Release\lib_json.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/local/boost_1_64_0/lib32-msvc-14.0;C:/local/boost_1_64_0/lib32-msvc-14.0/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>Debug</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/John/Desktop/checkers/sources/RelWithDebInfo/ZPR_Draughts.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/John/Desktop/checkers/sources/RelWithDebInfo/ZPR_Draughts.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\John\Desktop\checkers\sources\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/John/Desktop/checkers/sources/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/John/Desktop/checkers -BC:/Users/John/Desktop/checkers --check-stamp-file C:/Users/John/Desktop/checkers/sources/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/John/Desktop/checkers/sources/CMakeLists.txt;C:\Users\John\Desktop\checkers\sources\CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.8\Modules\FindBoost.cmake;C:\Users\John\Desktop\checkers\sources\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\John\Desktop\checkers\sources\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/John/Desktop/checkers/sources/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/John/Desktop/checkers -BC:/Users/John/Desktop/checkers --check-stamp-file C:/Users/John/Desktop/checkers/sources/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/John/Desktop/checkers/sources/CMakeLists.txt;C:\Users\John\Desktop\checkers\sources\CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.8\Modules\FindBoost.cmake;C:\Users\John\Desktop\checkers\sources\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\John\Desktop\checkers\sources\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/John/Desktop/checkers/sources/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/John/Desktop/checkers -BC:/Users/John/Desktop/checkers --check-stamp-file C:/Users/John/Desktop/checkers/sources/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/John/Desktop/checkers/sources/CMakeLists.txt;C:\Users\John\Desktop\checkers\sources\CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.8\Modules\FindBoost.cmake;C:\Users\John\Desktop\checkers\sources\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\John\Desktop\checkers\sources\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/John/Desktop/checkers/sources/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/John/Desktop/checkers -BC:/Users/John/Desktop/checkers --check-stamp-file C:/Users/John/Desktop/checkers/sources/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/John/Desktop/checkers/sources/CMakeLists.txt;C:\Users\John\Desktop\checkers\sources\CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.8\Modules\FindBoost.cmake;C:\Users\John\Desktop\checkers\sources\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\John\Desktop\checkers\sources\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\GameLogic\Point.hpp" />
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\GameObserver.hpp" />
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\GameLogic\Board.hpp" />
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\GameLogic\PieceKind.hpp" />
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\MessageDispatcher.hpp" />
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\GameLogic\PlayerColour.hpp" />
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\Signals\Signal.hpp" />
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\Signals\TextMessage.hpp" />
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\Signals\BoardSignal.hpp" />
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\Signals\EnterRoomSignal.hpp" />
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\Signals\GameEndSignal.hpp" />
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\Signals\LeaveRoomSignal.hpp" />
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\Signals\NewGameSignal.hpp" />
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\Signals\OpponentEnteredTheRoomSignal.hpp" />
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\Signals\NewRoomRequestSignal.hpp" />
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\Signals\OpponentLeftRoomSignal.hpp" />
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\Signals\PermissionSignal.hpp" />
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\Signals\NickRequestSignal.hpp" />
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\Signals\SignalFactory.hpp" />
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\Signals\MoveSignal.hpp" />
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\Signals\RoomsRequestSignal.hpp" />
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\Signals\RoomsSignal.hpp" />
+    <ClInclude Include="C:\Users\John\Desktop\checkers\sources\Signals\SendSignalDelegate.hpp" />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\Player.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\PlayerManager.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\ConnectionProtocolHandler.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\GameLogic\Game.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\Room.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\RoomManager.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\Server.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\main.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\GameLogic\Board.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\MessageDispatcher.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\Signals\EnterRoomSignal.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\Signals\BoardSignal.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\Signals\LeaveRoomSignal.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\Signals\NewGameSignal.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\Signals\NewRoomRequestSignal.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\Signals\NickRequestSignal.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\Signals\TextMessage.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\Signals\StaticInit.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\Signals\OpponentEnteredTheRoomSignal.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\Signals\OpponentLeftRoomSignal.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\Signals\PermissionSignal.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\Signals\GameEndSignal.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\Signals\Signal.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\Signals\MoveSignal.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\Signals\RoomsRequestSignal.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\Signals\RoomsSignal.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\sources\Signals\SendSignalDelegate.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\tests\Helpers\TestConnectionProtocolHandler.cpp"  />
+    <ClCompile Include="C:\Users\John\Desktop\checkers\tests\Helpers\TestSignalSendDelegate.cpp"  />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\John\Desktop\checkers\ZERO_CHECK.vcxproj">
+      <Project>FA516412-7AD8-3917-98F5-C59F91FFFEB5</Project>
+      <Name>ZERO_CHECK</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\John\Desktop\checkers\tests\runTests.vcxproj">
+      <Project>BD2E835A-C771-3696-89B0-86BEC309B11E</Project>
+      <Name>runTests</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

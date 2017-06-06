@@ -1,0 +1,71 @@
+﻿  test_main.cpp
+  GameEngineTests.cpp
+C:\Users\John\Desktop\checkers\sources\GameLogic/Game.hpp(53): warning C4018: '<': signed/unsigned mismatch
+C:\Users\John\Desktop\checkers\sources\GameLogic/Game.hpp(54): warning C4018: '<': signed/unsigned mismatch
+  TestConnectionProtocolHandler.cpp
+  RoomTests.cpp
+c:\users\john\desktop\checkers\sources\GameLogic/Game.hpp(53): warning C4018: '<': signed/unsigned mismatch
+c:\users\john\desktop\checkers\sources\GameLogic/Game.hpp(54): warning C4018: '<': signed/unsigned mismatch
+  TestGameObserver.cpp
+  PlayerManagerTests.cpp
+  PlayerTests.cpp
+c:\users\john\desktop\checkers\sources\GameLogic/Game.hpp(53): warning C4018: '<': signed/unsigned mismatch
+c:\users\john\desktop\checkers\sources\GameLogic/Game.hpp(54): warning C4018: '<': signed/unsigned mismatch
+  RoomManagerTests.cpp
+  Player.cpp
+c:\users\john\desktop\checkers\sources\GameLogic/Game.hpp(53): warning C4018: '<': signed/unsigned mismatch
+c:\users\john\desktop\checkers\sources\GameLogic/Game.hpp(54): warning C4018: '<': signed/unsigned mismatch
+  PlayerManager.cpp
+c:\users\john\desktop\checkers\sources\GameLogic/Game.hpp(53): warning C4018: '<': signed/unsigned mismatch
+c:\users\john\desktop\checkers\sources\GameLogic/Game.hpp(54): warning C4018: '<': signed/unsigned mismatch
+  ConnectionProtocolHandler.cpp
+  Game.cpp
+c:\users\john\desktop\checkers\sources\gamelogic\Game.hpp(53): warning C4018: '<': signed/unsigned mismatch
+c:\users\john\desktop\checkers\sources\gamelogic\Game.hpp(54): warning C4018: '<': signed/unsigned mismatch
+C:\Users\John\Desktop\checkers\sources\GameLogic\Game.cpp(47): warning C4018: '<': signed/unsigned mismatch
+C:\Users\John\Desktop\checkers\sources\GameLogic\Game.cpp(48): warning C4018: '<': signed/unsigned mismatch
+C:\Users\John\Desktop\checkers\sources\GameLogic\Game.cpp(70): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\John\Desktop\checkers\sources\GameLogic\Game.cpp(71): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\John\Desktop\checkers\sources\GameLogic\Game.cpp(72): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\John\Desktop\checkers\sources\GameLogic\Game.cpp(73): warning C4018: '>=': signed/unsigned mismatch
+  Room.cpp
+c:\users\john\desktop\checkers\sources\GameLogic/Game.hpp(53): warning C4018: '<': signed/unsigned mismatch
+c:\users\john\desktop\checkers\sources\GameLogic/Game.hpp(54): warning C4018: '<': signed/unsigned mismatch
+  RoomManager.cpp
+c:\users\john\desktop\checkers\sources\GameLogic/Game.hpp(53): warning C4018: '<': signed/unsigned mismatch
+c:\users\john\desktop\checkers\sources\GameLogic/Game.hpp(54): warning C4018: '<': signed/unsigned mismatch
+  Server.cpp
+  Board.cpp
+C:\Users\John\Desktop\checkers\sources\GameLogic\Board.cpp(15): warning C4018: '<': signed/unsigned mismatch
+C:\Users\John\Desktop\checkers\sources\GameLogic\Board.cpp(16): warning C4018: '<': signed/unsigned mismatch
+C:\Users\John\Desktop\checkers\sources\GameLogic\Board.cpp(75): warning C4018: '<': signed/unsigned mismatch
+  MessageDispatcher.cpp
+c:\users\john\desktop\checkers\sources\GameLogic/Game.hpp(53): warning C4018: '<': signed/unsigned mismatch
+c:\users\john\desktop\checkers\sources\GameLogic/Game.hpp(54): warning C4018: '<': signed/unsigned mismatch
+  EnterRoomSignal.cpp
+  BoardSignal.cpp
+  LeaveRoomSignal.cpp
+  Generating Code...
+c:\users\john\desktop\checkers\sources\server.cpp(56): warning C4722: 'Server::~Server': destructor never returns, potential memory leak
+  Compiling...
+  NewGameSignal.cpp
+  NewRoomRequestSignal.cpp
+  NickRequestSignal.cpp
+  TextMessage.cpp
+  StaticInit.cpp
+  OpponentEnteredTheRoomSignal.cpp
+  OpponentLeftRoomSignal.cpp
+  PermissionSignal.cpp
+  GameEndSignal.cpp
+  Signal.cpp
+  MoveSignal.cpp
+C:\Users\John\Desktop\checkers\sources\Signals\MoveSignal.cpp(19): warning C4018: '<': signed/unsigned mismatch
+  SendSignalDelegate.cpp
+  RoomsRequestSignal.cpp
+  RoomsSignal.cpp
+  TestSignalSendDelegate.cpp
+  Generating Code...
+  lib_json.lib(json_value.obj) : MSIL .netmodule or module compiled with /GL found; restarting link with /LTCG; add /LTCG to the link command line to improve linker performance
+  Generating code
+  Finished generating code
+  Tests.vcxproj -> C:\Users\John\Desktop\checkers\tests\Release\Tests.exe

@@ -69,8 +69,14 @@ if(_ENABLE_TESTS_AT_EACH_BUILD_)
 		set(JSONCPP_LIBRARY_DIR /usr/local/lib/libjsoncpp.dylib)
 		target_link_libraries(Tests ${Boost_SYSTEM_LIBRARY} ${JSONCPP_LIBRARY_DIR})
 
-	else ()
+	elseif (UNIX)
 		target_link_libraries(Tests ${Boost_SYSTEM_LIBRARY} jsoncpp pthread)
+	elseif(WIN32)
+		include_directories("C:/local/jsoncpp-master/include")
+		include_directories("C:/local/websocketpp-master")
+		include_directories("C:/local/boost_1_64_0")
+		set(JSONCPP_LIBRARY_DIR C:/local/jsoncpp-master/makefiles/msvc2010/Release/lib_json.lib)
+		target_link_libraries(Tests ${Boost_SYSTEM_LIBRARY} ${JSONCPP_LIBRARY_DIR})
 	endif ()
 
 

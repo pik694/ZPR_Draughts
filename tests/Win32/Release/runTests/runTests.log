@@ -1,0 +1,9 @@
+﻿  Building Custom Rule C:/Users/John/Desktop/checkers/tests/CMakeLists.txt
+  CMake does not need to re-run because C:/Users/John/Desktop/checkers/tests/CMakeFiles/generate.stamp is up-to-date.
+  Test project C:/Users/John/Desktop/checkers/tests
+      Start 1: boostUnitTestsRun
+  1/1 Test #1: boostUnitTestsRun ................   Passed    0.02 sec
+  
+  100% tests passed, 0 tests failed out of 1
+  
+  Total Test time (real) =   0.02 sec
